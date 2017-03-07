@@ -1,6 +1,6 @@
 #Декомпозиция требований к разрабатываемому приложению (Красильников П. В.) :pencil2: :clipboard:
 
-### Задача состоит в том, чтобы реализовать CLI, которое соответствует тем требованиям, которые описаны ниже. :point_down:
+###Задача состоит в том, чтобы реализовать CLI, которое соответствует тем требованиям, которые описаны ниже. :point_down:
 
 ###1. Начальная подготовка проекта к работе: 
 ___
@@ -109,4 +109,20 @@ ___
   - [ ] 6.1. Найти сервисы/софт для удобного оформления и составления документации.
 
 
+#Написание тестовых сценариев к приложению
 
+###Задача состоит в том, чтобы реализовать модель поведения CLI при различных наборах параметров для запуска.
+
+№ | Цепочка параметров | Результат 
+------------ | ------------- |------------  
+1 | myProgram.exe | вывод справки
+2 | myProgram.exe -h | вывод справки
+3 | myProgram.exe -login userLogin -password | 2
+4 | myProgram.exe -login -password userPassword | 1
+5 | myProgram.exe -login userLogin -password userPassword | 0
+6 | myProgram.exe -login userLogin -password userPassword -role **SomeRole** | 3
+7 | myProgram.exe -login userLogin -password userPassword -role **EXECUTE** -res A.B.C ( к примеру, у ресурса доступ только на **WRITE**) | 4
+8 | myProgram.exe -login userLogin -password userPassword -role **EXECUTE** -res A.B.C (У ресурса есть право **EXECUTE**) | 0
+9 | myProgram.exe -login userLogin -password userPassword -role EXECUTE -res A.B.C -ds **“01.010.101”** -de “07.03.17” -vol 100 | 5
+10| myProgram.exe -login userLogin -password userPassword -role EXECUTE -res A.B.C -ds “05.03.17” -de “07.03.17” -vol **stringNumber??\\** | 5
+11| myProgram.exe -login userLogin -password userPassword -role EXECUTE -res A.B.C -ds “05.03.17” -de “07.03.17” -vol 100 | 0
