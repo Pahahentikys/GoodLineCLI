@@ -3,7 +3,9 @@
  */
 public class UserInfo {
     private int userId;
-    private String userLogin, userHashPassword, userSalt;
+    private String userLogin,
+            userHashPassword,
+            userSalt;
 
     public int getUserId() {
         return userId;
@@ -21,23 +23,23 @@ public class UserInfo {
         return userSalt;
     }
 
-    public UserInfo setUserId(int userId)
-    {
-        this.userId=userId;
+    public UserInfo setUserId(int userId) {
+        this.userId = userId;
         return this;
     }
-    public UserInfo setUserLogin(String userLogin)
-    {
-        this.userLogin=userLogin;
+
+    public UserInfo setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
         return this;
     }
-    public UserInfo setUserHashPassword(String userHashPassword){
-        this.userHashPassword=userHashPassword;
+
+    public UserInfo setUserHashPassword(String userHashPassword) {
+        this.userHashPassword = userHashPassword;
         return this;
     }
-    public UserInfo setUserSalt(String userSalt)
-    {
-        this.userSalt=userSalt;
+
+    public UserInfo setUserSalt(String userSalt) {
+        this.userSalt = userSalt;
         return this;
     }
 
