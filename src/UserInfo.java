@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,8 +37,8 @@ public class UserInfo {
         return this;
     }
 
-    public UserInfo setUserHashPassword(String userHashPassword) {
-        this.userHashPassword = userHashPassword;
+    public UserInfo setUserHashPassword(String userNoHashPassword) {
+        this.userHashPassword = AuthentifAndAuthorizService.getHashUserPassword(userNoHashPassword, getUserSalt());
         return this;
     }
 
@@ -60,5 +61,6 @@ public class UserInfo {
     public static List<UserInfo> getUsersinfo() {
         return usersInfo;
     }
+
 
 }
