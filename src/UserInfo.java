@@ -50,7 +50,7 @@ public class UserInfo {
      * Коллеция объектов с пользователями, которая нужна
      * для формирования тестовых данных
      */
-    private static List<UserInfo> usersInfo = new ArrayList<UserInfo>();
+    private static ArrayList<UserInfo> usersInfo = new ArrayList<UserInfo>();
 
     /**
      * Получить всех пользователей

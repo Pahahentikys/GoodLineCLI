@@ -1,3 +1,7 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Pavel on 09.03.2017.
  */
@@ -31,5 +35,19 @@ public class UserResources {
     public UserResources setUserResResId(int userResResId) {
         this.userResResId = userResResId;
         return this;
+    }
+
+    /**
+     * Коллекция объектов объектов ресурсов пользователя
+     */
+    private static ArrayList<UserResources> usersResources = new ArrayList<UserResources>();
+
+    /**
+     * Получить информацию о ресурсе и его пользователе
+     *
+     * @return - коллекция объектов с ресурами и пользователями
+     */
+    public static List<UserResources> getUsersResources() {
+        return usersResources;
     }
 }
