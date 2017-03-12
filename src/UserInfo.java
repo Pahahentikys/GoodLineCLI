@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Pavel on 09.03.2017.
  */
@@ -41,6 +44,21 @@ public class UserInfo {
     public UserInfo setUserSalt(String userSalt) {
         this.userSalt = userSalt;
         return this;
+    }
+
+    /**
+     * Коллеция объектов с пользователями, которая нужна
+     * для формирования тестовых данных
+     */
+    private static List<UserInfo> usersInfo = new ArrayList<UserInfo>();
+
+    /**
+     * Получить всех пользователей
+     *
+     * @return - коллекция объектов с пользователями
+     */
+    public static List<UserInfo> getUsersinfo() {
+        return usersInfo;
     }
 
 }
