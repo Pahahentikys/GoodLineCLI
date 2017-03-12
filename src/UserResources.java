@@ -1,3 +1,4 @@
+import javax.annotation.Resource;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,5 +50,18 @@ public class UserResources {
      */
     public static List<UserResources> getUsersResources() {
         return usersResources;
+    }
+
+    /**
+     * Коллекция объектов вех ресурсов
+     */
+    private static List<UserResources> allResources = new ArrayList<UserResources>();
+
+    /**
+     * Получить все ресурсы
+     * @return - коллекция объектов с набором всех ресурсов
+     */
+    public static List<UserResources> getAllResources(){
+        return allResources;
     }
 }
