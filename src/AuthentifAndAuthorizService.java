@@ -28,6 +28,16 @@ public class AuthentifAndAuthorizService {
     }
 
     /**
+     * Сравнить хэши на совпадение
+     * @param user - информация о пользователе, который задан, из коллекции
+     * @param hashUserPass - хэш пароля, который ввёл пользователь
+     * @return
+     */
+    private boolean isUserHashesEqual(UserInfo user, String hashUserPass) {
+        return user.getUserHashPassword().equals(hashUserPass);
+    }
+
+    /**
      * Получение хэша пароля
      *
      * @param userNoHashPassword - пароль пользователя без хэша
