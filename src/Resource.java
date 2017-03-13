@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Pavel on 14.03.2017.
  */
@@ -22,4 +25,15 @@ public class Resource {
         this.resourcePath = resourcePath;
         return this;
     }
+
+    /**
+     * Коллекция ресуров приложения с набором тестовых данных.
+     */
+    private static List<Resource> allResources = Arrays.asList(
+            new Resource().setResourceId(1).setResourcePath("A.B"),
+            new Resource().setResourceId(2).setResourcePath("A.B.C"),
+            new Resource().setResourceId(3).setResourcePath("A.B.C.D")
+    );
+
+
 }
