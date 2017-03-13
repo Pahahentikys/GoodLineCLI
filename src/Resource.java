@@ -35,5 +35,13 @@ public class Resource {
             new Resource().setResourceId(3).setResourcePath("A.B.C.D")
     );
 
+    /**
+     * Получить все ресурсы приложения
+     * @return - коллекция объектов с ресурсами
+     */
+    public static List<Resource> getAllResources(){
+        return allResources;
+    }
+
 
 }
