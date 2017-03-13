@@ -4,14 +4,13 @@
 
 import org.apache.commons.cli.*;
 
+import java.util.ArrayList;
+
 public class DataValidator {
     private static CommandLine commandLine;
-    Options options = new Options();
-    UserInputData userInputData = new UserInputData();
-    CommandLineParser commandLineParser = new DefaultParser();
 
 
-    public Options generateOptions() {
+    public static Options generateOptions() {
         Options options = new Options();
         options.addOption("h", "help", true, "Показать справочную информацию");
         options.addOption("login", "login", true, "Логин: ");
@@ -24,10 +23,9 @@ public class DataValidator {
         return options;
     }
 
-    public UserInputData getUserInputData(String[] args) {
+    public static UserInputData getUserInputData(UserInputData userInputData, String[] args) {
         try {
-            userInputData = new UserInputData();
-            commandLine = commandLineParser.parse(options, args);
+            commandLine = new DefaultParser().parse(generateOptions(), args);
             userInputData.setUserInputLogin(commandLine.getOptionValue("login"));
             userInputData.setUserInputPassword(commandLine.getOptionValue("pass"));
             userInputData.setUserInputPathResource(commandLine.getOptionValue("res"));
@@ -38,11 +36,31 @@ public class DataValidator {
 
         } catch (ParseException ex) {
             HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("Показать справочную информацию: ", options);
+            helpFormatter.printHelp("Показать справочную информацию: ", generateOptions());
             System.exit(0);
         }
 
-        return null;
+        return userInputData;
+    }
+
+    /**
+     * Проверка на то, аутентифицирован ли пользователь
+     *
+     * @param usersList     - коллекция пользователей
+     * @param userInputData - объект, хранящий в себе входные параметры
+     * @return - true, если верный логин и пароль
+     */
+    boolean isUserAuthentification(ArrayList<UserInfo> usersList, UserInputData userInputData) {
+        if (!AuthentifAndAuthorizService.isGetUserLogin(usersList, userInputData)) {
+            System.exit(1);
+        }
+
+        if (!AuthentifAndAuthorizService.isGetUserPassword(usersList, userInputData)) {
+
+            System.exit(2);
+
+        }
+        return true;
     }
 
 }
