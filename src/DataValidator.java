@@ -63,4 +63,17 @@ public class DataValidator {
         return true;
     }
 
+    /**
+     * Проверка корректности значения роли
+     * @param userInpData - данные, которые идут на вход в консоль
+     * @return - true в том случае, если роль существует
+     */
+    public static boolean isUserRoleValid(UserInputData userInpData) {
+        for (UserRoles role : UserRoles.values()) {
+            if (role.name().equals((userInpData.getUserInputRole())))
+                return true;
+        }
+        return false;
+    }
+
 }
