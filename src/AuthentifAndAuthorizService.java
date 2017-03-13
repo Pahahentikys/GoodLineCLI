@@ -27,7 +27,6 @@ public class AuthentifAndAuthorizService {
         return false;
     }
 
-
     /**
      * Сравнить хэши на совпадение
      *
@@ -59,6 +58,25 @@ public class AuthentifAndAuthorizService {
         return false;
     }
 
+    /**
+     * Проверка на то, аутентифицирован ли пользователь
+     *
+     * @param usersList     - коллекция пользователей
+     * @param userInputData - объект, хранящий в себе входные параметры
+     * @return - true, если верный логин и пароль
+     */
+    boolean isUserAuthentification(ArrayList<UserInfo> usersList, UserInputData userInputData) {
+        if (!AuthentifAndAuthorizService.isGetUserLogin(usersList, userInputData)) {
+            System.exit(1);
+        }
+
+        if (!AuthentifAndAuthorizService.isGetUserPassword(usersList, userInputData)) {
+
+            System.exit(2);
+
+        }
+        return true;
+    }
     /**
      * Получение хэша пароля
      *

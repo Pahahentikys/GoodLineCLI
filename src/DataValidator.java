@@ -44,26 +44,6 @@ public class DataValidator {
     }
 
     /**
-     * Проверка на то, аутентифицирован ли пользователь
-     *
-     * @param usersList     - коллекция пользователей
-     * @param userInputData - объект, хранящий в себе входные параметры
-     * @return - true, если верный логин и пароль
-     */
-    boolean isUserAuthentification(ArrayList<UserInfo> usersList, UserInputData userInputData) {
-        if (!AuthentifAndAuthorizService.isGetUserLogin(usersList, userInputData)) {
-            System.exit(1);
-        }
-
-        if (!AuthentifAndAuthorizService.isGetUserPassword(usersList, userInputData)) {
-
-            System.exit(2);
-
-        }
-        return true;
-    }
-
-    /**
      * Проверка корректности значения роли
      * @param userInpData - данные, которые идут на вход в консоль
      * @return - true в том случае, если роль существует
