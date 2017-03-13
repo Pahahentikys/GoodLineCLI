@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * Created by Pavel on 09.03.2017.
@@ -51,7 +52,18 @@ public class UserInfo {
      * Коллеция объектов с пользователями, которая нужна
      * для формирования тестовых данных
      */
-    private static ArrayList<UserInfo> usersInfo = new ArrayList<UserInfo>();
+    private static List<UserInfo> usersInfo = Arrays.asList(
+            new UserInfo()
+                    .setUserId(1)
+                    .setUserLogin("userOne")
+                    .setUserSalt("111")
+                    .setUserHashPassword(RandomStringUtils.randomAscii(8, 8).toString()),
+            new UserInfo()
+                    .setUserId(2)
+                    .setUserLogin("userTwo")
+                    .setUserSalt("222")
+                    .setUserHashPassword(RandomStringUtils.randomAscii(8, 8).toString())
+    );
 
     /**
      * Получить всех пользователей
@@ -61,6 +73,4 @@ public class UserInfo {
     public static List<UserInfo> getUsersinfo() {
         return usersInfo;
     }
-
-
 }
