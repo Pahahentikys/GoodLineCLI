@@ -16,16 +16,17 @@ public class AuthentifAndAuthorizService {
      * @param userInpdata - входные данные
      * @return - true, если логины совпадают
      */
-    private boolean isGetUserLogin(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
+    public static boolean isGetUserLogin(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
         for (UserInfo user : usersList) {
             if (userInpdata.getUserInputLogin().equals(user.getUserLogin())) {
                 userInpdata.userInputId = user.getUserId();
                 return true;
-            } else {
-                return false;
             }
+
         }
+        return false;
     }
+
 
     /**
      * Сравнить хэши на совпадение
@@ -34,7 +35,7 @@ public class AuthentifAndAuthorizService {
      * @param hashUserPass - хэш пароля, который ввёл пользователь
      * @return
      */
-    private boolean isUserHashesEqual(UserInfo user, String hashUserPass) {
+    private static boolean isUserHashesEqual(UserInfo user, String hashUserPass) {
         return user.getUserHashPassword().equals(hashUserPass);
     }
 
@@ -45,7 +46,7 @@ public class AuthentifAndAuthorizService {
      * @param userInpdata - введённые пользователем данные
      * @return - true, если парольные хэши совпадают
      */
-    private boolean isGetUserPassword(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
+    public static boolean isGetUserPassword(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
 
         for (UserInfo user : usersList) {
             if (userInpdata.getUserInputId() == user.getUserId()) {
@@ -73,3 +74,4 @@ public class AuthentifAndAuthorizService {
 
 
 }
+
