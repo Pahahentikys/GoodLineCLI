@@ -57,6 +57,12 @@ public class Main {
         ArrayList<UserResources> usersResources = new ArrayList<>();
         usersResources.add(userResourceOne);
 
+        DataValidator.getUserInputData(userInputData, args);
+
+        boolean isAuthentification = AuthentifAndAuthorizService.isUserAuthentification(usersInfo, userInputData);
+        if(isAuthentification) {
+            System.out.println("Аутентификация!");
+        }
 
         }
     }
