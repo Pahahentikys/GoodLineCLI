@@ -120,13 +120,17 @@ public class AuthentifAndAuthorizService {
      * @param resourcesList          - коллекция ресурсов
      * @param userInpData            - входные данные
      * @param isUserAuthentification - имеет значение true, если пользователь аутентифицирован
-     * @return - код: 3, если неправильная роль,
+     * @return - код: 3, если неправильная роль, код: 4, если нет доступа
      */
 
     boolean isUserAuthorization(ArrayList<UserResources> resourcesList, UserInputData userInpData, boolean isUserAuthentification) {
         if (isUserAuthentification & !userInpData.getUserInputRole().isEmpty() & !userInpData.getUserInputPathResource().isEmpty()) {
             if (!DataValidator.isUserRoleValid(userInpData)) {
                 System.exit(3);
+            }
+            if(!isResUserAccess(resourcesList, userInpData))
+            {
+                System.exit(4);
             }
             return true;
         }
