@@ -39,7 +39,7 @@ public class UserInfo {
     }
 
     public UserInfo setUserHashPassword(String userNoHashPassword) {
-        this.userHashPassword = AuthentifAndAuthorizService.getHashUserPassword(userNoHashPassword, getUserSalt());
+        this.userHashPassword = AuthentifAndAuthorizService.generHashUserPassword(userNoHashPassword, getUserSalt());
         return this;
     }
 
@@ -56,13 +56,13 @@ public class UserInfo {
             new UserInfo()
                     .setUserId(1)
                     .setUserLogin("userOne")
-                    .setUserSalt("111")
-                    .setUserHashPassword(RandomStringUtils.randomAscii(8, 8).toString()),
+                    .setUserSalt(RandomStringUtils.randomAscii(8, 8))
+                    .setUserHashPassword("111"),
             new UserInfo()
                     .setUserId(2)
                     .setUserLogin("userTwo")
-                    .setUserSalt("222")
-                    .setUserHashPassword(RandomStringUtils.randomAscii(8, 8).toString())
+                    .setUserSalt(RandomStringUtils.randomAscii(8, 8))
+                    .setUserHashPassword("111")
     );
 
     /**
