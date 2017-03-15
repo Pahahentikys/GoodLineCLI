@@ -7,9 +7,19 @@ import java.util.List;
  */
 public class UserResources {
     private UserRoles userRole;
+    private String resourcePath;
     private int userResId,
             userResUserId,
             userResResId;
+
+    public String getResourcePath() {
+        return resourcePath;
+    }
+
+    public UserResources setResourcePath(String resourcePath) {
+        this.resourcePath = resourcePath;
+        return this;
+    }
 
     public UserRoles getUserRole() {
         return userRole;
@@ -55,12 +65,14 @@ public class UserResources {
                     .setUserResId(1)
                     .setUserResUserId(1)
                     .setUserResResId(1)
+                    .setResourcePath("A.B")
                     .setUserRole(UserRoles.EXECUTE)
             ,
             new UserResources()
                     .setUserResId(2)
                     .setUserResUserId(2)
                     .setUserResResId(2)
+                    .setResourcePath("A.B.C")
                     .setUserRole(UserRoles.EXECUTE)
 
     );
