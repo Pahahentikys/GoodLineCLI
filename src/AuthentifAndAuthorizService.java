@@ -85,7 +85,7 @@ public class AuthentifAndAuthorizService {
      * @param path    - объект, который хранит путь до ресурса из входных данных
      * @return - true, если хэши равны
      */
-    private static boolean isPathEquals(UserResources userRes, String path) {
+    private boolean isPathEquals(UserResources userRes, String path) {
         return userRes.getResourcePath().equals(path);
     }
 
@@ -134,6 +134,7 @@ public class AuthentifAndAuthorizService {
             }
             return true;
         }
+        return false;
     }
 
     /**
@@ -144,7 +145,7 @@ public class AuthentifAndAuthorizService {
      * @return - "посоленный" хэш пароля
      */
 
-    public static String generHashUserPassword(String userNoHashPassword, String salt) {
+    private String generHashUserPassword(String userNoHashPassword, String salt) {
 
         return DigestUtils.md5Hex(DigestUtils.md5Hex(userNoHashPassword) + salt);
 
