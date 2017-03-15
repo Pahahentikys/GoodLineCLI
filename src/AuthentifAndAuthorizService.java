@@ -16,7 +16,7 @@ public class AuthentifAndAuthorizService {
      * @param userInpdata - входные данные
      * @return - true, если логины совпадают
      */
-    public static boolean isGetUserLogin(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
+    private static boolean isGetUserLogin(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
         for (UserInfo user : usersList) {
             if (userInpdata.getUserInputLogin().equals(user.getUserLogin())) {
                 userInpdata.userInputId = user.getUserId();
@@ -45,7 +45,7 @@ public class AuthentifAndAuthorizService {
      * @param userInpdata - введённые пользователем данные
      * @return - true, если парольные хэши совпадают
      */
-    public static boolean isGetUserPassword(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
+    private static boolean isGetUserPassword(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
 
         for (UserInfo user : usersList) {
             if (userInpdata.getUserInputId() == user.getUserId()) {
@@ -77,6 +77,25 @@ public class AuthentifAndAuthorizService {
         }
         return true;
     }
+
+    /**
+     * Проверка на то, авторизован ли пользователь
+     *
+     * @param resourcesList          - коллекция ресурсов
+     * @param userInpData            - входные данные
+     * @param isUserAuthentification - имеет значение true, если пользователь аутентифицирован
+     * @return - код: 3, если неправильная роль,
+     */
+
+    boolean isUserAuthorization(ArrayList<UserResources> resourcesList, UserInputData userInpData, boolean isUserAuthentification) {
+        if (isUserAuthentification & !userInpData.getUserInputRole().isEmpty() & !userInpData.getUserInputPathResource().isEmpty()) {
+            if (!DataValidator.isUserRoleValid(userInpData)) {
+                System.exit(3);
+            }
+            return true;
+        }
+    }
+
     /**
      * Получение хэша пароля
      *
@@ -84,6 +103,7 @@ public class AuthentifAndAuthorizService {
      * @param salt               - соль
      * @return - "посоленный" хэш пароля
      */
+
     public static String generHashUserPassword(String userNoHashPassword, String salt) {
 
         return DigestUtils.md5Hex(DigestUtils.md5Hex(userNoHashPassword) + salt);
