@@ -79,6 +79,17 @@ public class AuthentifAndAuthorizService {
     }
 
     /**
+     * Сравнить пути на совпадение
+     * @param userRes - информация о пользовательском ресурсе
+     * @param path - объект, который хранит путь до ресурса из входных данных
+     * @return - true, если хэши равны
+     */
+    private static boolean isPathEquals(UserResources userRes, String path) {
+        return userRes.getResourcePath().equals(path);
+    }
+
+
+    /**
      * Проверка на то, авторизован ли пользователь
      *
      * @param resourcesList          - коллекция ресурсов
