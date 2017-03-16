@@ -65,7 +65,7 @@ public class AuthentifAndAuthorizService {
      * @param userInputData - объект, хранящий в себе входные параметры
      * @return - true, если верный логин и пароль
      */
-    boolean isUserAuthentification(ArrayList<UserInfo> usersList, UserInputData userInputData) {
+   public static boolean isUserAuthentification(ArrayList<UserInfo> usersList, UserInputData userInputData) {
         if (!AuthentifAndAuthorizService.isGetUserLogin(usersList, userInputData)) {
             System.exit(1);
         }
@@ -85,7 +85,7 @@ public class AuthentifAndAuthorizService {
      * @param path    - объект, который хранит путь до ресурса из входных данных
      * @return - true, если хэши равны
      */
-    private boolean isPathEquals(UserResources userRes, String path) {
+    private static boolean isPathEquals(UserResources userRes, String path) {
         return userRes.getResourcePath().equals(path);
     }
 
@@ -98,12 +98,12 @@ public class AuthentifAndAuthorizService {
      */
     public static boolean isResUserAccess(ArrayList<UserResources> userResourcesList, UserInputData userInputData) {
         String[] nodeResInputPath = userInputData.getUserInputPathResource().split("\\.");
-        String searchingPathRes = null;
+        String searchingPathRes = " ";
         for (String path : nodeResInputPath) {
             searchingPathRes += path;
             for (UserResources userRes : userResourcesList) {
                 if (isPathEquals(userRes, path)) {
-                    if (DataValidator.isUserRoleValid(userInputData)) {
+                    if (userInputData.getUserInputId() == userRes.getUserResId() & DataValidator.isUserRoleValid(userInputData)) {
                         return true;
                     }
                 }
@@ -123,7 +123,7 @@ public class AuthentifAndAuthorizService {
      * @return - код: 3, если неправильная роль, код: 4, если нет доступа
      */
 
-    boolean isUserAuthorization(ArrayList<UserResources> resourcesList, UserInputData userInpData, boolean isUserAuthentification) {
+   public static boolean isUserAuthorization(ArrayList<UserResources> resourcesList, UserInputData userInpData, boolean isUserAuthentification) {
         if (isUserAuthentification & !userInpData.getUserInputRole().isEmpty() & !userInpData.getUserInputPathResource().isEmpty()) {
             if (!DataValidator.isUserRoleValid(userInpData)) {
                 System.exit(3);
@@ -137,6 +137,8 @@ public class AuthentifAndAuthorizService {
         return false;
     }
 
+
+
     /**
      * Получение хэша пароля
      *
@@ -145,7 +147,7 @@ public class AuthentifAndAuthorizService {
      * @return - "посоленный" хэш пароля
      */
 
-    private String generHashUserPassword(String userNoHashPassword, String salt) {
+    public static String generHashUserPassword(String userNoHashPassword, String salt) {
 
         return DigestUtils.md5Hex(DigestUtils.md5Hex(userNoHashPassword) + salt);
 
