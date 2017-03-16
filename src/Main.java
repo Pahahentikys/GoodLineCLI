@@ -10,35 +10,9 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        //        /**
-//         * Коллеция объектов с пользователями, которая нужна
-//         * для формирования тестовых данных
-//         */
-//        List<UserInfo> usersInfo = Arrays.asList(
-//                new UserInfo()
-//                        .setUserId(1)
-//                        .setUserLogin("userOne")
-//                        .setUserSalt(RandomStringUtils.randomAscii(8, 8))
-//                        .setUserHashPassword("111"),
-//                new UserInfo()
-//                        .setUserId(2)
-//                        .setUserLogin("userTwo")
-//                        .setUserSalt(RandomStringUtils.randomAscii(8, 8))
-//                        .setUserHashPassword("111")
-//        );
-//        /**
-//         * Получить всех пользователей
-//         *
-//         * @return - коллекция объектов с пользователями
-//         */
-//        public  List<UserInfo> getUsersinfo() {
-//            return usersInfo;
-//        }
-
         UserInfo userOne = new UserInfo();
         UserResources userResourceOne = new UserResources();
         UserInputData userInputData = new UserInputData();
-        DataValidator dataValidator = new DataValidator();
 
         userOne.setUserId(1)
                 .setUserLogin("userOne")
@@ -60,12 +34,16 @@ public class Main {
         DataValidator.getUserInputData(userInputData, args);
 
         boolean isAuthentification = AuthentifAndAuthorizService.isUserAuthentification(usersInfo, userInputData);
-        if(isAuthentification) {
-            System.out.println("Аутентификация!");
+        if (isAuthentification) {
+            System.out.println("Аутентификация прошла успешно!");
         }
 
+        boolean isAuth = AuthentifAndAuthorizService.isUserAuthorization(usersResources, userInputData, isAuthentification);
+        if (isAuth) {
+            System.out.println("Авторизация прошла успешно!");
         }
     }
+}
 
 
 
