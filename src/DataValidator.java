@@ -3,8 +3,12 @@
  */
 
 import org.apache.commons.cli.*;
+import org.apache.commons.cli.ParseException;
 
+import java.text.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DataValidator {
     private static CommandLine commandLine;
@@ -45,6 +49,7 @@ public class DataValidator {
 
     /**
      * Проверка корректности значения роли
+     *
      * @param userInpData - данные, которые идут на вход в консоль
      * @return - true в том случае, если роль существует
      */
@@ -54,6 +59,22 @@ public class DataValidator {
                 return true;
         }
         return false;
+    }
+
+    /**
+     * Проверка даты на соответтствие шаблону ГГГГ-ММ-ДД, если соответствие есть, выполнить конфертацию в Date
+     * @param userInputData - входные данные
+     * @return - null, если дата с инупта не совпала с шаблоном
+     * @throws java.text.ParseException - кидается исключение, если дата, которую ввёл юзер, не соответствует шаблону
+     */
+    public static Date[] DateStartAndEndParse(UserInputData userInputData) throws java.text.ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
+
+        return new Date[]{
+                dateFormat.parse(userInputData.getUserInputDs()),
+                dateFormat.parse(userInputData.getUserInputDe())
+        };
+
     }
 
 }
