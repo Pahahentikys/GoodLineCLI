@@ -5,10 +5,9 @@
 import org.apache.commons.cli.*;
 import org.apache.commons.cli.ParseException;
 
-import java.text.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class DataValidator {
     private static CommandLine commandLine;
@@ -62,19 +61,18 @@ public class DataValidator {
     }
 
     /**
-     * Проверка даты на соответтствие шаблону ГГГГ-ММ-ДД, если соответствие есть, выполнить конфертацию в Date
+     * Конвертация в даты в формат ГГГГ-ММ-ДД
      * @param userInputData - входные данные
-     * @return - null, если дата с инупта не совпала с шаблоном
-     * @throws java.text.ParseException - кидается исключение, если дата, которую ввёл юзер, не соответствует шаблону
+     * @return - true, если конвертация прошла успешно
      */
-    public static Date[] DateStartAndEndParse(UserInputData userInputData) throws java.text.ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
-
-        return new Date[]{
-                dateFormat.parse(userInputData.getUserInputDs()),
-                dateFormat.parse(userInputData.getUserInputDe())
-        };
-
+    public static boolean isDateDsAndDeValid(UserInputData userInputData) {
+        try {
+            LocalDate.parse(userInputData.getUserInputDs());
+            LocalDate.parse(userInputData.getUserInputDe());
+        } catch (Exception ex) {
+            return false;
+        }
+        return true;
     }
 
 }
