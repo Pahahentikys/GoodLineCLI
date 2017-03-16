@@ -5,7 +5,7 @@
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class AuthentifAndAuthorizService {
 
@@ -80,8 +80,9 @@ public class AuthentifAndAuthorizService {
 
     /**
      * Метод, который проверяет доступность к ресурсу
+     *
      * @param userResourcesList - коллекция ресурсов, заданных в программе
-     * @param userInputData - объект, который хранит входные данные
+     * @param userInputData     - объект, который хранит входные данные
      */
     public static boolean isResUserAccess(ArrayList<UserResources> userResourcesList, UserInputData userInputData) {
         String[] nodeResInputPath = userInputData.getUserInputPathResource().split("\\.");
@@ -121,6 +122,25 @@ public class AuthentifAndAuthorizService {
             }
             return true;
         }
+        return false;
+    }
+
+    /**
+     * Проверка на то, был ли пользовательский сеанс
+     * @param accountingList - коллекция сеансов пользователя
+     * @param userInputData - входные данные
+     * @param isUserAuthorization - проверка на то, что пользователь авторизован
+     * @return - код: 5, если некорректная дата
+     */
+    public static boolean isUserAccounting(ArrayList<Accounting> accountingList, UserInputData userInputData, boolean isUserAuthorization) {
+        if (isUserAuthorization) {
+            if (!DataValidator.isDateDsAndDeValid(userInputData)) {
+                System.exit(5);
+            }
+
+            return true;
+        }
+
         return false;
     }
 
