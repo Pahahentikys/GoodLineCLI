@@ -79,40 +79,28 @@ public class AuthentifAndAuthorizService {
     }
 
     /**
-     * Сравнить пути на совпадение
-     *
-     * @param userRes            - информация о пользовательском ресурсе
-     * @param path               - объект, который хранит путь до ресурса из входных данных
-     * @return - true, если хэши равны
-     */
-    private static boolean isPathEquals(UserResources userRes, String path) {
-        return userRes.getResourcePath().equals(path);
-    }
-    /**
-     * Метод проверки доступа пользователя к ресурсу
-     *
-     * @param userResourcesList - коллекция ресурсов пользователя
-     * @param userInputData     - водные данные
-     * @return - true, если доступ пользователю разрешается
+     * Метод, который проверяет доступность к ресурсу
+     * @param userResourcesList - коллекция ресурсов, заданных в программе
+     * @param userInputData - объект, который хранит входные данные
      */
     public static boolean isResUserAccess(ArrayList<UserResources> userResourcesList, UserInputData userInputData) {
         String[] nodeResInputPath = userInputData.getUserInputPathResource().split("\\.");
-        String searchingPathRes = "";
-        for (String path : nodeResInputPath) {
-            searchingPathRes += path;
-            for (UserResources userRes : userResourcesList) {
-                if (isPathEquals(userRes, searchingPathRes)) {
-                    if (DataValidator.isUserRoleValid(userInputData)) {
-                        return true;
-                    }
+        for (UserResources anUserResourcesList : userResourcesList) {
+            boolean isResEqual = false;
+            String[] userResPath = anUserResourcesList.getResourcePath().split("\\.");
+            for (int i = 0; i < userResPath.length; i++) {
+                isResEqual = nodeResInputPath[i].equals(userResPath[i]);
+                if (!isResEqual) {
+                    return false;
                 }
 
+                if (isResEqual) {
+                    return true;
+                }
             }
         }
-
         return false;
     }
-
 
     /**
      * Проверка на то, авторизован ли пользователь
