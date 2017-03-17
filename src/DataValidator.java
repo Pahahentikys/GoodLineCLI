@@ -8,19 +8,27 @@ import org.apache.commons.cli.ParseException;
 import java.time.LocalDate;
 
 public class DataValidator {
+    public static final String HELP = "help";
+    public static final String LOGIN = "login";
+    public static final String PASS = "pass";
+    public static final String RES = "res";
+    public static final String ROLE = "role";
+    public static final String DS = "ds";
+    public static final String DE = "de";
+    public static final String VOL = "vol";
     private static CommandLine commandLine;
 
 
     public static Options generateOptions() {
         Options options = new Options();
-        options.addOption("h", "help", true, "Показать справочную информацию");
-        options.addOption("login", "login", true, "Логин: ");
-        options.addOption("pass", "pass", true, "Пароль: ");
-        options.addOption("res", "res", true, "Ресурс для доступа: ");
-        options.addOption("role", "role", true, "Права доступа к ресурсу: ");
-        options.addOption("ds", "ds", true, "Начало доступа к ресурсу: ");
-        options.addOption("de", "de", true, "Конец доступа к ресурсу: ");
-        options.addOption("vol", "vol", true, "Потреблённые ресурсы: ");
+        options.addOption("h", HELP, true, "Показать справочную информацию");
+        options.addOption("login", LOGIN, true, "Логин: ");
+        options.addOption("pass", PASS, true, "Пароль: ");
+        options.addOption("res", RES, true, "Ресурс для доступа: ");
+        options.addOption("role", ROLE, true, "Права доступа к ресурсу: ");
+        options.addOption("ds", DS, true, "Начало доступа к ресурсу: ");
+        options.addOption("de", DE, true, "Конец доступа к ресурсу: ");
+        options.addOption("vol", VOL, true, "Потреблённые ресурсы: ");
         return options;
     }
 
@@ -89,6 +97,5 @@ public class DataValidator {
         }
         return true;
     }
-    // Здесь моя лееееееееееееееееееееееееееееень
 
 }
