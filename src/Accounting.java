@@ -1,16 +1,27 @@
 /**
  * Created by Pavel on 12.03.2017.
  */
+
 import java.util.Date;
+
 public class Accounting {
     /**
-     * Идентификатор ресурса, к которому обращается пользователь. Объём ресурсов, потреблённых юзером.
+     * Идентификатор ресурса, к которому обращается пользователь.
      */
-    private int resourceUserId, volumeOfUseRes;
+    private int resourceUserId;
     /**
-     * Дата, по которой началось пользование ресурсом. Дата, по которой закончилось пользование ресурсом.
+     * Объём ресурсов, потреблённых юзером.
      */
-    private Date startAccountingDate, endAccountingDate;
+    private String volumeOfUseRes;
+
+    /**
+     * Дата, по которой началось пользование ресурсом.
+     */
+    private String startAccountingDate;
+    /**
+     * Дата, по которой закончилось пользование ресурсом.
+     */
+    private String endAccountingDate;
 
     public int getResourceUserId() {
         return resourceUserId;
@@ -21,29 +32,29 @@ public class Accounting {
         return this;
     }
 
-    public int getVolumeOfUseRes() {
+    public String getVolumeOfUseRes() {
         return volumeOfUseRes;
     }
 
-    public Accounting setVolumeOfUseRes(int volumeOfUseRes) {
+    public Accounting setVolumeOfUseRes(String volumeOfUseRes) {
         this.volumeOfUseRes = volumeOfUseRes;
         return this;
     }
 
-    public Date getStartAccountingDate() {
+    public String getStartAccountingDate() {
         return startAccountingDate;
     }
 
-    public Accounting setStartAccountingDate(Date startAccountingDate) {
+    public Accounting setStartAccountingDate(String startAccountingDate) {
         this.startAccountingDate = startAccountingDate;
         return this;
     }
 
-    public Date getEndAccountingDate() {
+    public String getEndAccountingDate() {
         return endAccountingDate;
     }
 
-    public Accounting setEndAccountingDate(Date endAccountingDate) {
+    public Accounting setEndAccountingDate(String endAccountingDate) {
         this.endAccountingDate = endAccountingDate;
         return this;
     }
