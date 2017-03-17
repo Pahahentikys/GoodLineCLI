@@ -5,8 +5,6 @@
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.ArrayList;
-import java.util.Date;
-
 
 public class AuthentifAndAuthorizService {
 
@@ -128,8 +126,9 @@ public class AuthentifAndAuthorizService {
 
     /**
      * Метод для создания сеанса доступа к ресурсу для юзера, который фиксирует даты: начала доступа, окончания и объем, потребдённых ресурсов.
+     *
      * @param accountingList - коллекция сенсов пользователя.
-     * @param userInputData - входные данные.
+     * @param userInputData  - входные данные.
      */
     public static void createUserSeans(ArrayList<Accounting> accountingList, UserInputData userInputData) {
         Accounting userSeans = new Accounting()

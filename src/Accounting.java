@@ -2,8 +2,6 @@
  * Created by Pavel on 12.03.2017.
  */
 
-import java.util.Date;
-
 public class Accounting {
     /**
      * Идентификатор ресурса, к которому обращается пользователь.
