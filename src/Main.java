@@ -9,26 +9,57 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
 
-        UserInfo userOne = new UserInfo();
+        UserInfo johnDoe = new UserInfo();
+        UserInfo janeRow = new UserInfo();
         UserResources userResourceOne = new UserResources();
+        UserResources userResourceTwo = new UserResources();
+        UserResources userResourceThree = new UserResources();
+        UserResources userResourceFour = new UserResources();
+
         UserInputData userInputData = new UserInputData();
 
-        userOne.setUserId(1)
-                .setUserLogin("userOne")
+        johnDoe.setUserId(1)
+                .setUserLogin("jdoe")
                 .setUserSalt(RandomStringUtils.randomAscii(8))
-                .setUserHashPassword("111");
+                .setUserHashPassword("sup3rpaZZ");
+
+        janeRow.setUserId(2)
+                .setUserLogin("jrow")
+                .setUserSalt(RandomStringUtils.randomAscii(8))
+                .setUserHashPassword("Qweqrty12");
 
         ArrayList<UserInfo> usersInfo = new ArrayList<>();
-        usersInfo.add(userOne);
+        usersInfo.add(johnDoe);
+        usersInfo.add(janeRow);
 
         userResourceOne.setUserResId(1)
-                .setUserResUserId(1)
-                .setUserResResId(1)
-                .setResourcePath("A.B")
-                .setUserRole(UserRoles.EXECUTE);
+                .setUserResUserId(johnDoe.getUserId())
+                .setUserResResId(userResourceOne.getUserResResId())
+                .setResourcePath("a")
+                .setUserRole(UserRoles.READ);
+
+        userResourceTwo.setUserResId(2)
+                        .setUserResUserId(johnDoe.getUserId())
+                        .setUserResResId(userResourceTwo.getUserResResId())
+                        .setResourcePath("a.b")
+                        .setUserRole(UserRoles.WRITE);
+        userResourceThree.setUserResId(3)
+                        .setUserResUserId(janeRow.getUserId())
+                        .setUserResResId(userResourceThree.getUserResResId())
+                        .setResourcePath("a.b.c")
+                        .setUserRole(UserRoles.EXECUTE);
+        userResourceFour.setUserResId(4)
+                        .setUserResUserId(johnDoe.getUserId())
+                        .setResourcePath("a.bc")
+                        .setUserRole(UserRoles.EXECUTE);
+
+
 
         ArrayList<UserResources> usersResources = new ArrayList<>();
         usersResources.add(userResourceOne);
+        usersResources.add(userResourceTwo);
+        usersResources.add(userResourceThree);
+        usersResources.add(userResourceFour);
 
         ArrayList<Accounting> accountingList = new ArrayList<>();
 
