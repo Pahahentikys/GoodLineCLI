@@ -21,14 +21,14 @@ public class DataValidator {
 
     public static Options generateOptions() {
         Options options = new Options();
-        options.addOption("h", HELP, true, "Показать справочную информацию");
-        options.addOption("login", LOGIN, true, "Логин: ");
-        options.addOption("pass", PASS, true, "Пароль: ");
-        options.addOption("res", RES, true, "Ресурс для доступа: ");
-        options.addOption("role", ROLE, true, "Права доступа к ресурсу: ");
-        options.addOption("ds", DS, true, "Начало доступа к ресурсу: ");
-        options.addOption("de", DE, true, "Конец доступа к ресурсу: ");
-        options.addOption("vol", VOL, true, "Потреблённые ресурсы: ");
+        options.addOption("h", HELP, true, "Help menu: ");
+        options.addOption("login", LOGIN, true, "Login : ");
+        options.addOption("pass", PASS, true, "Password: ");
+        options.addOption("res", RES, true, "Resource: ");
+        options.addOption("role", ROLE, true, "Access: ");
+        options.addOption("ds", DS, true, "Date start to access: ");
+        options.addOption("de", DE, true, "Date start to access: ");
+        options.addOption("vol", VOL, true, "Volume: ");
         return options;
     }
 
@@ -42,6 +42,12 @@ public class DataValidator {
             userInputData.setUserInputDs(commandLine.getOptionValue("ds"));
             userInputData.setUserInputDe(commandLine.getOptionValue("de"));
             userInputData.setUserInputVol(commandLine.getOptionValue("vol"));
+
+            if (userInputData.getUserInputLogin() == null || userInputData.getUserInputPassword() == null) {
+                HelpFormatter helpFormatter = new HelpFormatter();
+                helpFormatter.printHelp("Help menu: ", generateOptions());
+                System.exit(0);
+            }
 
         } catch (ParseException ex) {
             HelpFormatter helpFormatter = new HelpFormatter();
