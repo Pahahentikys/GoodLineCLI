@@ -5,8 +5,6 @@
 import org.apache.commons.cli.*;
 import org.apache.commons.cli.ParseException;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 public class DataValidator {
@@ -62,6 +60,7 @@ public class DataValidator {
 
     /**
      * Конвертация в даты в формат ГГГГ-ММ-ДД
+     *
      * @param userInputData - входные данные
      * @return - true, если конвертация прошла успешно
      */
@@ -70,6 +69,22 @@ public class DataValidator {
             LocalDate.parse(userInputData.getUserInputDs());
             LocalDate.parse(userInputData.getUserInputDe());
         } catch (Exception ex) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Приведение объёма используемых юзером ресурсов к целому числу
+     *
+     * @param userInputData - входные данные
+     * @return - true, если число в целое
+     */
+    public static boolean isVolumeValid(UserInputData userInputData) {
+        try {
+            String testVol = userInputData.getUserInputVol();
+            Integer.valueOf(testVol);
+        } catch (NumberFormatException ex) {
             return false;
         }
         return true;
