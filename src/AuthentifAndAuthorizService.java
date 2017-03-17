@@ -127,20 +127,20 @@ public class AuthentifAndAuthorizService {
 
     /**
      * Проверка на то, был ли пользовательский сеанс
-     * @param accountingList - коллекция сеансов пользователя
-     * @param userInputData - входные данные
+     *
+     * @param accountingList      - коллекция сеансов пользователя
+     * @param userInputData       - входные данные
      * @param isUserAuthorization - проверка на то, что пользователь авторизован
      * @return - код: 5, если некорректная дата
      */
     public static boolean isUserAccounting(ArrayList<Accounting> accountingList, UserInputData userInputData, boolean isUserAuthorization) {
         if (isUserAuthorization) {
-            if (!DataValidator.isDateDsAndDeValid(userInputData)) {
+            if (!DataValidator.isDateDsAndDeValid(userInputData) || !DataValidator.isVolumeValid(userInputData)) {
+
                 System.exit(5);
             }
-
             return true;
         }
-
         return false;
     }
 
