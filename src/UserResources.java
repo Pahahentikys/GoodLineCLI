@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Pavel on 09.03.2017.
@@ -53,5 +56,7 @@ public class UserResources {
         this.userResResId = userResResId;
         return this;
     }
+
+
 
 }

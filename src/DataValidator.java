@@ -27,7 +27,7 @@ public class DataValidator {
         options.addOption("res", RES, true, "Resource: ");
         options.addOption("role", ROLE, true, "Access: ");
         options.addOption("ds", DS, true, "Date start to access: ");
-        options.addOption("de", DE, true, "Date start to access: ");
+        options.addOption("de", DE, true, "Date end to access: ");
         options.addOption("vol", VOL, true, "Volume: ");
         return options;
     }
@@ -51,7 +51,7 @@ public class DataValidator {
 
         } catch (ParseException ex) {
             HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("Показать справочную информацию: ", generateOptions());
+            helpFormatter.printHelp("Help menu: ", generateOptions());
             System.exit(0);
         }
 
