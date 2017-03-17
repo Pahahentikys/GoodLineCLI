@@ -5,6 +5,7 @@
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class AuthentifAndAuthorizService {
@@ -126,6 +127,21 @@ public class AuthentifAndAuthorizService {
     }
 
     /**
+     * Метод для создания сеанса доступа к ресурсу для юзера, который фиксирует даты: начала доступа, окончания и объем, потребдённых ресурсов.
+     * @param accountingList - коллекция сенсов пользователя.
+     * @param userInputData - входные данные.
+     */
+    public void createUserSeans(ArrayList<Accounting> accountingList, UserInputData userInputData) {
+        Accounting userSeans = new Accounting()
+                .setResourceUserId(userInputData.getUserInputId())
+                .setStartAccountingDate(userInputData.getUserInputDs())
+                .setEndAccountingDate(userInputData.getUserInputDe())
+                .setVolumeOfUseRes(userInputData.getUserInputVol());
+
+        accountingList.add(userSeans);
+    }
+
+    /**
      * Проверка на то, был ли пользовательский сеанс
      *
      * @param accountingList      - коллекция сеансов пользователя
@@ -143,7 +159,6 @@ public class AuthentifAndAuthorizService {
         }
         return false;
     }
-
 
     /**
      * Получение хэша пароля
