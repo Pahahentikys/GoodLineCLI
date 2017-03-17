@@ -131,7 +131,7 @@ public class AuthentifAndAuthorizService {
      * @param accountingList - коллекция сенсов пользователя.
      * @param userInputData - входные данные.
      */
-    public void createUserSeans(ArrayList<Accounting> accountingList, UserInputData userInputData) {
+    public static void createUserSeans(ArrayList<Accounting> accountingList, UserInputData userInputData) {
         Accounting userSeans = new Accounting()
                 .setResourceUserId(userInputData.getUserInputId())
                 .setStartAccountingDate(userInputData.getUserInputDs())
@@ -152,9 +152,9 @@ public class AuthentifAndAuthorizService {
     public static boolean isUserAccounting(ArrayList<Accounting> accountingList, UserInputData userInputData, boolean isUserAuthorization) {
         if (isUserAuthorization) {
             if (!DataValidator.isDateDsAndDeValid(userInputData) || !DataValidator.isVolumeValid(userInputData)) {
-
                 System.exit(5);
             }
+            createUserSeans(accountingList, userInputData);
             return true;
         }
         return false;
