@@ -2,13 +2,24 @@
  * Created by Pavel on 09.03.2017.
  */
 public class UserInputData {
-    private String userInputLogin,
-            userInputPassword,
-            userInputPathResource,
-            userInputRole,
-            userInputDs,
-            userInputDe,
-            userInputVol;
+    int userInputId;
+    private String userInputLogin;
+
+    public int getUserInputId() {
+        return userInputId;
+    }
+
+    public UserInputData setUserInputId(int userInputId) {
+        this.userInputId = userInputId;
+        return this;
+    }
+
+    private String userInputPassword;
+    private String userInputPathResource;
+    private String userInputRole;
+    private String userInputDs;
+    private String userInputDe;
+    private String userInputVol;
 
     public String getUserInputLogin() {
         return userInputLogin;
@@ -73,4 +84,5 @@ public class UserInputData {
         this.userInputVol = userInputVol;
         return this;
     }
+
 }
