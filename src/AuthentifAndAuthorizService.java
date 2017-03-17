@@ -90,13 +90,14 @@ public class AuthentifAndAuthorizService {
             String[] userResPath = anUserResourcesList.getResourcePath().split("\\.");
             for (int i = 0; i < userResPath.length; i++) {
                 isResEqual = nodeResInputPath[i].equals(userResPath[i]);
-                if (!isResEqual) {
-                    return false;
-                }
-
                 if (isResEqual) {
-                    return true;
+                    if (userInputData.getUserInputId() == anUserResourcesList.getUserResUserId()) {
+                        if (UserRoles.valueOf(userInputData.getUserInputRole()).equals((anUserResourcesList.getUserRole()))) {
+                            return true;
+                        }
+                    }
                 }
+                return false;
             }
         }
         return false;
@@ -112,7 +113,7 @@ public class AuthentifAndAuthorizService {
      */
 
     public static boolean isUserAuthorization(ArrayList<UserResources> resourcesList, UserInputData userInpData, boolean isUserAuthentification) {
-        if (isUserAuthentification & !userInpData.getUserInputRole().isEmpty() & !userInpData.getUserInputPathResource().isEmpty()) {
+        if (isUserAuthentification & userInpData.getUserInputRole() != null & userInpData.getUserInputPathResource() != null) {
             if (!DataValidator.isUserRoleValid(userInpData)) {
                 System.exit(3);
             }
@@ -149,7 +150,7 @@ public class AuthentifAndAuthorizService {
      * @return - код: 5, если некорректная дата
      */
     public static boolean isUserAccounting(ArrayList<Accounting> accountingList, UserInputData userInputData, boolean isUserAuthorization) {
-        if (isUserAuthorization) {
+        if (isUserAuthorization & userInputData.getUserInputDs() != null) {
             if (!DataValidator.isDateDsAndDeValid(userInputData) || !DataValidator.isVolumeValid(userInputData)) {
                 System.exit(5);
             }
