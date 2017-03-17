@@ -1,8 +1,7 @@
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 /**
  * Created by Pavel on 07.03.2017.
@@ -31,6 +30,8 @@ public class Main {
         ArrayList<UserResources> usersResources = new ArrayList<>();
         usersResources.add(userResourceOne);
 
+        ArrayList<Accounting> accountingList = new ArrayList<>();
+
         DataValidator.getUserInputData(userInputData, args);
 
         boolean isAuthentification = AuthentifAndAuthorizService.isUserAuthentification(usersInfo, userInputData);
@@ -42,8 +43,20 @@ public class Main {
         if (isAuth) {
             System.out.println("Авторизация прошла успешно!");
         }
+
+        if (AuthentifAndAuthorizService.isUserAccounting(accountingList, userInputData, isAuth)) {
+            System.out.println("Аккаунтинг!");
+        }
+
+        boolean isAccount = AuthentifAndAuthorizService.isUserAccounting(accountingList, userInputData, isAuth);
+        if (isAccount) {
+            for (Accounting accounting : accountingList) {
+                System.out.println(accounting);
+            }
+        }
     }
 }
+
 
 
 
