@@ -51,7 +51,10 @@ public class Main {
         boolean isAccount = AuthentifAndAuthorizService.isUserAccounting(accountingList, userInputData, isAuth);
         if (isAccount) {
             for (Accounting accounting : accountingList) {
-                System.out.println(accounting);
+
+                System.out.println(String.format("ID:%s; Ds:%s; De:%s; Vol: %s", accounting.getResourceUserId(),
+                        accounting.getStartAccountingDate(), accounting.getEndAccountingDate(),
+                        accounting.getVolumeOfUseRes()));
             }
         }
     }
