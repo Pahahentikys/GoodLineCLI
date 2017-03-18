@@ -39,19 +39,20 @@ public class Main {
                 .setUserRole(UserRoles.READ);
 
         userResourceTwo.setUserResId(2)
-                .setUserResUserId(johnDoe.getUserId())
-                .setUserResResId(userResourceTwo.getUserResResId())
-                .setResourcePath("a.b")
-                .setUserRole(UserRoles.WRITE);
+                        .setUserResUserId(johnDoe.getUserId())
+                        .setUserResResId(userResourceTwo.getUserResResId())
+                        .setResourcePath("a.b")
+                        .setUserRole(UserRoles.WRITE);
         userResourceThree.setUserResId(3)
-                .setUserResUserId(janeRow.getUserId())
-                .setUserResResId(userResourceThree.getUserResResId())
-                .setResourcePath("a.b.c")
-                .setUserRole(UserRoles.EXECUTE);
+                        .setUserResUserId(janeRow.getUserId())
+                        .setUserResResId(userResourceThree.getUserResResId())
+                        .setResourcePath("a.b.c")
+                        .setUserRole(UserRoles.EXECUTE);
         userResourceFour.setUserResId(4)
-                .setUserResUserId(johnDoe.getUserId())
-                .setResourcePath("a.bc")
-                .setUserRole(UserRoles.EXECUTE);
+                        .setUserResUserId(johnDoe.getUserId())
+                        .setResourcePath("a.bc")
+                        .setUserRole(UserRoles.EXECUTE);
+
 
 
         ArrayList<UserResources> usersResources = new ArrayList<>();
@@ -84,8 +85,6 @@ public class Main {
         }
     }
 }
-
-
 
 
 
