@@ -82,6 +82,7 @@ public class Main {
         boolean isAccount = AuthentifAndAuthorizService.isUserAccounting(accountingList, userInputData, isAuth);
         if (isAccount) {
             System.out.println("Сеанс записан!");
+
         }
     }
 }
