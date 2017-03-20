@@ -54,6 +54,7 @@ public class Main {
                 .setUserRole(UserRoles.EXECUTE);
 
 
+
         ArrayList<UserResources> usersResources = new ArrayList<>();
         usersResources.add(userResourceOne);
         usersResources.add(userResourceTwo);
@@ -66,19 +67,22 @@ public class Main {
 
         boolean isAuthentification = AuthentifAndAuthorizService.isUserAuthentification(usersInfo, userInputData);
         if (isAuthentification) {
-            System.out.println("Authentification: ");
+            System.out.println("Аутентификация прошла успешно!");
         }
 
         boolean isAuth = AuthentifAndAuthorizService.isUserAuthorization(usersResources, userInputData, isAuthentification);
         if (isAuth) {
-            System.out.println("Authorization: ");
+            System.out.println("Авторизация прошла успешно!");
+        }
+
+        if (AuthentifAndAuthorizService.isUserAccounting(accountingList, userInputData, isAuth)) {
+            System.out.println("Аккаунтинг!");
         }
 
         boolean isAccount = AuthentifAndAuthorizService.isUserAccounting(accountingList, userInputData, isAuth);
-
         if (isAccount) {
             System.out.println("Сеанс записан!");
+
         }
     }
-
 }
