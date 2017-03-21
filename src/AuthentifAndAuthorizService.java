@@ -2,12 +2,12 @@
  * Created by Pavel on 09.03.2017.
  */
 
-
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.ArrayList;
 
 public class AuthentifAndAuthorizService {
+
 
     /**
      * Получение хэша пароля
@@ -17,7 +17,7 @@ public class AuthentifAndAuthorizService {
      * @return - "посоленный" хэш пароля
      */
 
-    public static String generHashUserPassword(String userNoHashPassword, String salt) {
+    public String generHashUserPassword(String userNoHashPassword, String salt) {
 
         return DigestUtils.md5Hex(DigestUtils.md5Hex(userNoHashPassword) + salt);
 
@@ -30,7 +30,7 @@ public class AuthentifAndAuthorizService {
      * @param hashUserPass - хэш пароля, который ввёл пользователь
      * @return true, если хэши равны
      */
-    public static boolean isUserHashesEqual(UserInfo user, String hashUserPass) {
+    public boolean isUserHashesEqual(UserInfo user, String hashUserPass) {
         return user.getUserHashPassword().equals(hashUserPass);
     }
 
@@ -41,12 +41,13 @@ public class AuthentifAndAuthorizService {
      * @param userInputData - объект, хранящий в себе входные параметры
      * @return - true, если верный логин и пароль
      */
-    public static boolean isUserAuthentification(ArrayList<UserInfo> usersList, UserInputData userInputData) {
-        if (!DataBaseContext.isGetUserLogin(usersList, userInputData)) {
+    public boolean isUserAuthentification(ArrayList<UserInfo> usersList, UserInputData userInputData) {
+        DataBaseContext dataBaseContext = new DataBaseContext();
+        if (!dataBaseContext.isGetUserLogin(usersList, userInputData)) {
             System.exit(1);
         }
 
-        if (!DataBaseContext.isGetUserPassword(usersList, userInputData)) {
+        if (!dataBaseContext.isGetUserPassword(usersList, userInputData)) {
 
             System.exit(2);
 
@@ -64,12 +65,12 @@ public class AuthentifAndAuthorizService {
      * @return - код: 3, если неправильная роль, код: 4, если нет доступа
      */
 
-    public static boolean isUserAuthorization(ArrayList<UserResources> resourcesList, UserInputData userInpData, boolean isUserAuthentification) {
+    public boolean isUserAuthorization(ArrayList<UserResources> resourcesList, UserInputData userInpData, DataBaseContext dataBaseContext, DataValidator dataValidator, boolean isUserAuthentification) {
         if ((isUserAuthentification) && (userInpData.getUserInputRole() != null) && (userInpData.getUserInputPathResource() != null)) {
-            if (!DataValidator.isUserRoleValid(userInpData)) {
+            if (!dataValidator.isUserRoleValid(userInpData)) {
                 System.exit(3);
             }
-            if (!DataBaseContext.isResUserAccess(resourcesList, userInpData)) {
+            if (!dataBaseContext.isResUserAccess(resourcesList, userInpData)) {
                 System.exit(4);
             }
             return true;
@@ -83,7 +84,7 @@ public class AuthentifAndAuthorizService {
      * @param accountingList - коллекция сенсов пользователя.
      * @param userInputData  - входные данные.
      */
-    public static void createUserSeans(ArrayList<Accounting> accountingList, UserInputData userInputData) {
+    public void createUserSeans(ArrayList<Accounting> accountingList, UserInputData userInputData) {
         Accounting userSeans = new Accounting()
                 .setResourceUserId(userInputData.getUserInputId())
                 .setStartAccountingDate(userInputData.getUserInputDs())
@@ -101,9 +102,9 @@ public class AuthentifAndAuthorizService {
      * @param isUserAuthorization - проверка на то, что пользователь авторизован
      * @return - код: 5, если некорректная дата
      */
-    public static boolean isUserAccounting(ArrayList<Accounting> accountingList, UserInputData userInputData, boolean isUserAuthorization) {
+    public boolean isUserAccounting(ArrayList<Accounting> accountingList, UserInputData userInputData, DataValidator dataValidator, boolean isUserAuthorization) {
         if (isUserAuthorization && userInputData.getUserInputDs() != null) {
-            if (!DataValidator.isDateDsAndDeValid(userInputData) || !DataValidator.isVolumeValid(userInputData)) {
+            if (!dataValidator.isDateDsAndDeValid(userInputData) || !dataValidator.isVolumeValid(userInputData)) {
                 System.exit(5);
             }
             createUserSeans(accountingList, userInputData);

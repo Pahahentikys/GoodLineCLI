@@ -16,10 +16,10 @@ public class DataValidator {
     public static final String DS = "ds";
     public static final String DE = "de";
     public static final String VOL = "vol";
-    private static CommandLine commandLine;
 
 
-    public static Options generateOptions() {
+
+    public Options generateOptions() {
         Options options = new Options();
         options.addOption("h", HELP, true, "Help menu: ");
         options.addOption("login", LOGIN, true, "Login : ");
@@ -32,9 +32,9 @@ public class DataValidator {
         return options;
     }
 
-    public static UserInputData getUserInputData(UserInputData userInputData, String[] args) {
+    public  UserInputData getUserInputData (UserInputData userInputData, String[] args) {
         try {
-            commandLine = new DefaultParser().parse(generateOptions(), args);
+            CommandLine commandLine = new DefaultParser().parse(generateOptions(), args);
             userInputData.setUserInputLogin(commandLine.getOptionValue("login"));
             userInputData.setUserInputPassword(commandLine.getOptionValue("pass"));
             userInputData.setUserInputPathResource(commandLine.getOptionValue("res"));
@@ -64,7 +64,7 @@ public class DataValidator {
      * @param userInpData - данные, которые идут на вход в консоль
      * @return - true в том случае, если роль существует
      */
-    public static boolean isUserRoleValid(UserInputData userInpData) {
+    public  boolean isUserRoleValid(UserInputData userInpData) {
         for (UserRoles role : UserRoles.values()) {
             if (role.name().equals((userInpData.getUserInputRole())))
                 return true;
@@ -78,7 +78,7 @@ public class DataValidator {
      * @param userInputData - входные данные
      * @return - true, если конвертация прошла успешно
      */
-    public static boolean isDateDsAndDeValid(UserInputData userInputData) {
+    public  boolean isDateDsAndDeValid(UserInputData userInputData) {
         try {
             LocalDate.parse(userInputData.getUserInputDs());
             LocalDate.parse(userInputData.getUserInputDe());
@@ -94,7 +94,7 @@ public class DataValidator {
      * @param userInputData - входные данные
      * @return - true, если число в целое
      */
-    public static boolean isVolumeValid(UserInputData userInputData) {
+    public boolean isVolumeValid(UserInputData userInputData) {
         try {
             String testVol = userInputData.getUserInputVol();
             Integer.valueOf(testVol);

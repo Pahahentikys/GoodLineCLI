@@ -1,4 +1,3 @@
-import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.ArrayList;
 
@@ -7,6 +6,8 @@ import java.util.ArrayList;
  */
 public class DataBaseContext {
 
+    AuthentifAndAuthorizService authAndAuthorServ = new AuthentifAndAuthorizService();
+
     /**
      * Получить пользователя по логину
      *
@@ -14,7 +15,7 @@ public class DataBaseContext {
      * @param userInpdata - входные данные
      * @return - true, если логины совпадают
      */
-    public static boolean isGetUserLogin(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
+    public boolean isGetUserLogin(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
         for (UserInfo user : usersList) {
             if (userInpdata.getUserInputLogin().equals(user.getUserLogin())) {
                 userInpdata.userInputId = user.getUserId();
@@ -33,12 +34,12 @@ public class DataBaseContext {
      * @param userInpdata - введённые пользователем данные
      * @return - true, если парольные хэши совпадают
      */
-    public static boolean isGetUserPassword(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
+    public boolean isGetUserPassword(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
 
         for (UserInfo user : usersList) {
             if (userInpdata.getUserInputId() == user.getUserId()) {
-                String hashUserPass = AuthentifAndAuthorizService.generHashUserPassword(userInpdata.getUserInputPassword(), user.getUserSalt());
-                if (AuthentifAndAuthorizService.isUserHashesEqual(user, hashUserPass)) {
+                String hashUserPass = authAndAuthorServ.generHashUserPassword(userInpdata.getUserInputPassword(), user.getUserSalt());
+                if (authAndAuthorServ.isUserHashesEqual(user, hashUserPass)) {
                     return true;
                 }
             }
@@ -52,7 +53,7 @@ public class DataBaseContext {
      * @param userResourcesList - коллекция ресурсов, заданных в программе
      * @param userInputData     - объект, который хранит входные данные
      */
-    public static boolean isResUserAccess(ArrayList<UserResources> userResourcesList, UserInputData userInputData) {
+    public boolean isResUserAccess(ArrayList<UserResources> userResourcesList, UserInputData userInputData) {
         String[] nodeResInputPath = userInputData.getUserInputPathResource().split("\\.");
         for (UserResources anUserResourcesList : userResourcesList) {
             boolean isResEqual = false;
