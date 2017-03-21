@@ -113,7 +113,7 @@ public class AuthentifAndAuthorizService {
      */
 
     public static boolean isUserAuthorization(ArrayList<UserResources> resourcesList, UserInputData userInpData, boolean isUserAuthentification) {
-        if (isUserAuthentification && userInpData.getUserInputRole() != null && userInpData.getUserInputPathResource() != null) {
+        if ((isUserAuthentification) && (userInpData.getUserInputRole() != null) && (userInpData.getUserInputPathResource() != null)) {
             if (!DataValidator.isUserRoleValid(userInpData)) {
                 System.exit(3);
             }
