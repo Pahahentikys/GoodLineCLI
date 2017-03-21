@@ -3,9 +3,9 @@
  */
 public class UserInfo {
     private int userId;
-    private String userLogin,
-            userHashPassword,
-            userSalt;
+    private String userLogin;
+    private String userHashPassword;
+    private String userSalt;
 
     public int getUserId() {
         return userId;
