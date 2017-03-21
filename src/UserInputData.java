@@ -4,22 +4,14 @@
 public class UserInputData {
     int userInputId;
     private String userInputLogin;
-
-    public int getUserInputId() {
-        return userInputId;
-    }
-
-    public UserInputData setUserInputId(int userInputId) {
-        this.userInputId = userInputId;
-        return this;
-    }
-
     private String userInputPassword;
     private String userInputPathResource;
     private String userInputRole;
     private String userInputDs;
     private String userInputDe;
     private String userInputVol;
+
+    public int getUserInputId() { return userInputId; }
 
     public String getUserInputLogin() {
         return userInputLogin;
@@ -47,6 +39,11 @@ public class UserInputData {
 
     public String getUserInputVol() {
         return userInputVol;
+    }
+
+    public UserInputData setUserInputId(int userInputId) {
+        this.userInputId = userInputId;
+        return this;
     }
 
     public UserInputData setUserInputLogin(String userInputLogin) {
