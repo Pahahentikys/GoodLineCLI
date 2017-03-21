@@ -33,8 +33,8 @@ public class UserInfo {
         return this;
     }
 
-    public UserInfo setUserHashPassword(String userNoHashPassword) {
-        this.userHashPassword = AuthentifAndAuthorizService.generHashUserPassword(userNoHashPassword, getUserSalt());
+    public UserInfo setUserHashPassword(String userHashPassword) {
+        this.userHashPassword = userHashPassword;
         return this;
     }
 

@@ -18,15 +18,18 @@ public class Main {
 
         UserInputData userInputData = new UserInputData();
 
+
         johnDoe.setUserId(1)
                 .setUserLogin("jdoe")
                 .setUserSalt(RandomStringUtils.randomAscii(8))
-                .setUserHashPassword("sup3rpaZZ");
+                .setUserHashPassword(AuthentifAndAuthorizService.generHashUserPassword("sup3rpaZZ",
+                        johnDoe.getUserSalt()));
 
         janeRow.setUserId(2)
                 .setUserLogin("jrow")
                 .setUserSalt(RandomStringUtils.randomAscii(8))
-                .setUserHashPassword("Qweqrty12");
+                .setUserHashPassword(AuthentifAndAuthorizService.generHashUserPassword("Qweqrty12",
+                        janeRow.getUserSalt()));
 
         ArrayList<UserInfo> usersInfo = new ArrayList<>();
         usersInfo.add(johnDoe);
