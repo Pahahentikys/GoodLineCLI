@@ -6,42 +6,50 @@ import org.apache.commons.cli.*;
 import org.apache.commons.cli.ParseException;
 
 import java.time.LocalDate;
+import java.util.Locale;
+
 
 public class DataValidator {
-    public static final String HELP = "help";
-    public static final String LOGIN = "login";
-    public static final String PASS = "pass";
-    public static final String RES = "res";
-    public static final String ROLE = "role";
-    public static final String DS = "ds";
-    public static final String DE = "de";
-    public static final String VOL = "vol";
+    enum ComLineOptions {
+        HELP,
+        LOGIN,
+        PASS,
+        RES,
+        ROLE,
+        DS,
+        DE,
+        VOL;
 
-
+        @Override
+        public String toString() {
+            String ComLineOptions = name().toLowerCase(Locale.US);
+            return ComLineOptions;
+        }
+    }
 
     public Options generateOptions() {
         Options options = new Options();
-        options.addOption("h", HELP, true, "Help menu: ");
-        options.addOption("login", LOGIN, true, "Login : ");
-        options.addOption("pass", PASS, true, "Password: ");
-        options.addOption("res", RES, true, "Resource: ");
-        options.addOption("role", ROLE, true, "Access: ");
-        options.addOption("ds", DS, true, "Date start to access: ");
-        options.addOption("de", DE, true, "Date end to access: ");
-        options.addOption("vol", VOL, true, "Volume: ");
+        options.addOption("h", String.valueOf(ComLineOptions.HELP), true, "Help menu: ");
+        options.addOption("login", String.valueOf(ComLineOptions.LOGIN), true, "Login : ");
+        options.addOption("pass", String.valueOf(ComLineOptions.PASS), true, "Password: ");
+        options.addOption("res", String.valueOf(ComLineOptions.RES), true, "Resource: ");
+        options.addOption("role", String.valueOf(ComLineOptions.ROLE), true, "Access: ");
+        options.addOption("ds", String.valueOf(ComLineOptions.DS), true, "Date start to access: ");
+        options.addOption("de", String.valueOf(ComLineOptions.DE), true, "Date end to access: ");
+        options.addOption("vol", String.valueOf(ComLineOptions.VOL), true, "Volume: ");
         return options;
     }
 
-    public  UserInputData getUserInputData (UserInputData userInputData, String[] args) {
+    public UserInputData getUserInputData(UserInputData userInputData, String[] args) {
         try {
             CommandLine commandLine = new DefaultParser().parse(generateOptions(), args);
-            userInputData.setUserInputLogin(commandLine.getOptionValue("login"));
-            userInputData.setUserInputPassword(commandLine.getOptionValue("pass"));
-            userInputData.setUserInputPathResource(commandLine.getOptionValue("res"));
-            userInputData.setUserInputRole(commandLine.getOptionValue("role"));
-            userInputData.setUserInputDs(commandLine.getOptionValue("ds"));
-            userInputData.setUserInputDe(commandLine.getOptionValue("de"));
-            userInputData.setUserInputVol(commandLine.getOptionValue("vol"));
+            userInputData.setUserInputLogin(commandLine.getOptionValue(String.valueOf(ComLineOptions.LOGIN)));
+            userInputData.setUserInputPassword(commandLine.getOptionValue(String.valueOf(ComLineOptions.PASS)));
+            userInputData.setUserInputPathResource(commandLine.getOptionValue(String.valueOf(ComLineOptions.RES)));
+            userInputData.setUserInputRole(commandLine.getOptionValue(String.valueOf(ComLineOptions.ROLE)));
+            userInputData.setUserInputDs(commandLine.getOptionValue(String.valueOf(ComLineOptions.DS)));
+            userInputData.setUserInputDe(commandLine.getOptionValue(String.valueOf(ComLineOptions.DE)));
+            userInputData.setUserInputVol(commandLine.getOptionValue(String.valueOf(ComLineOptions.VOL)));
 
             if (userInputData.getUserInputLogin() == null || userInputData.getUserInputPassword() == null) {
                 HelpFormatter helpFormatter = new HelpFormatter();
@@ -64,7 +72,7 @@ public class DataValidator {
      * @param userInpData - данные, которые идут на вход в консоль
      * @return - true в том случае, если роль существует
      */
-    public  boolean isUserRoleValid(UserInputData userInpData) {
+    public boolean isUserRoleValid(UserInputData userInpData) {
         for (UserRoles role : UserRoles.values()) {
             if (role.name().equals((userInpData.getUserInputRole())))
                 return true;
@@ -78,7 +86,7 @@ public class DataValidator {
      * @param userInputData - входные данные
      * @return - true, если конвертация прошла успешно
      */
-    public  boolean isDateDsAndDeValid(UserInputData userInputData) {
+    public boolean isDateDsAndDeValid(UserInputData userInputData) {
         try {
             LocalDate.parse(userInputData.getUserInputDs());
             LocalDate.parse(userInputData.getUserInputDe());
