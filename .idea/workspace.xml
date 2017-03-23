@@ -6,8 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b693990-8332-41ab-ae1f-7f8267f9c06c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BUILD.sh" />
+    <list default="true" id="9b693990-8332-41ab-ae1f-7f8267f9c06c" name="Default" comment="Добавил в репозиторий файл: BUILD.sh">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TEST.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="c9f75d62-c9aa-4e3e-a5a9-a73b215f85c3" name="Revert: Del .idea" comment="" />
@@ -48,8 +48,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BUILD.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BUILD.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BUILD.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TEST.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TEST.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -628,7 +638,14 @@
       <option name="project" value="LOCAL" />
       <updated>1490302934504</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Добавил в репозиторий файл: BUILD.sh">
+      <created>1490308896198</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1490308896198</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -747,7 +764,8 @@
     <MESSAGE value="Пункт: 5, Release 1.0 #1. Избавилася от статических методов." />
     <MESSAGE value="Тест мерджа на тестовой ветке" />
     <MESSAGE value="Докинул батник" />
-    <option name="LAST_COMMIT_MESSAGE" value="Докинул батник" />
+    <MESSAGE value="Добавил в репозиторий файл: BUILD.sh" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил в репозиторий файл: BUILD.sh" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -768,17 +786,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AuthentifAndAuthorizService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1386">
-          <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DataBaseContext.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="902">
@@ -1206,6 +1213,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BUILD.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TEST.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
