@@ -8,6 +8,11 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args) {
+        UserInputData userInputData = new UserInputData();
+        DataValidator dataValidator = new DataValidator();
+        AuthentifAndAuthorizService authentifAndAuthorServ = new AuthentifAndAuthorizService();
+        DataBaseContext dataBaseContext = new DataBaseContext();
+
 
         UserInfo johnDoe = new UserInfo();
         UserInfo janeRow = new UserInfo();
@@ -16,17 +21,20 @@ public class Main {
         UserResources userResourceThree = new UserResources();
         UserResources userResourceFour = new UserResources();
 
-        UserInputData userInputData = new UserInputData();
+
+
 
         johnDoe.setUserId(1)
                 .setUserLogin("jdoe")
                 .setUserSalt(RandomStringUtils.randomAscii(8))
-                .setUserHashPassword("sup3rpaZZ");
+                .setUserHashPassword(authentifAndAuthorServ.generHashUserPassword("sup3rpaZZ",
+                        johnDoe.getUserSalt()));
 
         janeRow.setUserId(2)
                 .setUserLogin("jrow")
                 .setUserSalt(RandomStringUtils.randomAscii(8))
-                .setUserHashPassword("Qweqrty12");
+                .setUserHashPassword(authentifAndAuthorServ.generHashUserPassword("Qweqrty12",
+                        janeRow.getUserSalt()));
 
         ArrayList<UserInfo> usersInfo = new ArrayList<>();
         usersInfo.add(johnDoe);
@@ -63,26 +71,25 @@ public class Main {
 
         ArrayList<Accounting> accountingList = new ArrayList<>();
 
-        DataValidator.getUserInputData(userInputData, args);
+        dataValidator.getUserInputData(userInputData, args);
 
-        boolean isAuthentification = AuthentifAndAuthorizService.isUserAuthentification(usersInfo, userInputData);
+        boolean isAuthentification = authentifAndAuthorServ.isUserAuthentification(usersInfo, userInputData);
         if (isAuthentification) {
             System.out.println("Аутентификация прошла успешно!");
         }
 
-        boolean isAuth = AuthentifAndAuthorizService.isUserAuthorization(usersResources, userInputData, isAuthentification);
+        boolean isAuth = authentifAndAuthorServ.isUserAuthorization(usersResources, userInputData,dataBaseContext, dataValidator, isAuthentification);
         if (isAuth) {
             System.out.println("Авторизация прошла успешно!");
         }
 
-        if (AuthentifAndAuthorizService.isUserAccounting(accountingList, userInputData, isAuth)) {
+        if (authentifAndAuthorServ.isUserAccounting(accountingList, userInputData, dataValidator, isAuth)) {
             System.out.println("Аккаунтинг!");
         }
 
-        boolean isAccount = AuthentifAndAuthorizService.isUserAccounting(accountingList, userInputData, isAuth);
+        boolean isAccount = authentifAndAuthorServ.isUserAccounting(accountingList, userInputData, dataValidator, isAuth);
         if (isAccount) {
             System.out.println("Сеанс записан!");
-
         }
     }
 }

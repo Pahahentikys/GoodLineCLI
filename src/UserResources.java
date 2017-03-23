@@ -8,9 +8,9 @@ import java.util.List;
 public class UserResources {
     private UserRoles userRole;
     private String resourcePath;
-    private int userResId,
-            userResUserId,
-            userResResId;
+    private int userResId;
+    private int userResUserId;
+    private int userResResId;
 
     public String getResourcePath() {
         return resourcePath;
@@ -56,7 +56,6 @@ public class UserResources {
         this.userResResId = userResResId;
         return this;
     }
-
 
 
 }

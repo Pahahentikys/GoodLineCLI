@@ -3,9 +3,9 @@
  */
 public class UserInfo {
     private int userId;
-    private String userLogin,
-            userHashPassword,
-            userSalt;
+    private String userLogin;
+    private String userHashPassword;
+    private String userSalt;
 
     public int getUserId() {
         return userId;
@@ -33,8 +33,8 @@ public class UserInfo {
         return this;
     }
 
-    public UserInfo setUserHashPassword(String userNoHashPassword) {
-        this.userHashPassword = AuthentifAndAuthorizService.generHashUserPassword(userNoHashPassword, getUserSalt());
+    public UserInfo setUserHashPassword(String userHashPassword) {
+        this.userHashPassword = userHashPassword;
         return this;
     }
 
