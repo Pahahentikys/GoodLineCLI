@@ -6,9 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b693990-8332-41ab-ae1f-7f8267f9c06c" name="Default" comment="Пункт: 5, Release 1.0 #1. Избавилася от статических методов.">
+    <list default="true" id="9b693990-8332-41ab-ae1f-7f8267f9c06c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/commons-cli-1.3.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/commons-codec-1.10.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/commons-lang3-3.5.jar" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/GoodLineCLI_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/GoodLineCLI_jar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoodLineCLI.iml" afterPath="$PROJECT_DIR$/GoodLineCLI.iml" />
     </list>
     <list id="c9f75d62-c9aa-4e3e-a5a9-a73b215f85c3" name="Revert: Del .idea" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -32,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="169">
-              <caret line="94" column="1" lean-forward="true" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
+              <caret line="94" column="1" lean-forward="false" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,8 +48,8 @@
       <file leaf-file-name="batTestCLI.bat" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/batTestCLI.bat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+            <state relative-caret-position="132">
+              <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -214,7 +219,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -510,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1490302426042</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Докинул батник">
+      <created>1490302934504</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1490302934504</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -631,7 +643,8 @@
     <MESSAGE value="Пункт: 4, Release 1.0 #1. Выделил работу с &quot;базой данных&quot; в отдельный класс: DataBaseContext, в который поместил методы поиска ресурса, пароля, логина пользователя из коллекция и сопоставление их с инпутом. В классе: AuthetificationAndAuthorization оставил процесс проверки авторизации, аутентифицакии, аккаунтинга и регистрации сеанса." />
     <MESSAGE value="Пункт: 5, Release 1.0 #1. Избавилася от статических методов." />
     <MESSAGE value="Тест мерджа на тестовой ветке" />
-    <option name="LAST_COMMIT_MESSAGE" value="Тест мерджа на тестовой ветке" />
+    <MESSAGE value="Докинул батник" />
+    <option name="LAST_COMMIT_MESSAGE" value="Докинул батник" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1113,7 +1126,7 @@
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
-          <caret line="94" column="1" lean-forward="true" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
+          <caret line="94" column="1" lean-forward="false" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1122,8 +1135,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/batTestCLI.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        <state relative-caret-position="132">
+          <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
           <folding />
         </state>
       </provider>
