@@ -3,13 +3,15 @@
 
 [GoodLine](http://kafedra-goodline.info/) - это кафедра, организованная на основе [КузГТУ](https://www.kuzstu.ru/)
 
+[Сайт проекта на GitHub Pages](https://pahahentikys.github.io/GoodLineCLI/)
+
 <h2>Ход работы:</h2>
 
 Работа выполняется с последовательным выполнений группы наборов требований:
 
-- [x] 1. [Набор требований для первого задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap.md)
+  1. [Набор требований для первого задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap.md)
   
-- [x] 2. [Набор требований для второго задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap2.md) 
+  2. [Набор требований для второго задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap2.md) 
 
 <h2>Набор инструкций по сборке проекта: </h2>
 
@@ -27,3 +29,5 @@
 Чтобы выполнить тестирование проекта, требуется запустить файл: **TEST.sh** при помощи специальной команды: **./TEST.sh**, которая должна быть введена из командной строки. Результатов выполнения тестирования может быть два: **код-0**, если тестирование прошло успешно и **код-1**, если хотя бы один тест приложения провален. 
 
 **Примечание**: тестирование проекта производится при помощи бесплатного сервиса: [Travis CI](https://travis-ci.org/) , который интегрируется с **GitHub**.
+
+
