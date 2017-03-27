@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b693990-8332-41ab-ae1f-7f8267f9c06c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/GoodLineCLI_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/sf-acc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="c9f75d62-c9aa-4e3e-a5a9-a73b215f85c3" name="Revert: Del .idea" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -60,11 +57,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoadMap2.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RoadMap2.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoadMap2.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="513">
               <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -585,7 +592,14 @@
       <option name="project" value="LOCAL" />
       <updated>1490633610929</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Уборка в репозитории. Убрал папку: .idea/">
+      <created>1490634039985</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1490634039985</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView">
@@ -718,7 +732,8 @@
     <MESSAGE value="Добавил в репозиторий файл: TEST.sh для тестирования проекта." />
     <MESSAGE value="Выполнил п. 5, обновил план." />
     <MESSAGE value="Поправил класс: Main, чтобы при тестировании, при запуске скрипта: TEST.sh выводились корректные символы в сообщениях о процессе аутентификации, авторизации, аккаунтинга, записи сеанса пользоваеля." />
-    <option name="LAST_COMMIT_MESSAGE" value="Поправил класс: Main, чтобы при тестировании, при запуске скрипта: TEST.sh выводились корректные символы в сообщениях о процессе аутентификации, авторизации, аккаунтинга, записи сеанса пользоваеля." />
+    <MESSAGE value="Уборка в репозитории. Убрал папку: .idea/" />
+    <option name="LAST_COMMIT_MESSAGE" value="Уборка в репозитории. Убрал папку: .idea/" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1088,18 +1103,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RoadMap2.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
           <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
