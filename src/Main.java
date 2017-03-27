@@ -75,21 +75,21 @@ public class Main {
 
         boolean isAuthentification = authentifAndAuthorServ.isUserAuthentification(usersInfo, userInputData);
         if (isAuthentification) {
-            System.out.println("Аутентификация прошла успешно!");
+            System.out.println("Authentification success!");
         }
 
         boolean isAuth = authentifAndAuthorServ.isUserAuthorization(usersResources, userInputData,dataBaseContext, dataValidator, isAuthentification);
         if (isAuth) {
-            System.out.println("Авторизация прошла успешно!");
+            System.out.println("Authorization success!");
         }
 
         if (authentifAndAuthorServ.isUserAccounting(accountingList, userInputData, dataValidator, isAuth)) {
-            System.out.println("Аккаунтинг!");
+            System.out.println("Accounting!");
         }
 
         boolean isAccount = authentifAndAuthorServ.isUserAccounting(accountingList, userInputData, dataValidator, isAuth);
         if (isAccount) {
-            System.out.println("Сеанс записан!");
+            System.out.println("Seance save!");
         }
     }
 }
