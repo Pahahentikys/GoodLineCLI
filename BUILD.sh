@@ -1,7 +1,4 @@
 #!/bin/bash
-#read -n 1 -p "Запустить скрипт для построения билда? (y/n): " AMSURE
-#[ "$AMSURE" = "y" ] || exit
-#echo "" 1>&2
 # Создать папку: out
 mkdir -p out
 
