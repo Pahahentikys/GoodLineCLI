@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9b693990-8332-41ab-ae1f-7f8267f9c06c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BUILD.sh" afterPath="$PROJECT_DIR$/BUILD.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoadMap2.md" afterPath="$PROJECT_DIR$/RoadMap2.md" />
     </list>
     <list id="c9f75d62-c9aa-4e3e-a5a9-a73b215f85c3" name="Revert: Del .idea" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -38,7 +38,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BUILD.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BUILD.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BUILD.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
@@ -58,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoadMap2.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RoadMap2.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoadMap2.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="132">
+              <caret line="18" column="45" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -108,8 +108,8 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/AuthentifAndAuthorizService.java" />
         <option value="$PROJECT_DIR$/src/DataValidator.java" />
-        <option value="$PROJECT_DIR$/RoadMap2.md" />
         <option value="$PROJECT_DIR$/BUILD.sh" />
+        <option value="$PROJECT_DIR$/RoadMap2.md" />
       </list>
     </option>
   </component>
@@ -522,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1490632172744</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Обновил баш-скрипт для компиляции файлов проекта и сборки их в jar-архив, добавил в него вопрос для запуска, прописал пути до библиотек.">
+      <created>1490632510509</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1490632510509</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -648,7 +655,8 @@
     <MESSAGE value="Добавил в репозиторий файл: TEST.sh" />
     <MESSAGE value="Работа над файлов: BUILD.sh добавил компиляцию по исходнику через команду: javac, добавил команду: jar для упаковки файлов в java-архив." />
     <MESSAGE value="Выполнены подпункты п. 2. Поправил файл: MANIFEST.MF в п. 3.1, указал пути до компилированных файлов и до библиотек." />
-    <option name="LAST_COMMIT_MESSAGE" value="Выполнены подпункты п. 2. Поправил файл: MANIFEST.MF в п. 3.1, указал пути до компилированных файлов и до библиотек." />
+    <MESSAGE value="Обновил баш-скрипт для компиляции файлов проекта и сборки их в jar-архив, добавил в него вопрос для запуска, прописал пути до библиотек." />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновил баш-скрипт для компиляции файлов проекта и сборки их в jar-архив, добавил в него вопрос для запуска, прописал пути до библиотек." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1011,18 +1019,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoadMap2.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BUILD.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoadMap2.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="18" column="45" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
           <folding />
         </state>
       </provider>
