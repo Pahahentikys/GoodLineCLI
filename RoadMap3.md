@@ -7,37 +7,39 @@
 
   - [x] 2. Произвести проектирование базы данных, к ходе которой выявить необходимый набор таблиц и их атрибуты:
 
-    - [ ] 2. 1. Реализовать таблицу с пользователями и набором следующих атрибутов:
+    - [x] 2. 1. Реализовать таблицу: **Users** с пользователями и набором следующих атрибутов:
     
-      - userId;
+      - user_id;
       
-      - userName;
+      - user_name;
       
-      - userLogin;
+      - user_login;
       
-      - userPassHash;
+      - user_pass_hash;
       
-      - userSalt;
+      - user_salt;
       
-      - resourceId **(внешний ключ из UserResources в Users)**.
+      - user_resource_id **(внешний ключ из User_Resources в Users)**.
 
-    - [ ] 2. 2. Реализовать таблицу с ресурсами и набором следующих атрибутов:
+    - [x] 2. 2. Реализовать таблицу: **User_Resources** с ресурсами и набором следующих атрибутов:
     
-      - resourceId;
+      - user_resource_id;
      
-      - resourcePath;
-     
-      - userSeansId **(внешний ключ из UserSeans в UserResources)**.
+      - user_resource_path;
 
-    - [ ] 2. 3. Релизовать таблицу с пользовательскими сеансами и набором следующих атрибутов:
+      - user_resource_role;
+
+      - uuser_seans_id **(внешний ключ из User_Seans в User_Resources)**.
+
+    - [x] 2. 3. Релизовать таблицу: **User_Seans** с пользовательскими сеансами и набором следующих атрибутов:
     
-      - userSeansId;
+      - user_seans_id;
      
-      - userSeandDateStar;
+      - user_seans_date_start;
      
-      - userSeansDateEnd;
+      - user_seans_date_end;
      
-      - userSeansVolume;
+      - user_seans_volume;
 
 <hr>
   
@@ -47,7 +49,7 @@
 
     - [x] 3. 2. Подключить библиотеку в проект;
 
-    - [ ] 3. 3. Создать базу данных: GooLineCLI.db:
+    - [x] 3. 3. Создать базу данных: GooLineCLI.db:
     
       - [ ] 3. 3. 1. Провести проверку подключения к базе;
 
