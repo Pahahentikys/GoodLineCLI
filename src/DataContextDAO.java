@@ -1,6 +1,8 @@
 /**
  * Created by Pavel on 30.03.2017.
  */
+import  java.sql.*;
+
 public class DataContextDAO {
 
     private String dataBaseDriver;
@@ -43,4 +45,16 @@ public class DataContextDAO {
         this.dataBasePassword = dataBasePassword;
         return this;
     }
+
+    public Connection getConnection() throws SQLException, ClassNotFoundException
+    {
+            try {
+              return DriverManager.getConnection(dataBaseUrl, dataBaseUserName, dataBasePassword);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+    }
+
 }
