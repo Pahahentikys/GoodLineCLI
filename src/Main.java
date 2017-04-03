@@ -1,6 +1,7 @@
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
+import java.sql.*;
 
 
 /**
@@ -8,6 +9,21 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args) {
+        DataContextDAO dataContextDAO = new DataContextDAO();
+        dataContextDAO.setDataBaseDriver("org.h2.Driver")
+                .setDataBaseUrl("jdbc:h2:./GoodLineCLI")
+                .setDataBaseUserName("Pavel")
+                .setDataBasePassword("1234");
+        try (Connection connection = dataContextDAO.getConnection()) {
+            System.out.println("DB connect!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
         UserInputData userInputData = new UserInputData();
         DataValidator dataValidator = new DataValidator();
         AuthentifAndAuthorizService authentifAndAuthorServ = new AuthentifAndAuthorizService();
@@ -20,8 +36,6 @@ public class Main {
         UserResources userResourceTwo = new UserResources();
         UserResources userResourceThree = new UserResources();
         UserResources userResourceFour = new UserResources();
-
-
 
 
         johnDoe.setUserId(1)
@@ -62,7 +76,6 @@ public class Main {
                 .setUserRole(UserRoles.EXECUTE);
 
 
-
         ArrayList<UserResources> usersResources = new ArrayList<>();
         usersResources.add(userResourceOne);
         usersResources.add(userResourceTwo);
@@ -78,7 +91,7 @@ public class Main {
             System.out.println("Authentification success!");
         }
 
-        boolean isAuth = authentifAndAuthorServ.isUserAuthorization(usersResources, userInputData,dataBaseContext, dataValidator, isAuthentification);
+        boolean isAuth = authentifAndAuthorServ.isUserAuthorization(usersResources, userInputData, dataBaseContext, dataValidator, isAuthentification);
         if (isAuth) {
             System.out.println("Authorization success!");
         }
