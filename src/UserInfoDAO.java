@@ -4,7 +4,7 @@ import java.sql.*;
  * Created by Pavel on 06.04.2017.
  */
 public class UserInfoDAO {
-    public static final String selectUsersWhereLogin = "SELECT FROM GOOD_LINE_CLI_SCHEME.USERS WHERE LOGIN = ?";
+    public static final String selectUsersWhereLogin = "SELECT * FROM GOOD_LINE_CLI_SCHEME.USERS WHERE USER_LOGIN = ?";
     private Connection connection;
 
     public UserInfoDAO(Connection connection) {
@@ -19,13 +19,20 @@ public class UserInfoDAO {
             //connection.commit();
             ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()){
-                System.out.println(resultSet.getInt("user_id" + ", "+ "user_login"));
+            while (resultSet.next()) {
+
+                //System.out.println("ID: " + resultSet.getInt("USER_ID") + ", " + resultSet.getString("USER_LOGIN"));
+                return new UserInfo()
+                        .setUserId(resultSet.getInt("USER_ID"))
+                        .setUserLogin(resultSet.getString("USER_LOGIN"))
+                        .setUserHashPassword(resultSet.getString("USER_PASS_HASH"))
+                        .setUserSalt(resultSet.getString("USER_SALT"));
+
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-           // connection.rollback();
+            // connection.rollback();
         }
         return null;
     }
