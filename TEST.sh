@@ -16,17 +16,14 @@ echo $1
 SYSTEM_EXIT=$?
 
 if [ "$SYSTEM_EXIT" == "$2" ]
-	echo ""
-	then
-		echo "Test is OK. Exit code: $SYSTEM_EXIT"
-			((PASSED_TESTS++))
-	else
-		echo "Test is FAIL. Exit code: ($SYSTEM_EXIT) need value $2"
-			((FAILED_TESTS++))
-	echo ""
-	TEST_PASS=1
+then
+echo "Test is OK. Exit code: $SYSTEM_EXIT"
+(( PASSED_TESTS++ ))
+else
+echo "Test is FAIL. Exit code: ($SYSTEM_EXIT) need value $2"
+(( FAILED_TESTS++ ))
+(( TEST_PASS=1 ))
 fi
-
 }
 
 testStart "" 0
@@ -61,7 +58,7 @@ testStart "-login jdoe -pass sup3rpaZZ -role XXX -res a.b" 3
 
 echo "-------------"
 
-testStart "-login XXX -pass sup3rpaZZ -role READ -res XXX" 4
+testStart "-login jdoe -pass sup3rpaZZ -role READ -res XXX" 4
 
 echo "-------------"
 
@@ -94,10 +91,9 @@ testStart "-login X -pass X -role READ -res X" 1
 echo "-------------"
 
 if [ "$TEST_PASS" = 0 ]
-	then
-		echo "All count OK tests: $PASSED_TESTS"
-		else
-			echo "Some test FAIL! FAILED tests: $FAILED_TESTS"
+then
+echo "All count OK tests: $PASSED_TESTS"
+else
+echo "Some test FAIL! FAILED tests: $FAILED_TESTS"
 fi
-
 exit $TEST_PASS
