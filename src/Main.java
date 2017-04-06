@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         DataContextDAO dataContextDAO = new DataContextDAO();
         dataContextDAO.setDataBaseDriver("org.h2.Driver")
-                .setDataBaseUrl("jdbc:h2:~/GoodLineCLI")
+                .setDataBaseUrl("jdbc:h2:./GoodLineCLI")
                 .setDataBaseUserName("Pavel")
                 .setDataBasePassword("1234");
         try (Connection connection = dataContextDAO.getConnection()) {
