@@ -1,4 +1,5 @@
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +27,23 @@ public class DataBaseContext {
         return false;
     }
 
+    public boolean isGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
+        UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
+//        if (userInfo.equals(userInputData.getUserInputLogin())) {
+//            System.out.println("Пользователя с таким логином есть!");
+//            return true;
+//        }
+//        System.out.println("Пользователя с таким логином нет!");
+//        return false;
+
+        if (userInfo == null)
+        {
+            System.out.println("Пользователя с таким логином нет!");
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Получить пароль пользователяя
