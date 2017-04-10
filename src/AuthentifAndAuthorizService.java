@@ -4,6 +4,7 @@
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AuthentifAndAuthorizService {
@@ -41,17 +42,17 @@ public class AuthentifAndAuthorizService {
      * @param userInputData - объект, хранящий в себе входные параметры
      * @return - true, если верный логин и пароль
      */
-    public boolean isUserAuthentification(ArrayList<UserInfo> usersList, UserInputData userInputData) {
+    public boolean isUserAuthentification(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         DataBaseContext dataBaseContext = new DataBaseContext();
-        if (!dataBaseContext.isGetUserLogin(usersList, userInputData)) {
+        if (!dataBaseContext.isGetUserLoginDAO(userInfoDAO, userInputData)) {
             System.exit(1);
         }
 
-        if (!dataBaseContext.isGetUserPassword(usersList, userInputData)) {
-
-            System.exit(2);
-
-        }
+//        if (!dataBaseContext.isGetUserPassword(usersList, userInputData)) {
+//
+//            System.exit(2);
+//
+//        }
         return true;
     }
 
