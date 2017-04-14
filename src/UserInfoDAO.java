@@ -16,12 +16,12 @@ public class UserInfoDAO {
             PreparedStatement statement = connection.prepareStatement(selectUsersWhereLogin);
             System.out.println("Логин: " + userLogin);
             statement.setString(1, userLogin);
-            //connection.commit();
             ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
+            if (resultSet.next()) {
 
-                //System.out.println("ID: " + resultSet.getInt("USER_ID") + ", " + resultSet.getString("USER_LOGIN"));
+                System.out.println("ID: " + resultSet.getInt("USER_ID") + ", " + resultSet.getString("USER_LOGIN"));
+
                 return new UserInfo()
                         .setUserId(resultSet.getInt("USER_ID"))
                         .setUserLogin(resultSet.getString("USER_LOGIN"))
@@ -30,9 +30,13 @@ public class UserInfoDAO {
 
             }
 
+            else
+            {
+                System.out.println("В БД нет записей с таким логином!");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
-            // connection.rollback();
         }
         return null;
     }
