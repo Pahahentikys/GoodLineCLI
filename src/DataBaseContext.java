@@ -1,4 +1,6 @@
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -36,14 +38,15 @@ public class DataBaseContext {
 //        System.out.println("Пользователя с таким логином нет!");
 //        return false;
 
-        if (userInfo == null)
-        {
+        if (userInfo == null) {
             System.out.println("Пользователя с таким логином нет!");
             return false;
         }
-
         return true;
+
     }
+
+
 
     /**
      * Получить пароль пользователяя
@@ -64,6 +67,20 @@ public class DataBaseContext {
         }
         return false;
     }
+
+    public boolean isGetUserPasswordDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
+        //UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
+        UserInfo userInfo = new UserInfo();
+        System.out.println(userInfo.getUserLogin());
+        String hashUserPass = authAndAuthorServ.generHashUserPassword(userInputData.getUserInputPassword(), userInfo.getUserSalt());
+        if (authAndAuthorServ.isUserHashesEqual(userInfo, hashUserPass)) {
+            return true;
+        }
+
+        System.out.println("Хэши паролей не совпадают!");
+        return false;
+    }
+
 
     /**
      * Метод, который проверяет доступность к ресурсу
