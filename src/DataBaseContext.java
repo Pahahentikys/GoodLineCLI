@@ -11,24 +11,6 @@ public class DataBaseContext {
 
     AuthentifAndAuthorizService authAndAuthorServ = new AuthentifAndAuthorizService();
 
-    /**
-     * Получить пользователя по логину
-     *
-     * @param usersList   - коллекция пользователей
-     * @param userInpdata - входные данные
-     * @return - true, если логины совпадают
-     */
-    public boolean isGetUserLogin(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
-        for (UserInfo user : usersList) {
-            if (userInpdata.getUserInputLogin().equals(user.getUserLogin())) {
-                userInpdata.userInputId = user.getUserId();
-                return true;
-            }
-
-        }
-        return false;
-    }
-
     public boolean isGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
 //        if (userInfo.equals(userInputData.getUserInputLogin())) {
