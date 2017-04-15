@@ -1,6 +1,3 @@
-
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,13 +10,6 @@ public class DataBaseContext {
 
     public boolean isGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
-//        if (userInfo.equals(userInputData.getUserInputLogin())) {
-//            System.out.println("Пользователя с таким логином есть!");
-//            return true;
-//        }
-//        System.out.println("Пользователя с таким логином нет!");
-//        return false;
-
         if (userInfo == null) {
             System.out.println("Пользователя с таким логином нет!");
             return false;
@@ -29,8 +19,7 @@ public class DataBaseContext {
     }
 
     public boolean isGetUserPasswordDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
-        //UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
-        UserInfo userInfo = new UserInfo();
+        UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
         System.out.println(userInfo.getUserLogin());
         String hashUserPass = authAndAuthorServ.generHashUserPassword(userInputData.getUserInputPassword(), userInfo.getUserSalt());
         if (authAndAuthorServ.isUserHashesEqual(userInfo, hashUserPass)) {
