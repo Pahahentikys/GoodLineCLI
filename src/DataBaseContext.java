@@ -28,28 +28,6 @@ public class DataBaseContext {
 
     }
 
-
-
-    /**
-     * Получить пароль пользователяя
-     *
-     * @param usersList   - коллекция пользователей
-     * @param userInpdata - введённые пользователем данные
-     * @return - true, если парольные хэши совпадают
-     */
-    public boolean isGetUserPassword(ArrayList<UserInfo> usersList, UserInputData userInpdata) {
-
-        for (UserInfo user : usersList) {
-            if (userInpdata.getUserInputId() == user.getUserId()) {
-                String hashUserPass = authAndAuthorServ.generHashUserPassword(userInpdata.getUserInputPassword(), user.getUserSalt());
-                if (authAndAuthorServ.isUserHashesEqual(user, hashUserPass)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public boolean isGetUserPasswordDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         //UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
         UserInfo userInfo = new UserInfo();
