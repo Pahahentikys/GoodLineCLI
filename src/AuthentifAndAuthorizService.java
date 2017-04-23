@@ -37,10 +37,10 @@ public class AuthentifAndAuthorizService {
 
     /**
      * Проверка на то, аутентифицирован ли пользователь
-     *
-     * @param usersList     - коллекция пользователей
+     * @param userInfoDAO - слой данных, который берёт по запросу из БД нужного пользователя
      * @param userInputData - объект, хранящий в себе входные параметры
-     * @return - true, если верный логин и пароль
+     * @return
+     * @throws SQLException
      */
     public boolean isUserAuthentification(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         DataBaseContext dataBaseContext = new DataBaseContext();
@@ -48,14 +48,13 @@ public class AuthentifAndAuthorizService {
             System.exit(1);
         }
 
-//        if (!dataBaseContext.isGetUserPassword(usersList, userInputData)) {
-//
-//            System.exit(2);
-//
-//        }
+        if (!dataBaseContext.isGetUserPasswordDAO(userInfoDAO, userInputData)) {
+
+            System.exit(2);
+
+        }
         return true;
     }
-
 
     /**
      * Проверка на то, авторизован ли пользователь
