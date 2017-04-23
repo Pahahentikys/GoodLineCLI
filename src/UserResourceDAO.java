@@ -9,6 +9,7 @@ import java.sql.SQLException;
  */
 public class UserResourceDAO {
 
+    UserInputData ui;
     Connection connection;
 
     public UserResourceDAO(Connection connection) {
@@ -34,6 +35,10 @@ public class UserResourceDAO {
 
                 System.out.println("ID: " + resultSet.getInt("USER_ID") + ", " + resultSet.getString("USER_RESOURCE_PATH")
                         + ", " + resultSet.getString("USER_RESOURCE_ROLE"));
+                return new UserResources()
+                        .setUserResUserId(resultSet.getInt("USER_ID"))
+                        .setResourcePath(resultSet.getString("USER_RESOURCE_PATH"));
+
             }
 
         } catch (SQLException e) {
