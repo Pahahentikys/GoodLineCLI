@@ -29,6 +29,10 @@ public class Main {
 
             UserInfoDAO userInfoDAO = new UserInfoDAO(connection);
 
+            UserResourceDAO userResourceDAO = new UserResourceDAO(connection);
+
+            userResourceDAO.getPathUserResource(1, "a.b", "WRITE");
+
             dataValidator.getUserInputData(userInputData, args);
 
             boolean isAuthentification = authentifAndAuthorServ.isUserAuthentification(userInfoDAO, userInputData);

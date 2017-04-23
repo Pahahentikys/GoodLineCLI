@@ -15,15 +15,16 @@ public class UserResourceDAO {
         this.connection = connection;
     }
 
-    static final String selectUserResourcesWherePath = "SELECT * FROM GOOD_LINE_CLI_SCHEME.USER_RESOURCES WHERE" +
-            "(USER_RESOURCES.USER_RESOURCE_PATH = userResourcePath) OR (USER_RESOURCES.USER_RESOURCE_PATH LIKE ?) AND " +
+    final String selectUserResourcesWherePath = "SELECT * FROM GOOD_LINE_CLI_SCHEME.USER_RESOURCES WHERE" +
+            "(USER_RESOURCES.USER_ID LIKE ?) AND "+
+            "(USER_RESOURCES.USER_RESOURCE_PATH LIKE ?) AND " +
             "(USER_RESOURCES.USER_RESOURCE_ROLE LIKE ?)";
 
     UserResources getPathUserResource(int userInfoId, String userResourcePath, String userRole) throws SQLException {
 
         try {
             PreparedStatement statement = connection.prepareStatement(selectUserResourcesWherePath);
-            System.out.println("Ресурс: " + userResourcePath);
+            System.out.println("Ресурс: " + userInfoId + ", " + userResourcePath + ", " + userRole);
             statement.setInt(1, userInfoId);
             statement.setString(2, userResourcePath);
             statement.setString(3, userRole);
@@ -35,7 +36,7 @@ public class UserResourceDAO {
                         + ", " + resultSet.getString("USER_RESOURCE_ROLE"));
             }
 
-            } catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
