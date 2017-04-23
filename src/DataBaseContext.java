@@ -8,6 +8,13 @@ public class DataBaseContext {
 
     AuthentifAndAuthorizService authAndAuthorServ = new AuthentifAndAuthorizService();
 
+    /**
+     * Поиск пользователя по логину
+     * @param userInfoDAO - слой доступа к БД
+     * @param userInputData - входящие параметры
+     * @return - true, если пользователь с таким же логином найден
+     * @throws SQLException
+     */
     public boolean isGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
         if (userInfo == null) {
@@ -18,6 +25,13 @@ public class DataBaseContext {
 
     }
 
+    /**
+     * Поиск пользователя по паролю
+     * @param userInfoDAO - слой доступа к БД
+     * @param userInputData - входящие параметры
+     * @return - true, если хэши паролей совпадают
+     * @throws SQLException
+     */
     public boolean isGetUserPasswordDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
         System.out.println(userInfo.getUserLogin());
