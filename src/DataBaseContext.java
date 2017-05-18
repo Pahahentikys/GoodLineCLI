@@ -1,5 +1,4 @@
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  * Created by Pavel on 21.03.2017.
@@ -10,7 +9,8 @@ public class DataBaseContext {
 
     /**
      * Поиск пользователя по логину
-     * @param userInfoDAO - слой доступа к БД
+     *
+     * @param userInfoDAO   - слой доступа к БД
      * @param userInputData - входящие параметры
      * @return - true, если пользователь с таким же логином найден
      * @throws SQLException
@@ -27,7 +27,8 @@ public class DataBaseContext {
 
     /**
      * Поиск пользователя по паролю
-     * @param userInfoDAO - слой доступа к БД
+     *
+     * @param userInfoDAO   - слой доступа к БД
      * @param userInputData - входящие параметры
      * @return - true, если хэши паролей совпадают
      * @throws SQLException
@@ -44,30 +45,23 @@ public class DataBaseContext {
         return false;
     }
 
-
     /**
-     * Метод, который проверяет доступность к ресурсу
+     * Метод, который проверяет доступность юзеру к ресурсу
      *
-     * @param userResourcesList - коллекция ресурсов, заданных в программе
-     * @param userInputData     - объект, который хранит входные данные
+     * @param userResourceDAO - слой доступа к БД, который наполняет объект UserResource данными из БД
+     * @param userInputData   - входные данные
+     * @return - true, если доступ к ресурсу есть, false - если доступ к ресурсу отсутствует
+     * @throws SQLException
      */
-    public boolean isResUserAccess(ArrayList<UserResources> userResourcesList, UserInputData userInputData) {
-        String[] nodeResInputPath = userInputData.getUserInputPathResource().split("\\.");
-        for (UserResources anUserResourcesList : userResourcesList) {
-            boolean isResEqual = false;
-            String[] userResPath = anUserResourcesList.getResourcePath().split("\\.");
-            for (int i = 0; i < userResPath.length; i++) {
-                isResEqual = nodeResInputPath[i].equals(userResPath[i]);
-                if (isResEqual) {
-                    if (userInputData.getUserInputId() == anUserResourcesList.getUserResUserId()) {
-                        if (UserRoles.valueOf(userInputData.getUserInputRole()).equals((anUserResourcesList.getUserRole()))) {
-                            return true;
-                        }
-                    }
-                }
-                return false;
-            }
+    public boolean isResUserAccessDAO(UserResourceDAO userResourceDAO, UserInputData userInputData) throws SQLException {
+        UserResources userResources = userResourceDAO.getPathUserResource(userInputData.getUserInputPathResource(), userInputData.getUserInputRole());
+        System.out.println(userResources.getUserResUserId());
+        if (userResources == null) {
+            System.out.println("Такого пути нет!");
+            return false;
         }
-        return false;
+        return true;
     }
+
+
 }
