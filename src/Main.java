@@ -1,7 +1,5 @@
-import org.apache.commons.lang3.RandomStringUtils;
-
-import java.util.ArrayList;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 
 /**
@@ -31,7 +29,6 @@ public class Main {
 
             UserResourceDAO userResourceDAO = new UserResourceDAO(connection);
 
-            userResourceDAO.getPathUserResource(1, "a.b", "WRITE");
 
             dataValidator.getUserInputData(userInputData, args);
 
@@ -39,6 +36,11 @@ public class Main {
 
             if (isAuthentification) {
                 System.out.println("Authentification success!");
+            }
+
+            boolean isAuthorization = authentifAndAuthorServ.isUserAuthorization(userResourceDAO, userInputData, isAuthentification);
+            if (isAuthorization) {
+                System.out.println("Authorization success!");
             }
 
         } catch (SQLException | ClassNotFoundException e) {
