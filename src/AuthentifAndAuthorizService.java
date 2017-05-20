@@ -5,7 +5,6 @@
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class AuthentifAndAuthorizService {
 
@@ -37,7 +36,8 @@ public class AuthentifAndAuthorizService {
 
     /**
      * Проверка на то, аутентифицирован ли пользователь
-     * @param userInfoDAO - слой данных, который берёт по запросу из БД нужного пользователя
+     *
+     * @param userInfoDAO   - слой данных, который берёт по запросу из БД нужного пользователя
      * @param userInputData - объект, хранящий в себе входные параметры
      * @return
      * @throws SQLException
@@ -58,14 +58,15 @@ public class AuthentifAndAuthorizService {
 
     /**
      * Проверка на то, авторизован ли пользователь
-     * @param userResourceDAO - перечень ресурсов, который получен выборкой из БД
-     * @param userInputData - входные параметры
+     *
+     * @param userResourceDAO        - перечень ресурсов, который получен выборкой из БД
+     * @param userInputData          - входные параметры
      * @param isUserAuthentification - проверка на то, аутентифицирован ли пользователь
      * @return - код: 3, если неправильная роль, код: 4, если нет доступа
      * @throws SQLException
      */
     public boolean isUserAuthorization(UserResourceDAO userResourceDAO, UserInputData userInputData, boolean isUserAuthentification) throws SQLException {
-       DataValidator dataValidator = new DataValidator();
+        DataValidator dataValidator = new DataValidator();
         DataBaseContext dataBaseContext = new DataBaseContext();
         if ((isUserAuthentification) && (userInputData.getUserInputRole() != null) && (userInputData.getUserInputPathResource() != null)) {
             if (!dataValidator.isUserRoleValid(userInputData)) {
@@ -80,40 +81,44 @@ public class AuthentifAndAuthorizService {
     }
 
     /**
-     * Метод для создания сеанса доступа к ресурсу для юзера, который фиксирует даты: начала доступа, окончания и объем, потребдённых ресурсов.
+     * Метод для создания сеанса доступа к ресурсу для юзера, который фиксирует даты: начала доступа, окончания, а также объем потреблённых ресурсов и id ресурса.
      *
-     * @param accountingList - коллекция сенсов пользователя.
-     * @param userInputData  - входные данные.
+     * @param accounting      - объект для наполнения параметрами, который после будет помещаться в БД
+     * @param userInputData   - входные параметры
+     * @param userResourceDAO - слой доступа к БД
+     * @throws SQLException
      */
-    public void createUserSeans(ArrayList<Accounting> accountingList, UserInputData userInputData) {
-        Accounting userSeans = new Accounting()
-                .setResourceUserId(userInputData.getUserInputId())
-                .setStartAccountingDate(userInputData.getUserInputDs())
-                .setEndAccountingDate(userInputData.getUserInputDe())
-                .setVolumeOfUseRes(userInputData.getUserInputVol());
+    public void addAccounting(Accounting accounting, UserInputData userInputData, UserResourceDAO userResourceDAO) throws SQLException {
 
-        accountingList.add(userSeans);
+        UserResources userResources = userResourceDAO.findIdRes(userInputData.getUserInputPathResource());
+
+        accounting.setResourceId(userResources.getUserResResId());
+        accounting.setStartAccountingDate(userInputData.getUserInputDs());
+        accounting.setEndAccountingDate(userInputData.getUserInputDe());
+        accounting.setVolumeOfUseRes(userInputData.getUserInputVol());
     }
 
     /**
      * Проверка на то, был ли пользовательский сеанс
      *
-     * @param accountingList      - коллекция сеансов пользователя
+     * @param accounting          - сеанс пользователя
+     * @param userResourceDAO     - слой доступа к БД
      * @param userInputData       - входные данные
-     * @param isUserAuthorization - проверка на то, что пользователь авторизован
-     * @return - код: 5, если некорректная дата
+     * @param dataValidator       - объект для валидации данных
+     * @param isUserAuthorization - проверка на то, авторизован ли юзер
+     * @return код: 5, если некорректная дата
+     * @throws SQLException
      */
-    public boolean isUserAccounting(ArrayList<Accounting> accountingList, UserInputData userInputData, DataValidator dataValidator, boolean isUserAuthorization) {
+    public boolean isUserAccounting(Accounting accounting, UserResourceDAO userResourceDAO, UserInputData userInputData, DataValidator dataValidator, boolean isUserAuthorization) throws SQLException {
         if (isUserAuthorization && userInputData.getUserInputDs() != null) {
             if (!dataValidator.isDateDsAndDeValid(userInputData) || !dataValidator.isVolumeValid(userInputData)) {
                 System.exit(5);
             }
-            createUserSeans(accountingList, userInputData);
+            addAccounting(accounting, userInputData, userResourceDAO);
             return true;
         }
         return false;
     }
-
 
 }
 
