@@ -1,4 +1,7 @@
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by Pavel on 06.04.2017.
@@ -20,18 +23,14 @@ public class UserInfoDAO {
 
             if (resultSet.next()) {
 
-                System.out.println("ID: " + resultSet.getInt("USER_ID") + ", " + resultSet.getString("USER_LOGIN"));
-
+                System.out.println("ID: " + resultSet.getInt("USER_ID") + ", " + resultSet.getString("USER_LOGIN") + ", " + resultSet.getString("USER_PASS_HASH") + ", " + resultSet.getString("USER_SALT"));
                 return new UserInfo()
                         .setUserId(resultSet.getInt("USER_ID"))
                         .setUserLogin(resultSet.getString("USER_LOGIN"))
                         .setUserHashPassword(resultSet.getString("USER_PASS_HASH"))
                         .setUserSalt(resultSet.getString("USER_SALT"));
 
-            }
-
-            else
-            {
+            } else {
                 System.out.println("В БД нет записей с таким логином!");
             }
 
