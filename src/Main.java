@@ -29,6 +29,7 @@ public class Main {
 
             UserResourceDAO userResourceDAO = new UserResourceDAO(connection);
 
+            AccountingDAO accountingDAO = new AccountingDAO(connection);
 
             dataValidator.getUserInputData(userInputData, args);
 
@@ -41,6 +42,14 @@ public class Main {
             boolean isAuthorization = authentifAndAuthorServ.isUserAuthorization(userResourceDAO, userInputData, isAuthentification);
             if (isAuthorization) {
                 System.out.println("Authorization success!");
+            }
+
+            Accounting accounting = new Accounting();
+
+            if (authentifAndAuthorServ.isUserAccounting(accounting, userResourceDAO, userInputData, dataValidator, isAuthorization)) {
+
+                accountingDAO.addUserSeans(accounting);
+                System.out.println("Accounting success!");
             }
 
         } catch (SQLException | ClassNotFoundException e) {
