@@ -3,10 +3,11 @@
  */
 
 public class Accounting {
+
     /**
      * Идентификатор ресурса, к которому обращается пользователь.
      */
-    private int resourceUserId;
+    private int resourceId;
     /**
      * Объём ресурсов, потреблённых юзером.
      */
@@ -20,15 +21,6 @@ public class Accounting {
      * Дата, по которой закончилось пользование ресурсом.
      */
     private String endAccountingDate;
-
-    public int getResourceUserId() {
-        return resourceUserId;
-    }
-
-    public Accounting setResourceUserId(int resourceUserId) {
-        this.resourceUserId = resourceUserId;
-        return this;
-    }
 
     public String getVolumeOfUseRes() {
         return volumeOfUseRes;
@@ -54,6 +46,15 @@ public class Accounting {
 
     public Accounting setEndAccountingDate(String endAccountingDate) {
         this.endAccountingDate = endAccountingDate;
+        return this;
+    }
+
+    public int getResourceId() {
+        return resourceId;
+    }
+
+    public Accounting setResourceId(int resourceId) {
+        this.resourceId = resourceId;
         return this;
     }
 }
