@@ -61,7 +61,7 @@ public class DataBaseContext {
      */
     public boolean isResUserAccessDAO(UserResourceDAO userResourceDAO, UserInputData userInputData) throws SQLException {
         UserResources userResources = userResourceDAO.getPathUserResource(userInputData.getUserInputPathResource(), userInputData.getUserInputRole());
-        System.out.println(userResources.getUserResResId());
+//        System.out.println(userResources.getUserResResId());
         if (userResources == null) {
             logger.error("Пути к ресурсу {} не существует!", userInputData.getUserInputPathResource());
             //System.out.println("Такого пути нет!");

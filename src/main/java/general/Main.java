@@ -1,6 +1,7 @@
 /**
  * Created by Pavel on 07.03.2017.
  */
+package general;
 //package general;
 import java.sql.Connection;
 import java.sql.SQLException;

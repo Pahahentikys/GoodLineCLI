@@ -72,7 +72,8 @@ public class UserResourceDAO {
             logger.debug("Выполнить запрос: "+statement.toString());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                System.out.println(resultSet.getInt("USER_RESOURCE_ID"));
+                //System.out.println(resultSet.getInt("USER_RESOURCE_ID"));
+                logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
                 return new UserResources()
                         .setUserResResId(resultSet.getInt("USER_RESOURCE_ID"));
             }
