@@ -4,12 +4,19 @@
 package general;
 import java.sql.Connection;
 import java.sql.SQLException;
+//import org.apache.logging.log4j.core.Logger;]
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.flywaydb.core.Flyway;
 import general.dao.*;
 import general.dom.*;
 import general.serv.*;
 
+
 public class Main {
+
+    private static final Logger logger = LogManager.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
 
         DataContextDAO dataContextDAO = new DataContextDAO();
