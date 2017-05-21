@@ -8,11 +8,13 @@ import java.sql.SQLException;
 import general.dom.*;
 import general.dao.*;
 import general.dom.UserInputData;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class AuthentifAndAuthorizService {
 
+    private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
 
     /**
      * Получение хэша пароля
@@ -48,6 +50,7 @@ public class AuthentifAndAuthorizService {
      * @throws SQLException
      */
     public boolean isUserAuthentification(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
+        logger.debug("Проверка на то, аутентифицирован ли пользователь");
         DataBaseContext dataBaseContext = new DataBaseContext();
         if (!dataBaseContext.isGetUserLoginDAO(userInfoDAO, userInputData)) {
             System.exit(1);
@@ -71,6 +74,7 @@ public class AuthentifAndAuthorizService {
      * @throws SQLException
      */
     public boolean isUserAuthorization(UserResourceDAO userResourceDAO, UserInputData userInputData, boolean isUserAuthentification) throws SQLException {
+        logger.debug("Проверка на то, авторизован ли пользователь");
         DataValidator dataValidator = new DataValidator();
         DataBaseContext dataBaseContext = new DataBaseContext();
         if ((isUserAuthentification) && (userInputData.getUserInputRole() != null) && (userInputData.getUserInputPathResource() != null)) {
@@ -94,7 +98,7 @@ public class AuthentifAndAuthorizService {
      * @throws SQLException
      */
     public void addAccounting(Accounting accounting, UserInputData userInputData, UserResourceDAO userResourceDAO) throws SQLException {
-
+        logger.debug("Добавление пользовательского сеанса в БД");
         UserResources userResources = userResourceDAO.findIdRes(userInputData.getUserInputPathResource());
 
         accounting.setResourceId(userResources.getUserResResId());
@@ -115,6 +119,7 @@ public class AuthentifAndAuthorizService {
      * @throws SQLException
      */
     public boolean isUserAccounting(Accounting accounting, UserResourceDAO userResourceDAO, UserInputData userInputData, DataValidator dataValidator, boolean isUserAuthorization) throws SQLException {
+        logger.debug("Проверка на то, выполнен ли процесс аккаунтинга");
         if (isUserAuthorization && userInputData.getUserInputDs() != null) {
             if (!dataValidator.isDateDsAndDeValid(userInputData) || !dataValidator.isVolumeValid(userInputData)) {
                 System.exit(5);
