@@ -5,9 +5,11 @@ package general.serv;
 import java.sql.SQLException;
 import general.dao.*;
 import general.dom.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DataBaseContext {
-
+    private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
     AuthentifAndAuthorizService authAndAuthorServ = new AuthentifAndAuthorizService();
 
     /**
@@ -21,7 +23,7 @@ public class DataBaseContext {
     public boolean isGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
         if (userInfo == null) {
-            System.out.println("Пользователя с таким логином нет!");
+            logger.error("Пользователь не найден по логину {}", userInputData.getUserInputLogin());
             return false;
         }
         return true;
@@ -44,7 +46,8 @@ public class DataBaseContext {
             return true;
         }
 
-        System.out.println("Хэши паролей не совпадают!");
+        logger.error("Хэши паролей не совпадают!");
+        //System.out.println("Хэши паролей не совпадают!");
         return false;
     }
 
@@ -60,7 +63,8 @@ public class DataBaseContext {
         UserResources userResources = userResourceDAO.getPathUserResource(userInputData.getUserInputPathResource(), userInputData.getUserInputRole());
         System.out.println(userResources.getUserResResId());
         if (userResources == null) {
-            System.out.println("Такого пути нет!");
+            logger.error("Пути к ресурсу {} не существует!", userInputData.getUserInputPathResource());
+            //System.out.println("Такого пути нет!");
             return false;
         }
         return true;
