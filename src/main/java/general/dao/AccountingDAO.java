@@ -1,27 +1,33 @@
 //package general.dao;
 package general.dao;
+
+import general.dom.Accounting;
+import general.serv.AuthentifAndAuthorizService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import general.dom.*;
-import general.Main;
 
 
 /**
  * Created by Pavel on 10.04.2017.
  */
 public class AccountingDAO {
-   // public static final String insertAccounting = "INSERT INTO GOOD_LINE_CLI_SCHEME.USER_SEANS(user_resource_id, user_seans_date_start, user_seans_date_end, user_seans_volume) VALUES (?, ?, ?, ?)";
+    private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
+    // public static final String insertAccounting = "INSERT INTO GOOD_LINE_CLI_SCHEME.USER_SEANS(user_resource_id, user_seans_date_start, user_seans_date_end, user_seans_volume) VALUES (?, ?, ?, ?)";
     public static final String insertAccounting = "INSERT INTO USER_SEANS(USER_RESOURCE_ID, USER_SEANS_DATE_START, USER_SEANS_DATE_END, USER_SEANS_VOLUME) VALUES (?, ?, ?, ?)";
     private Connection connection;
 
-   public AccountingDAO(Connection connection) {
+    public AccountingDAO(Connection connection) {
         this.connection = connection;
     }
 
     public void addUserSeans(Accounting accounting) {
 
+        logger.debug("Подготовить запрос: " + insertAccounting);
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertAccounting);
 
@@ -35,7 +41,10 @@ public class AccountingDAO {
 
             preparedStatement.executeUpdate();
 
+            logger.debug("Запрос в БД выполнен успешно, пользовательский сеанс сохранён");
+
         } catch (SQLException e) {
+            logger.error("Ошибка доступа к БД, приложение не работает!");
             e.printStackTrace();
         }
     }
