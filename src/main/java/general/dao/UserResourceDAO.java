@@ -65,18 +65,23 @@ public class UserResourceDAO {
     }
 
     public UserResources findIdRes(String path) throws SQLException {
-
+        logger.debug("Подготовить запрос: "+selectUserResourceId);
         try {
             PreparedStatement statement = connection.prepareStatement(selectUserResourceId);
             statement.setString(1, path);
+            logger.debug("Выполнить запрос: "+statement.toString());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 System.out.println(resultSet.getInt("USER_RESOURCE_ID"));
                 return new UserResources()
                         .setUserResResId(resultSet.getInt("USER_RESOURCE_ID"));
             }
+            else {
+                logger.debug("В БД нет записей по условию");
+            }
 
         } catch (SQLException e) {
+            logger.error("Ошибка доступа к БД, приложение не работает!");
             e.printStackTrace();
         }
 
