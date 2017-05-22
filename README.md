@@ -11,7 +11,9 @@
 
   1. [Набор требований для первого задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap.md)
   
-  2. [Набор требований для второго задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap2.md) 
+  2. [Набор требований для второго задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap2.md)
+  
+  3. [Набор требований для третьего задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap3.md)
 
 <h2>Набор инструкций по сборке проекта: </h2>
 
