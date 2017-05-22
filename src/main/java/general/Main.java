@@ -23,21 +23,17 @@ public class Main {
         DataContextDAO dataContextDAO = new DataContextDAO();
 
         dataContextDAO.setDataBaseDriver("org.h2.Driver")
-                //.setDataBaseUrl("jdbc:h2:~/GoodLineCLI")
-                //.setDataBaseUrl("jdbc:h2: ./src/main/resources/db/GoodLineCLI")
-                .setDataBaseUrl("jdbc:h2:C://Users/Pavel/IdeaProjects/GoodLineCLI/src/main/resources/db/GoodLineCLI")
+                .setDataBaseUrl("jdbc:h2:file:./resources/db/GoodLineCLI")
                 .setDataBaseUserName("Pavel")
                 .setDataBasePassword("1234");
 
         logger.debug("Процесс миграции");
-        //System.out.println("Migration!");
         Flyway flyway = new Flyway();
         flyway.setDataSource(dataContextDAO.getDataBaseUrl(), dataContextDAO.getDataBaseUserName(), dataContextDAO.getDataBasePassword());
         flyway.migrate();
 
         try (Connection connection = dataContextDAO.getConnection()) {
 
-            //System.out.println("DB connect!");
             logger.debug("Подключение к базе данных установлено");
 
             UserInputData userInputData = new UserInputData();
