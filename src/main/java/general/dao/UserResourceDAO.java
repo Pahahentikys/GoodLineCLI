@@ -23,37 +23,45 @@ public class UserResourceDAO {
         this.connection = connection;
     }
 
-    //    final String selectUserResourcesWherePath = "SELECT * FROM GOOD_LINE_CLI_SCHEME.USER_RESOURCES WHERE" +
-//            "(USER_RESOURCES.USER_RESOURCE_PATH LIKE ?) AND " +
-//            "(USER_RESOURCES.USER_RESOURCE_ROLE LIKE ?)";
+
     final String selectUserResourcesWherePath = "SELECT * FROM USER_RESOURCES WHERE" +
             "(USER_RESOURCES.USER_RESOURCE_PATH LIKE ?) AND " +
             "(USER_RESOURCES.USER_RESOURCE_ROLE LIKE ?)";
 
-    //    final String selectUserResourceId = "SELECT USER_RESOURCE_ID FROM GOOD_LINE_CLI_SCHEME.USER_RESOURCES WHERE USER_RESOURCES.USER_RESOURCE_PATH = ?";
     final String selectUserResourceId = "SELECT USER_RESOURCE_ID FROM USER_RESOURCES WHERE USER_RESOURCES.USER_RESOURCE_PATH = ?";
 
     public UserResources getPathUserResource(String userResourcePath, String userRole) throws SQLException {
         logger.debug("Подготовить запрос: " + selectUserResourcesWherePath);
-        try {
-            PreparedStatement statement = connection.prepareStatement(selectUserResourcesWherePath);
-            System.out.println(userResourcePath + ", " + userRole);
-            statement.setString(1, userResourcePath);
-            statement.setString(2, userRole);
-            //statement.setInt(3, resourceId);
-            logger.debug("Выполнить запрос: " + statement.toString());
-            ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
-                //System.out.println(resultSet.getString("USER_RESOURCE_PATH")
-                //      + ", " + resultSet.getString("USER_RESOURCE_ROLE"));
-                return new UserResources()
-                        .setUserResResId(resultSet.getInt("USER_RESOURCE_ID"))
-                        .setResourcePath(resultSet.getString("USER_RESOURCE_PATH"));
-            } else {
-                logger.debug("В БД нет записей по условию");
+        try {
+            String[] arrayOfPath = userResourcePath.split("\\.");
+            String findPath = "";
+            for (String path : arrayOfPath) {
+                findPath += path;
+                PreparedStatement statement = connection.prepareStatement(selectUserResourcesWherePath);
+                //System.out.println(userResourcePath + ", " + userRole);
+                statement.setString(1, findPath);
+                statement.setString(2, userRole);
+                //statement.setInt(3, resourceId);
+                logger.debug("Выполнить запрос: " + statement.toString());
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
+                    //System.out.println(resultSet.getString("USER_RESOURCE_PATH")
+                    //      + ", " + resultSet.getString("USER_RESOURCE_ROLE"));
+                    return new UserResources()
+                            .setUserResResId(resultSet.getInt("USER_RESOURCE_ID"))
+                            .setResourcePath(resultSet.getString("USER_RESOURCE_PATH"));
+                }
+
+                findPath += ".";
+
+                if (!resultSet.next()) {
+                    logger.debug("В БД нет записей по условию");
+                }
             }
+
 
         } catch (SQLException e) {
             logger.error("Ошибка доступа к БД, приложение не работает!");
@@ -65,19 +73,18 @@ public class UserResourceDAO {
     }
 
     public UserResources findIdRes(String path) throws SQLException {
-        logger.debug("Подготовить запрос: "+selectUserResourceId);
+        logger.debug("Подготовить запрос: " + selectUserResourceId);
         try {
             PreparedStatement statement = connection.prepareStatement(selectUserResourceId);
             statement.setString(1, path);
-            logger.debug("Выполнить запрос: "+statement.toString());
+            logger.debug("Выполнить запрос: " + statement.toString());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 //System.out.println(resultSet.getInt("USER_RESOURCE_ID"));
                 logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
                 return new UserResources()
                         .setUserResResId(resultSet.getInt("USER_RESOURCE_ID"));
-            }
-            else {
+            } else {
                 logger.debug("В БД нет записей по условию");
             }
 
