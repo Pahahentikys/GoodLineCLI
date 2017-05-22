@@ -2,14 +2,18 @@
  * Created by Pavel on 09.03.2017.
  */
 package general.serv;
-import org.apache.commons.codec.digest.DigestUtils;
 
-import java.sql.SQLException;
-import general.dom.*;
-import general.dao.*;
+import general.dao.UserInfoDAO;
+import general.dao.UserResourceDAO;
+import general.dom.Accounting;
+import general.dom.UserInfo;
 import general.dom.UserInputData;
+import general.dom.UserResources;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.SQLException;
 
 
 public class AuthentifAndAuthorizService {

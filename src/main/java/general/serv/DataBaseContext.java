@@ -2,11 +2,16 @@
  * Created by Pavel on 21.03.2017.
  */
 package general.serv;
-import java.sql.SQLException;
-import general.dao.*;
-import general.dom.*;
+
+import general.dao.UserInfoDAO;
+import general.dao.UserResourceDAO;
+import general.dom.UserInfo;
+import general.dom.UserInputData;
+import general.dom.UserResources;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.SQLException;
 
 public class DataBaseContext {
     private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
@@ -47,7 +52,6 @@ public class DataBaseContext {
         }
 
         logger.error("Хэши паролей не совпадают!");
-        //System.out.println("Хэши паролей не совпадают!");
         return false;
     }
 
@@ -61,10 +65,8 @@ public class DataBaseContext {
      */
     public boolean isResUserAccessDAO(UserResourceDAO userResourceDAO, UserInputData userInputData) throws SQLException {
         UserResources userResources = userResourceDAO.getPathUserResource(userInputData.getUserInputPathResource(), userInputData.getUserInputRole());
-//        System.out.println(userResources.getUserResResId());
         if (userResources == null) {
             logger.error("Пути к ресурсу {} не существует!", userInputData.getUserInputPathResource());
-            //System.out.println("Такого пути нет!");
             return false;
         }
         return true;

@@ -2,14 +2,13 @@
  * Created by Pavel on 09.03.2017.
  */
 package general.serv;
+
+import general.dom.UserInputData;
+import general.dom.UserRoles;
 import org.apache.commons.cli.*;
-import org.apache.commons.cli.ParseException;
 
 import java.time.LocalDate;
 import java.util.Locale;
-import general.dom.*;
-
-
 
 
 public class DataValidator {
