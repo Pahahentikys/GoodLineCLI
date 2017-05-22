@@ -16,9 +16,11 @@ import java.sql.SQLException;
  * Created by Pavel on 10.04.2017.
  */
 public class AccountingDAO {
+
     private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
-    // public static final String insertAccounting = "INSERT INTO GOOD_LINE_CLI_SCHEME.USER_SEANS(user_resource_id, user_seans_date_start, user_seans_date_end, user_seans_volume) VALUES (?, ?, ?, ?)";
+
     public static final String insertAccounting = "INSERT INTO USER_SEANS(USER_RESOURCE_ID, USER_SEANS_DATE_START, USER_SEANS_DATE_END, USER_SEANS_VOLUME) VALUES (?, ?, ?, ?)";
+
     private Connection connection;
 
     public AccountingDAO(Connection connection) {

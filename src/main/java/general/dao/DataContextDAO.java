@@ -2,7 +2,10 @@
  * Created by Pavel on 30.03.2017.
  */
 package general.dao;
-import  java.sql.*;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DataContextDAO {
 
@@ -47,15 +50,12 @@ public class DataContextDAO {
         return this;
     }
 
-    public Connection getConnection() throws SQLException, ClassNotFoundException
-    {
-            try {
-              return DriverManager.getConnection(dataBaseUrl, dataBaseUserName, dataBasePassword);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
+        try {
+            return DriverManager.getConnection(dataBaseUrl, dataBaseUserName, dataBasePassword);
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
 }

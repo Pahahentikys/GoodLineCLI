@@ -39,17 +39,13 @@ public class UserResourceDAO {
             for (String path : arrayOfPath) {
                 findPath += path;
                 PreparedStatement statement = connection.prepareStatement(selectUserResourcesWherePath);
-                //System.out.println(userResourcePath + ", " + userRole);
                 statement.setString(1, findPath);
                 statement.setString(2, userRole);
-                //statement.setInt(3, resourceId);
                 logger.debug("Выполнить запрос: " + statement.toString());
                 ResultSet resultSet = statement.executeQuery();
 
                 if (resultSet.next()) {
                     logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
-                    //System.out.println(resultSet.getString("USER_RESOURCE_PATH")
-                    //      + ", " + resultSet.getString("USER_RESOURCE_ROLE"));
                     return new UserResources()
                             .setUserResResId(resultSet.getInt("USER_RESOURCE_ID"))
                             .setResourcePath(resultSet.getString("USER_RESOURCE_PATH"));
@@ -80,7 +76,6 @@ public class UserResourceDAO {
             logger.debug("Выполнить запрос: " + statement.toString());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                //System.out.println(resultSet.getInt("USER_RESOURCE_ID"));
                 logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
                 return new UserResources()
                         .setUserResResId(resultSet.getInt("USER_RESOURCE_ID"));
