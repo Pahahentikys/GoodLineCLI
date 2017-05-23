@@ -15,10 +15,6 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
     public static void main(String[] args) {
 
-        LoggerContext context = (LoggerContext) LogManager.getContext(false);
-        File file = new File("./src/main/resources/log4j2.xml");
-        context.setConfigLocation(file.toURI());
-
         DataContextDAO dataContextDAO = new DataContextDAO();
 
         dataContextDAO.setDataBaseDriver("org.h2.Driver")

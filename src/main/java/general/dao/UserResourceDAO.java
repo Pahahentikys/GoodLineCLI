@@ -1,7 +1,6 @@
 package general.dao;
 
 import general.dom.UserResources;
-import general.serv.AuthentifAndAuthorizService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
