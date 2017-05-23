@@ -1,14 +1,20 @@
 package general.serv;
 
+import general.dao.DataContextDAO;
+import general.dom.UserInfo;
 import general.dom.UserInputData;
 import general.dom.UserRoles;
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 import java.util.Locale;
 
-
 public class DataValidator {
+
+    private static final Logger logger = LogManager.getLogger(DataContextDAO.class.getName());
+
     enum ComLineOptions {
         HELP,
         LOGIN,
@@ -74,8 +80,10 @@ public class DataValidator {
     public boolean isUserRoleValid(UserInputData userInpData) {
         for (UserRoles role : UserRoles.values()) {
             if (role.name().equals((userInpData.getUserInputRole())))
+                logger.info("Роль верна");
                 return true;
         }
+        logger.error("Роль пользователя {0} не подходит ни к одному значению из коллекции ролей", userInpData.getUserInputRole());
         return false;
     }
 
@@ -90,8 +98,10 @@ public class DataValidator {
             LocalDate.parse(userInputData.getUserInputDs());
             LocalDate.parse(userInputData.getUserInputDe());
         } catch (Exception ex) {
+            logger.error("Дата(ы) не соответствует формату", ex);
             return false;
         }
+        logger.info("Дата(ы) соответствуют формату");
         return true;
     }
 
@@ -106,8 +116,10 @@ public class DataValidator {
             String testVol = userInputData.getUserInputVol();
             Integer.valueOf(testVol);
         } catch (NumberFormatException ex) {
+            logger.error("Значение объёма {0} введеном некорректно", userInputData.getUserInputVol(),ex);
             return false;
         }
+        logger.info("Значение объёма введенно корректно!");
         return true;
     }
 
