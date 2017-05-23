@@ -1,24 +1,28 @@
 package general;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.LoggerContext;
 import org.flywaydb.core.Flyway;
 import general.dao.*;
 import general.dom.*;
 import general.serv.*;
 
 public class Main {
-
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
-
     public static void main(String[] args) {
+
+        LoggerContext context = (LoggerContext) LogManager.getContext(false);
+        File file = new File("./src/main/resources/log4j2.xml");
+        context.setConfigLocation(file.toURI());
 
         DataContextDAO dataContextDAO = new DataContextDAO();
 
         dataContextDAO.setDataBaseDriver("org.h2.Driver")
-                .setDataBaseUrl("jdbc:h2:file:./resources/db/GoodLineCLI")
+                .setDataBaseUrl("jdbc:h2:file:./src/main/resources/db/GoodLineCLI")
                 .setDataBaseUserName("Pavel")
                 .setDataBasePassword("1234");
 
@@ -29,39 +33,41 @@ public class Main {
 
         try (Connection connection = dataContextDAO.getConnection()) {
             logger.debug("Подключение к базе данных установлено");
+            AuthenticationService authenticationService = new AuthenticationService();
+            AuthorizationService authorizationService = new AuthorizationService();
             UserInputData userInputData = new UserInputData();
             DataValidator dataValidator = new DataValidator();
-            AuthentifAndAuthorizService authentifAndAuthorServ = new AuthentifAndAuthorizService();
             UserInfoDAO userInfoDAO = new UserInfoDAO(connection);
             UserResourceDAO userResourceDAO = new UserResourceDAO(connection);
             AccountingDAO accountingDAO = new AccountingDAO(connection);
             dataValidator.getUserInputData(userInputData, args);
             logger.debug("Запускается аутентификация");
 
-            boolean isAuthentification = authentifAndAuthorServ.isUserAuthentification(userInfoDAO, userInputData);
+            boolean isAuthentification = authenticationService.isUserAuthentification(userInfoDAO, userInputData);
             if (isAuthentification) {
-                System.out.println("Authentification success!");
+                logger.info("Authentification success!");
             }
 
             logger.debug("Запускается авторизация");
-            boolean isAuthorization = authentifAndAuthorServ.isUserAuthorization(userResourceDAO, userInputData, isAuthentification);
+
+            boolean isAuthorization = authorizationService.isUserAuthorization(userResourceDAO, userInputData, isAuthentification);
             if (isAuthorization) {
-                System.out.println("Authorization success!");
+                logger.info("Authorization success!");
             }
 
             logger.debug("Запускается аккаунтинг");
+
             Accounting accounting = new Accounting();
-            if (authentifAndAuthorServ.isUserAccounting(accounting, userResourceDAO, userInputData, dataValidator, isAuthorization)) {
+
+            if (authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData, dataValidator, isAuthorization)) {
 
                 accountingDAO.addUserSeans(accounting);
-                System.out.println("Accounting success!");
+                logger.info("Accounting success!");
             }
 
         } catch (SQLException | ClassNotFoundException e) {
 
-            logger.debug("При подключении к БД произошла ошибка");
-            e.printStackTrace();
-
+            logger.debug("При подключении к БД произошла ошибка", e);
         }
     }
 }
