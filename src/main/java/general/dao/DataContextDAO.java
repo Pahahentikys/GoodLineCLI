@@ -48,11 +48,6 @@ public class DataContextDAO {
     }
 
     public Connection getConnection() throws SQLException, ClassNotFoundException {
-        try {
             return DriverManager.getConnection(dataBaseUrl, dataBaseUserName, dataBasePassword);
-        } catch (Exception ex) {
-            throw ex;
-        }
     }
-
 }
