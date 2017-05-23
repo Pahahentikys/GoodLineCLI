@@ -1,6 +1,3 @@
-/**
- * Created by Pavel on 21.03.2017.
- */
 package general.serv;
 
 import general.dao.UserInfoDAO;
@@ -32,7 +29,6 @@ public class DataBaseContext {
             return false;
         }
         return true;
-
     }
 
     /**

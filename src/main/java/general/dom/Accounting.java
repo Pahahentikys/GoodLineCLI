@@ -1,6 +1,3 @@
-/**
- * Created by Pavel on 12.03.2017.
- */
 package general.dom;
 
 public class Accounting {

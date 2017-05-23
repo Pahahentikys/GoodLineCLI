@@ -1,6 +1,3 @@
-/**
- * Created by Pavel on 09.03.2017.
- */
 package general.serv;
 
 import general.dao.UserInfoDAO;
@@ -27,11 +24,8 @@ public class AuthentifAndAuthorizService {
      * @param salt               - соль
      * @return - "посоленный" хэш пароля
      */
-
     public String generHashUserPassword(String userNoHashPassword, String salt) {
-
         return DigestUtils.md5Hex(DigestUtils.md5Hex(userNoHashPassword) + salt);
-
     }
 
     /**
@@ -104,7 +98,6 @@ public class AuthentifAndAuthorizService {
     public void addAccounting(Accounting accounting, UserInputData userInputData, UserResourceDAO userResourceDAO) throws SQLException {
         logger.debug("Добавление пользовательского сеанса в БД");
         UserResources userResources = userResourceDAO.findIdRes(userInputData.getUserInputPathResource());
-
         accounting.setResourceId(userResources.getUserResResId());
         accounting.setStartAccountingDate(userInputData.getUserInputDs());
         accounting.setEndAccountingDate(userInputData.getUserInputDe());

@@ -1,6 +1,3 @@
-/**
- * Created by Pavel on 09.03.2017.
- */
 package general.dom;
 
 public class UserInputData {
@@ -13,7 +10,9 @@ public class UserInputData {
     private String userInputDe;
     private String userInputVol;
 
-    public int getUserInputId() { return userInputId; }
+    public int getUserInputId() {
+        return userInputId;
+    }
 
     public String getUserInputLogin() {
         return userInputLogin;

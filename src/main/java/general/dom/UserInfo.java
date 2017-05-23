@@ -1,6 +1,3 @@
-/**
- * Created by Pavel on 09.03.2017.
- */
 package general.dom;
 
 

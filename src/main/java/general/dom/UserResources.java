@@ -1,8 +1,5 @@
-
-/**
- * Created by Pavel on 09.03.2017.
- */
 package general.dom;
+
 public class UserResources {
     private UserRoles userRole;
     private String resourcePath;

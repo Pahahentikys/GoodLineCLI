@@ -1,6 +1,3 @@
-/**
- * Created by Pavel on 30.03.2017.
- */
 package general.dao;
 
 import java.sql.Connection;

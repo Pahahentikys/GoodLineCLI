@@ -10,14 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Created by Pavel on 06.04.2017.
- */
 public class UserInfoDAO {
 
     private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
 
-    public static final String selectUsersWhereLogin = "SELECT * FROM USERS WHERE USER_LOGIN = ?";
+    public static final String SELECT_WHERE_USER_LOGIN = "SELECT * FROM USERS WHERE USER_LOGIN = ?";
 
     private Connection connection;
 
@@ -26,9 +23,9 @@ public class UserInfoDAO {
     }
 
     public UserInfo searchUserLogin(String userLogin) throws SQLException {
-        logger.debug("Готовим запрос: " + selectUsersWhereLogin);
+        logger.debug("Готовим запрос: " + SELECT_WHERE_USER_LOGIN);
         try {
-            PreparedStatement statement = connection.prepareStatement(selectUsersWhereLogin);
+            PreparedStatement statement = connection.prepareStatement(SELECT_WHERE_USER_LOGIN);
             statement.setString(1, userLogin);
             logger.debug("Выполнить запрос: " + statement.toString());
             ResultSet resultSet = statement.executeQuery();
