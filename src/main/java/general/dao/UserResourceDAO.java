@@ -68,6 +68,7 @@ public class UserResourceDAO {
             statement.setString(1, path);
             logger.debug("Выполнить запрос: " + statement.toString());
             ResultSet resultSet = statement.executeQuery();
+
             if (resultSet.next()) {
                 logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
                 return new UserResources()

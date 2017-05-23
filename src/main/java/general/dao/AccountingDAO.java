@@ -37,5 +37,4 @@ public class AccountingDAO {
             logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
     }
-
 }

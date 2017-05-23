@@ -36,7 +36,6 @@ public class UserInfoDAO {
                         .withUserLogin(resultSet.getString("USER_LOGIN"))
                         .withUserHashPassword(resultSet.getString("USER_PASS_HASH"))
                         .withUserSalt(resultSet.getString("USER_SALT"));
-
             } else {
                 logger.debug("В БД нет записей по условию");
             }
