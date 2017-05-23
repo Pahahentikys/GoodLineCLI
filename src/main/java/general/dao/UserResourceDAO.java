@@ -28,10 +28,10 @@ public class UserResourceDAO {
 
     public UserResources getPathUserResource(String userResourcePath, String userRole) throws SQLException {
         logger.debug("Подготовить запрос: " + SELECT_WHERE_USER_RESOURCE_PATH);
-
+        String findPath = "";
         try {
             String[] arrayOfPath = userResourcePath.split("\\.");
-            String findPath = "";
+
             for (String path : arrayOfPath) {
                 findPath += path;
                 PreparedStatement statement = connection.prepareStatement(SELECT_WHERE_USER_RESOURCE_PATH);
@@ -57,6 +57,7 @@ public class UserResourceDAO {
 
         } catch (SQLException e) {
             logger.error("Ошибка доступа к БД, приложение не работает!", e);
+            return null;
         }
         return null;
     }
