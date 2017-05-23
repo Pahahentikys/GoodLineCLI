@@ -32,22 +32,22 @@ public class UserResources {
         return userResId;
     }
 
-    public UserResources setUserResId(int userResId) {
+    public UserResources withUserResId(int userResId) {
         this.userResId = userResId;
         return this;
     }
 
-    public UserResources setUserRole(UserRoles userRole) {
+    public UserResources withUserRole(UserRoles userRole) {
         this.userRole = userRole;
         return this;
     }
 
-    public UserResources setUserResUserId(int userResUserId) {
+    public UserResources withUserResUserId(int userResUserId) {
         this.userResUserId = userResUserId;
         return this;
     }
 
-    public UserResources setUserResResId(int userResResId) {
+    public UserResources withUserResResId(int userResResId) {
         this.userResResId = userResResId;
         return this;
     }

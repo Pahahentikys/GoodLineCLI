@@ -32,10 +32,10 @@ public class UserInfoDAO {
             if (resultSet.next()) {
                 logger.debug("Запрос выполнен. Наполнение данными объекта UserInfo");
                 return new UserInfo()
-                        .setUserId(resultSet.getInt("USER_ID"))
-                        .setUserLogin(resultSet.getString("USER_LOGIN"))
-                        .setUserHashPassword(resultSet.getString("USER_PASS_HASH"))
-                        .setUserSalt(resultSet.getString("USER_SALT"));
+                        .withUserId(resultSet.getInt("USER_ID"))
+                        .withUserLogin(resultSet.getString("USER_LOGIN"))
+                        .withUserHashPassword(resultSet.getString("USER_PASS_HASH"))
+                        .withUserSalt(resultSet.getString("USER_SALT"));
 
             } else {
                 logger.debug("В БД нет записей по условию");

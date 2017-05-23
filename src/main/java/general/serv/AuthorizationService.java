@@ -55,7 +55,7 @@ public class AuthorizationService {
         accounting.setResourceId(userResources.getUserResResId());
         accounting.setStartAccountingDate(userInputData.getUserInputDs());
         accounting.setEndAccountingDate(userInputData.getUserInputDe());
-        accounting.setVolumeOfUseRes(userInputData.getUserInputVol());
+        accounting.withVolumeOfUseRes(userInputData.getUserInputVol());
     }
 
     /**

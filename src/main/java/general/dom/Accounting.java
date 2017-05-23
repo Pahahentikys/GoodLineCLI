@@ -24,7 +24,7 @@ public class Accounting {
         return volumeOfUseRes;
     }
 
-    public Accounting setVolumeOfUseRes(String volumeOfUseRes) {
+    public Accounting withVolumeOfUseRes(String volumeOfUseRes) {
         this.volumeOfUseRes = volumeOfUseRes;
         return this;
     }

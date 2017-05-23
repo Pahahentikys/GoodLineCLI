@@ -23,22 +23,22 @@ public class UserInfo {
         return userSalt;
     }
 
-    public UserInfo setUserId(int userId) {
+    public UserInfo withUserId(int userId) {
         this.userId = userId;
         return this;
     }
 
-    public UserInfo setUserLogin(String userLogin) {
+    public UserInfo withUserLogin(String userLogin) {
         this.userLogin = userLogin;
         return this;
     }
 
-    public UserInfo setUserHashPassword(String userHashPassword) {
+    public UserInfo withUserHashPassword(String userHashPassword) {
         this.userHashPassword = userHashPassword;
         return this;
     }
 
-    public UserInfo setUserSalt(String userSalt) {
+    public UserInfo withUserSalt(String userSalt) {
         this.userSalt = userSalt;
         return this;
     }

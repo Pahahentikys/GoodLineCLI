@@ -47,38 +47,38 @@ public class UserInputData {
         return this;
     }
 
-    public UserInputData setUserInputLogin(String userInputLogin) {
+    public UserInputData withUserInputLogin(String userInputLogin) {
         this.userInputLogin = userInputLogin;
         return this;
     }
 
-    public UserInputData setUserInputPassword(String userInputPassword) {
+    public UserInputData withUserInputPassword(String userInputPassword) {
         this.userInputPassword = userInputPassword;
         return this;
     }
 
-    public UserInputData setUserInputPathResource(String userInputPathResource) {
+    public UserInputData withUserInputPathResource(String userInputPathResource) {
         this.userInputPathResource = userInputPathResource;
         return this;
     }
 
-    public UserInputData setUserInputRole(String userInputRole) {
+    public UserInputData withUserInputRole(String userInputRole) {
         this.userInputRole = userInputRole;
         return this;
     }
 
-    public UserInputData setUserInputDs(String userInputDs) {
+    public UserInputData withUserInputDs(String userInputDs) {
         this.userInputDs = userInputDs;
         return this;
 
     }
 
-    public UserInputData setUserInputDe(String userInputDe) {
+    public UserInputData withUserInputDe(String userInputDe) {
         this.userInputDe = userInputDe;
         return this;
     }
 
-    public UserInputData setUserInputVol(String userInputVol) {
+    public UserInputData withUserInputVol(String userInputVol) {
         this.userInputVol = userInputVol;
         return this;
     }

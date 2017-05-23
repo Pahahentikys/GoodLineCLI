@@ -47,13 +47,13 @@ public class DataValidator {
     public UserInputData getUserInputData(UserInputData userInputData, String[] args) {
         try {
             CommandLine commandLine = new DefaultParser().parse(generateOptions(), args);
-            userInputData.setUserInputLogin(commandLine.getOptionValue(String.valueOf(ComLineOptions.LOGIN)));
-            userInputData.setUserInputPassword(commandLine.getOptionValue(String.valueOf(ComLineOptions.PASS)));
-            userInputData.setUserInputPathResource(commandLine.getOptionValue(String.valueOf(ComLineOptions.RES)));
-            userInputData.setUserInputRole(commandLine.getOptionValue(String.valueOf(ComLineOptions.ROLE)));
-            userInputData.setUserInputDs(commandLine.getOptionValue(String.valueOf(ComLineOptions.DS)));
-            userInputData.setUserInputDe(commandLine.getOptionValue(String.valueOf(ComLineOptions.DE)));
-            userInputData.setUserInputVol(commandLine.getOptionValue(String.valueOf(ComLineOptions.VOL)));
+            userInputData.withUserInputLogin(commandLine.getOptionValue(String.valueOf(ComLineOptions.LOGIN)));
+            userInputData.withUserInputPassword(commandLine.getOptionValue(String.valueOf(ComLineOptions.PASS)));
+            userInputData.withUserInputPathResource(commandLine.getOptionValue(String.valueOf(ComLineOptions.RES)));
+            userInputData.withUserInputRole(commandLine.getOptionValue(String.valueOf(ComLineOptions.ROLE)));
+            userInputData.withUserInputDs(commandLine.getOptionValue(String.valueOf(ComLineOptions.DS)));
+            userInputData.withUserInputDe(commandLine.getOptionValue(String.valueOf(ComLineOptions.DE)));
+            userInputData.withUserInputVol(commandLine.getOptionValue(String.valueOf(ComLineOptions.VOL)));
 
             if (userInputData.getUserInputLogin() == null || userInputData.getUserInputPassword() == null) {
                 HelpFormatter helpFormatter = new HelpFormatter();
