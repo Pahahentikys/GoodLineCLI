@@ -1,10 +1,8 @@
-/**
- * Created by Pavel on 09.03.2017.
- */
 package general.dom;
 
 
 public class UserInfo {
+
     private int userId;
     private String userLogin;
     private String userHashPassword;
@@ -13,35 +11,29 @@ public class UserInfo {
     public int getUserId() {
         return userId;
     }
-
     public String getUserLogin() {
         return userLogin;
     }
-
     public String getUserHashPassword() {
         return userHashPassword;
     }
-
     public String getUserSalt() {
         return userSalt;
     }
 
-    public UserInfo setUserId(int userId) {
+    public UserInfo withUserId(int userId) {
         this.userId = userId;
         return this;
     }
-
-    public UserInfo setUserLogin(String userLogin) {
+    public UserInfo withUserLogin(String userLogin) {
         this.userLogin = userLogin;
         return this;
     }
-
-    public UserInfo setUserHashPassword(String userHashPassword) {
+    public UserInfo withUserHashPassword(String userHashPassword) {
         this.userHashPassword = userHashPassword;
         return this;
     }
-
-    public UserInfo setUserSalt(String userSalt) {
+    public UserInfo withUserSalt(String userSalt) {
         this.userSalt = userSalt;
         return this;
     }

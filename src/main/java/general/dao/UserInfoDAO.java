@@ -1,7 +1,6 @@
 package general.dao;
 
 import general.dom.UserInfo;
-import general.serv.AuthentifAndAuthorizService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,14 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Created by Pavel on 06.04.2017.
- */
 public class UserInfoDAO {
 
-    private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
+    private static final Logger logger = LogManager.getLogger(UserInfoDAO.class.getName());
 
-    public static final String selectUsersWhereLogin = "SELECT * FROM USERS WHERE USER_LOGIN = ?";
+    public static final String SELECT_WHERE_USER_LOGIN = "SELECT * FROM USERS WHERE USER_LOGIN = ?";
 
     private Connection connection;
 
@@ -26,9 +22,9 @@ public class UserInfoDAO {
     }
 
     public UserInfo searchUserLogin(String userLogin) throws SQLException {
-        logger.debug("Готовим запрос: " + selectUsersWhereLogin);
+        logger.debug("Готовим запрос: " + SELECT_WHERE_USER_LOGIN);
         try {
-            PreparedStatement statement = connection.prepareStatement(selectUsersWhereLogin);
+            PreparedStatement statement = connection.prepareStatement(SELECT_WHERE_USER_LOGIN);
             statement.setString(1, userLogin);
             logger.debug("Выполнить запрос: " + statement.toString());
             ResultSet resultSet = statement.executeQuery();
@@ -36,18 +32,17 @@ public class UserInfoDAO {
             if (resultSet.next()) {
                 logger.debug("Запрос выполнен. Наполнение данными объекта UserInfo");
                 return new UserInfo()
-                        .setUserId(resultSet.getInt("USER_ID"))
-                        .setUserLogin(resultSet.getString("USER_LOGIN"))
-                        .setUserHashPassword(resultSet.getString("USER_PASS_HASH"))
-                        .setUserSalt(resultSet.getString("USER_SALT"));
+                        .withUserId(resultSet.getInt("USER_ID"))
+                        .withUserLogin(resultSet.getString("USER_LOGIN"))
+                        .withUserHashPassword(resultSet.getString("USER_PASS_HASH"))
+                        .withUserSalt(resultSet.getString("USER_SALT"));
 
             } else {
                 logger.debug("В БД нет записей по условию");
             }
 
         } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!");
-            e.printStackTrace();
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
         return null;
     }

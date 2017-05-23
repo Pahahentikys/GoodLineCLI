@@ -1,97 +1,45 @@
-/**
- * Created by Pavel on 09.03.2017.
- */
 package general.serv;
 
-import general.dao.UserInfoDAO;
 import general.dao.UserResourceDAO;
 import general.dom.Accounting;
-import general.dom.UserInfo;
 import general.dom.UserInputData;
 import general.dom.UserResources;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 
+public class AuthorizationService {
 
-public class AuthentifAndAuthorizService {
-
-    private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
-
-    /**
-     * Получение хэша пароля
-     *
-     * @param userNoHashPassword - пароль пользователя без хэша
-     * @param salt               - соль
-     * @return - "посоленный" хэш пароля
-     */
-
-    public String generHashUserPassword(String userNoHashPassword, String salt) {
-
-        return DigestUtils.md5Hex(DigestUtils.md5Hex(userNoHashPassword) + salt);
-
-    }
-
-    /**
-     * Сравнить хэши на совпадение
-     *
-     * @param user         - информация о пользователе, который задан, из коллекции
-     * @param hashUserPass - хэш пароля, который ввёл пользователь
-     * @return true, если хэши равны
-     */
-    public boolean isUserHashesEqual(UserInfo user, String hashUserPass) {
-        return user.getUserHashPassword().equals(hashUserPass);
-    }
-
-    /**
-     * Проверка на то, аутентифицирован ли пользователь
-     *
-     * @param userInfoDAO   - слой данных, который берёт по запросу из БД нужного пользователя
-     * @param userInputData - объект, хранящий в себе входные параметры
-     * @return
-     * @throws SQLException
-     */
-    public boolean isUserAuthentification(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
-        logger.debug("Проверка на то, аутентифицирован ли пользователь");
-        DataBaseContext dataBaseContext = new DataBaseContext();
-        if (!dataBaseContext.isGetUserLoginDAO(userInfoDAO, userInputData)) {
-            System.exit(1);
-        }
-
-        if (!dataBaseContext.isGetUserPasswordDAO(userInfoDAO, userInputData)) {
-
-            System.exit(2);
-
-        }
-        return true;
-    }
+    private static final Logger logger = LogManager.getLogger(AuthorizationService.class.getName());
 
     /**
      * Проверка на то, авторизован ли пользователь
      *
      * @param userResourceDAO        - перечень ресурсов, который получен выборкой из БД
-     * @param userInputData          - входные параметры
+     * @param userResourcePath - пользовательский путь, который считывается с входных аргументов
+     * @param userResourceRole - пользовательская роль, которая считывается с входных аргументов
      * @param isUserAuthentification - проверка на то, аутентифицирован ли пользователь
      * @return - код: 3, если неправильная роль, код: 4, если нет доступа
      * @throws SQLException
      */
-    public boolean isUserAuthorization(UserResourceDAO userResourceDAO, UserInputData userInputData, boolean isUserAuthentification) throws SQLException {
+    public boolean isUserAuthorization(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole, boolean isUserAuthentification) throws SQLException {
         logger.debug("Проверка на то, авторизован ли пользователь");
         DataValidator dataValidator = new DataValidator();
         DataBaseContext dataBaseContext = new DataBaseContext();
-        if ((isUserAuthentification) && (userInputData.getUserInputRole() != null) && (userInputData.getUserInputPathResource() != null)) {
-            if (!dataValidator.isUserRoleValid(userInputData)) {
+        if ((isUserAuthentification) && (userResourceRole != null) && (userResourcePath != null)) {
+            if (!dataValidator.isUserRoleValid(userResourceRole)) {
                 System.exit(3);
             }
-            if (!dataBaseContext.isResUserAccessDAO(userResourceDAO, userInputData)) {
+            if (!dataBaseContext.hasResUserAccessDAO(userResourceDAO, userResourcePath, userResourceRole)) {
                 System.exit(4);
             }
             return true;
         }
         return false;
     }
+
+
 
     /**
      * Метод для создания сеанса доступа к ресурсу для юзера, который фиксирует даты: начала доступа, окончания, а также объем потреблённых ресурсов и id ресурса.
@@ -104,11 +52,10 @@ public class AuthentifAndAuthorizService {
     public void addAccounting(Accounting accounting, UserInputData userInputData, UserResourceDAO userResourceDAO) throws SQLException {
         logger.debug("Добавление пользовательского сеанса в БД");
         UserResources userResources = userResourceDAO.findIdRes(userInputData.getUserInputPathResource());
-
-        accounting.setResourceId(userResources.getUserResResId());
-        accounting.setStartAccountingDate(userInputData.getUserInputDs());
-        accounting.setEndAccountingDate(userInputData.getUserInputDe());
-        accounting.setVolumeOfUseRes(userInputData.getUserInputVol());
+        accounting.withResourceId(userResources.getUserResResId());
+        accounting.withStartAccountingDate(userInputData.getUserInputDs());
+        accounting.withEndAccountingDate(userInputData.getUserInputDe());
+        accounting.withVolumeOfUseRes(userInputData.getUserInputVol());
     }
 
     /**
@@ -133,7 +80,4 @@ public class AuthentifAndAuthorizService {
         }
         return false;
     }
-
 }
-
-

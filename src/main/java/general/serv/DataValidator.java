@@ -1,17 +1,19 @@
-/**
- * Created by Pavel on 09.03.2017.
- */
 package general.serv;
 
+import general.dao.DataContextDAO;
 import general.dom.UserInputData;
 import general.dom.UserRoles;
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 import java.util.Locale;
 
-
 public class DataValidator {
+
+    private static final Logger logger = LogManager.getLogger(DataContextDAO.class.getName());
+
     enum ComLineOptions {
         HELP,
         LOGIN,
@@ -45,13 +47,13 @@ public class DataValidator {
     public UserInputData getUserInputData(UserInputData userInputData, String[] args) {
         try {
             CommandLine commandLine = new DefaultParser().parse(generateOptions(), args);
-            userInputData.setUserInputLogin(commandLine.getOptionValue(String.valueOf(ComLineOptions.LOGIN)));
-            userInputData.setUserInputPassword(commandLine.getOptionValue(String.valueOf(ComLineOptions.PASS)));
-            userInputData.setUserInputPathResource(commandLine.getOptionValue(String.valueOf(ComLineOptions.RES)));
-            userInputData.setUserInputRole(commandLine.getOptionValue(String.valueOf(ComLineOptions.ROLE)));
-            userInputData.setUserInputDs(commandLine.getOptionValue(String.valueOf(ComLineOptions.DS)));
-            userInputData.setUserInputDe(commandLine.getOptionValue(String.valueOf(ComLineOptions.DE)));
-            userInputData.setUserInputVol(commandLine.getOptionValue(String.valueOf(ComLineOptions.VOL)));
+            userInputData.withUserInputLogin(commandLine.getOptionValue(String.valueOf(ComLineOptions.LOGIN)));
+            userInputData.withUserInputPassword(commandLine.getOptionValue(String.valueOf(ComLineOptions.PASS)));
+            userInputData.withUserInputPathResource(commandLine.getOptionValue(String.valueOf(ComLineOptions.RES)));
+            userInputData.withUserInputRole(commandLine.getOptionValue(String.valueOf(ComLineOptions.ROLE)));
+            userInputData.withUserInputDs(commandLine.getOptionValue(String.valueOf(ComLineOptions.DS)));
+            userInputData.withUserInputDe(commandLine.getOptionValue(String.valueOf(ComLineOptions.DE)));
+            userInputData.withUserInputVol(commandLine.getOptionValue(String.valueOf(ComLineOptions.VOL)));
 
             if (userInputData.getUserInputLogin() == null || userInputData.getUserInputPassword() == null) {
                 HelpFormatter helpFormatter = new HelpFormatter();
@@ -71,14 +73,17 @@ public class DataValidator {
     /**
      * Проверка корректности значения роли
      *
-     * @param userInpData - данные, которые идут на вход в консоль
+     * @param userRole - роль пользователя, которая идёт входным параметром
      * @return - true в том случае, если роль существует
      */
-    public boolean isUserRoleValid(UserInputData userInpData) {
+    public boolean isUserRoleValid(String userRole) {
         for (UserRoles role : UserRoles.values()) {
-            if (role.name().equals((userInpData.getUserInputRole())))
+            if (role.name().equals((userRole))) {
+                logger.info("Роль верна");
                 return true;
+            }
         }
+        logger.error("Роль пользователя {} не подходит ни к одному значению из коллекции ролей", userRole);
         return false;
     }
 
@@ -93,8 +98,10 @@ public class DataValidator {
             LocalDate.parse(userInputData.getUserInputDs());
             LocalDate.parse(userInputData.getUserInputDe());
         } catch (Exception ex) {
+            logger.error("Дата(ы) не соответствует формату", ex);
             return false;
         }
+        logger.info("Дата(ы) соответствуют формату");
         return true;
     }
 
@@ -109,8 +116,10 @@ public class DataValidator {
             String testVol = userInputData.getUserInputVol();
             Integer.valueOf(testVol);
         } catch (NumberFormatException ex) {
+            logger.error("Значение объёма {} введеном некорректно", userInputData.getUserInputVol(),ex);
             return false;
         }
+        logger.info("Значение объёма введенно корректно!");
         return true;
     }
 
