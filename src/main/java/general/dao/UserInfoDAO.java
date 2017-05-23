@@ -43,8 +43,7 @@ public class UserInfoDAO {
             }
 
         } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!");
-            e.printStackTrace();
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
         return null;
     }

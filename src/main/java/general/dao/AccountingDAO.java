@@ -35,8 +35,7 @@ public class AccountingDAO {
             logger.debug("Запрос в БД выполнен успешно, пользовательский сеанс сохранён");
 
         } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!");
-            e.printStackTrace();
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
     }
 
