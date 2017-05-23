@@ -46,11 +46,11 @@ public class AuthenticationService {
     public boolean isUserAuthentification(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         logger.debug("Проверка на то, аутентифицирован ли пользователь");
         DataBaseContext dataBaseContext = new DataBaseContext();
-        if (!dataBaseContext.isGetUserLoginDAO(userInfoDAO, userInputData)) {
+        if (!dataBaseContext.hasGetUserLoginDAO(userInfoDAO, userInputData)) {
             System.exit(1);
         }
 
-        if (!dataBaseContext.isGetUserPasswordDAO(userInfoDAO, userInputData)) {
+        if (!dataBaseContext.hasGetUserPasswordDAO(userInfoDAO, userInputData)) {
 
             System.exit(2);
 

@@ -23,7 +23,7 @@ public class DataBaseContext {
      * @return - true, если пользователь с таким же логином найден
      * @throws SQLException
      */
-    public boolean isGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
+    public boolean hasGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
         if (userInfo == null) {
             logger.error("Пользователь не найден по логину {}", userInputData.getUserInputLogin());
@@ -40,7 +40,7 @@ public class DataBaseContext {
      * @return - true, если хэши паролей совпадают
      * @throws SQLException
      */
-    public boolean isGetUserPasswordDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
+    public boolean hasGetUserPasswordDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
         System.out.println(userInfo.getUserLogin());
         String hashUserPass = authenticationService.generHashUserPassword(userInputData.getUserInputPassword(), userInfo.getUserSalt());
@@ -60,7 +60,7 @@ public class DataBaseContext {
      * @return - true, если доступ к ресурсу есть, false - если доступ к ресурсу отсутствует
      * @throws SQLException
      */
-    public boolean isResUserAccessDAO(UserResourceDAO userResourceDAO, UserInputData userInputData) throws SQLException {
+    public boolean hasResUserAccessDAO(UserResourceDAO userResourceDAO, UserInputData userInputData) throws SQLException {
         UserResources userResources = userResourceDAO.getPathUserResource(userInputData.getUserInputPathResource(), userInputData.getUserInputRole());
         if (userResources == null) {
             logger.error("Пути к ресурсу {} не существует!", userInputData.getUserInputPathResource());

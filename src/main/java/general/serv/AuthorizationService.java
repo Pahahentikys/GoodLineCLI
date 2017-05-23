@@ -30,7 +30,7 @@ public class AuthorizationService {
             if (!dataValidator.isUserRoleValid(userInputData)) {
                 System.exit(3);
             }
-            if (!dataBaseContext.isResUserAccessDAO(userResourceDAO, userInputData)) {
+            if (!dataBaseContext.hasResUserAccessDAO(userResourceDAO, userInputData)) {
                 System.exit(4);
             }
             return true;
