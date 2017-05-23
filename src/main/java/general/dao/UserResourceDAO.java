@@ -52,16 +52,16 @@ public class UserResourceDAO {
 
                 if (!resultSet.next()) {
                     logger.debug("В БД нет записей по условию");
+                    return null;
                 }
             }
 
 
         } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!");
-            e.printStackTrace();
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
-        return null;
 
+        return null;
     }
 
     public UserResources findIdRes(String path) throws SQLException {
