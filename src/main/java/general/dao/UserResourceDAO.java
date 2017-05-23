@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class UserResourceDAO {
 
-    private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
+    private static final Logger logger = LogManager.getLogger(UserResourceDAO.class.getName());
 
     Connection connection;
 

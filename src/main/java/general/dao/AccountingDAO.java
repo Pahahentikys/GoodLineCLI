@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class AccountingDAO {
 
-    private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
+    private static final Logger logger = LogManager.getLogger(AccountingDAO.class.getName());
 
     public static final String INSERT_ACCOUNTING = "INSERT INTO USER_SEANS(USER_RESOURCE_ID, USER_SEANS_DATE_START, USER_SEANS_DATE_END, USER_SEANS_VOLUME) VALUES (?, ?, ?, ?)";
 

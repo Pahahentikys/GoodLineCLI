@@ -1,5 +1,6 @@
 package general.serv;
 
+import general.dao.DataContextDAO;
 import general.dao.UserInfoDAO;
 import general.dao.UserResourceDAO;
 import general.dom.UserInfo;
@@ -11,8 +12,8 @@ import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 
 public class DataBaseContext {
-    private static final Logger logger = LogManager.getLogger(AuthentifAndAuthorizService.class.getName());
-    AuthentifAndAuthorizService authAndAuthorServ = new AuthentifAndAuthorizService();
+    AuthenticationService authenticationService = new AuthenticationService();
+    private static final Logger logger = LogManager.getLogger(DataContextDAO.class.getName());
 
     /**
      * Поиск пользователя по логину
@@ -42,8 +43,8 @@ public class DataBaseContext {
     public boolean isGetUserPasswordDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
         System.out.println(userInfo.getUserLogin());
-        String hashUserPass = authAndAuthorServ.generHashUserPassword(userInputData.getUserInputPassword(), userInfo.getUserSalt());
-        if (authAndAuthorServ.isUserHashesEqual(userInfo, hashUserPass)) {
+        String hashUserPass = authenticationService.generHashUserPassword(userInputData.getUserInputPassword(), userInfo.getUserSalt());
+        if (authenticationService.isUserHashesEqual(userInfo, hashUserPass)) {
             return true;
         }
 
