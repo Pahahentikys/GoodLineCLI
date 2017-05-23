@@ -1,15 +1,20 @@
 package general;
 
-import java.io.File;
+import general.dao.AccountingDAO;
+import general.dao.DataContextDAO;
+import general.dao.UserInfoDAO;
+import general.dao.UserResourceDAO;
+import general.dom.Accounting;
+import general.dom.UserInputData;
+import general.serv.AuthenticationService;
+import general.serv.AuthorizationService;
+import general.serv.DataValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.flywaydb.core.Flyway;
+
 import java.sql.Connection;
 import java.sql.SQLException;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.flywaydb.core.Flyway;
-import general.dao.*;
-import general.dom.*;
-import general.serv.*;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
