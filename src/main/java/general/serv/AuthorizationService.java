@@ -52,9 +52,9 @@ public class AuthorizationService {
     public void addAccounting(Accounting accounting, UserInputData userInputData, UserResourceDAO userResourceDAO) throws SQLException {
         logger.debug("Добавление пользовательского сеанса в БД");
         UserResources userResources = userResourceDAO.findIdRes(userInputData.getUserInputPathResource());
-        accounting.setResourceId(userResources.getUserResResId());
-        accounting.setStartAccountingDate(userInputData.getUserInputDs());
-        accounting.setEndAccountingDate(userInputData.getUserInputDe());
+        accounting.withResourceId(userResources.getUserResResId());
+        accounting.withStartAccountingDate(userInputData.getUserInputDs());
+        accounting.withEndAccountingDate(userInputData.getUserInputDe());
         accounting.withVolumeOfUseRes(userInputData.getUserInputVol());
     }
 

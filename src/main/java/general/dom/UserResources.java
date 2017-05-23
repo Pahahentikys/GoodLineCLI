@@ -19,15 +19,12 @@ public class UserResources {
     public UserRoles getUserRole() {
         return userRole;
     }
-
     public int getUserResUserId() {
         return userResUserId;
     }
-
     public int getUserResResId() {
         return userResResId;
     }
-
     public int getUserResId() {
         return userResId;
     }
@@ -36,21 +33,17 @@ public class UserResources {
         this.userResId = userResId;
         return this;
     }
-
     public UserResources withUserRole(UserRoles userRole) {
         this.userRole = userRole;
         return this;
     }
-
     public UserResources withUserResUserId(int userResUserId) {
         this.userResUserId = userResUserId;
         return this;
     }
-
     public UserResources withUserResResId(int userResResId) {
         this.userResResId = userResResId;
         return this;
     }
-
 
 }

@@ -22,10 +22,10 @@ public class Main {
 
         DataContextDAO dataContextDAO = new DataContextDAO();
 
-        dataContextDAO.setDataBaseDriver("org.h2.Driver")
-                .setDataBaseUrl("jdbc:h2:file:./src/main/resources/db/GoodLineCLI")
-                .setDataBaseUserName("Pavel")
-                .setDataBasePassword("1234");
+        dataContextDAO.withDataBaseDriver("org.h2.Driver")
+                .withDataBaseUrl("jdbc:h2:file:./src/main/resources/db/GoodLineCLI")
+                .withDataBaseUserName("Pavel")
+                .withDataBasePassword("1234");
 
         logger.debug("Процесс миграции");
         Flyway flyway = new Flyway();
