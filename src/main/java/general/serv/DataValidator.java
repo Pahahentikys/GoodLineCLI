@@ -79,11 +79,12 @@ public class DataValidator {
      */
     public boolean isUserRoleValid(UserInputData userInpData) {
         for (UserRoles role : UserRoles.values()) {
-            if (role.name().equals((userInpData.getUserInputRole())))
+            if (role.name().equals((userInpData.getUserInputRole()))) {
                 logger.info("Роль верна");
                 return true;
+            }
         }
-        logger.error("Роль пользователя {0} не подходит ни к одному значению из коллекции ролей", userInpData.getUserInputRole());
+        logger.error("Роль пользователя {} не подходит ни к одному значению из коллекции ролей", userInpData.getUserInputRole());
         return false;
     }
 
@@ -116,7 +117,7 @@ public class DataValidator {
             String testVol = userInputData.getUserInputVol();
             Integer.valueOf(testVol);
         } catch (NumberFormatException ex) {
-            logger.error("Значение объёма {0} введеном некорректно", userInputData.getUserInputVol(),ex);
+            logger.error("Значение объёма {} введеном некорректно", userInputData.getUserInputVol(),ex);
             return false;
         }
         logger.info("Значение объёма введенно корректно!");

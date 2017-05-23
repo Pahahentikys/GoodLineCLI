@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 public class DataBaseContext {
     AuthenticationService authenticationService = new AuthenticationService();
+    DataValidator dataValidator = new DataValidator();
     private static final Logger logger = LogManager.getLogger(DataContextDAO.class.getName());
 
     /**
@@ -62,10 +63,10 @@ public class DataBaseContext {
      */
     public boolean hasResUserAccessDAO(UserResourceDAO userResourceDAO, UserInputData userInputData) throws SQLException {
         UserResources userResources = userResourceDAO.getPathUserResource(userInputData.getUserInputPathResource(), userInputData.getUserInputRole());
-        if (userResources == null) {
-            logger.error("Пути к ресурсу {} не существует!", userInputData.getUserInputPathResource());
-            return false;
-        }
+            if (userResources == null) {
+                logger.error("Пути к ресурсу {} не существует!", userInputData.getUserInputPathResource());
+                return false;
+            }
         return true;
     }
 }
