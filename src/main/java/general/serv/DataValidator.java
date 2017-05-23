@@ -116,7 +116,7 @@ public class DataValidator {
             String testVol = userInputData.getUserInputVol();
             Integer.valueOf(testVol);
         } catch (NumberFormatException ex) {
-            logger.error("Значение объёма {} введеном некорректно", userInputData.getUserInputVol(),ex);
+            logger.error("Значение объёма: "+userInputData.getUserInputVol()+" введено некорректно. Ошибка: {}", ex);
             return false;
         }
         logger.info("Значение объёма введенно корректно!");
