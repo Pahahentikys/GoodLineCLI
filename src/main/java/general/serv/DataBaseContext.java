@@ -4,7 +4,6 @@ import general.dao.DataContextDAO;
 import general.dao.UserInfoDAO;
 import general.dao.UserResourceDAO;
 import general.dom.UserInfo;
-import general.dom.UserInputData;
 import general.dom.UserResources;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,19 +20,10 @@ public class DataBaseContext {
      * Поиск пользователя по логину
      *
      * @param userInfoDAO   - слой доступа к БД
-     * @param userInputData - входящие параметры
+     * @param userLogin - пользовательский логин, который считывается с входных аргументов
      * @return - true, если пользователь с таким же логином найден
      * @throws SQLException
      */
-//    public boolean hasGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
-//        UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
-//        if (userInfo == null) {
-//            logger.error("Пользователь не найден по логину {}", userInputData.getUserInputLogin());
-//            return false;
-//        }
-//        return true;
-//    }
-
     public boolean hasGetUserLoginDAO(UserInfoDAO userInfoDAO, String userLogin) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userLogin);
         if (userInfo == null) {
@@ -47,7 +37,8 @@ public class DataBaseContext {
      * Поиск пользователя по паролю
      *
      * @param userInfoDAO   - слой доступа к БД
-     * @param userInputData - входящие параметры
+     * @param userLogin - пользовательский логин, который считывается с входных аргументов
+     * @param userPassword - пользовательская пароль, которая считывается с входных аргументов
      * @return - true, если хэши паролей совпадают
      * @throws SQLException
      */
@@ -67,14 +58,15 @@ public class DataBaseContext {
      * Метод, который проверяет доступность юзеру к ресурсу
      *
      * @param userResourceDAO - слой доступа к БД, который наполняет объект UserResource данными из БД
-     * @param userInputData   - входные данные
+     * @param userResourcePath - пользовательский путь, который считывается с входных аргументов
+     * @param userResourceRole - пользовательская роль, которая считывается с входных аргументов
      * @return - true, если доступ к ресурсу есть, false - если доступ к ресурсу отсутствует
      * @throws SQLException
      */
-    public boolean hasResUserAccessDAO(UserResourceDAO userResourceDAO, UserInputData userInputData) throws SQLException {
-        UserResources userResources = userResourceDAO.getPathUserResource(userInputData.getUserInputPathResource(), userInputData.getUserInputRole());
+    public boolean hasResUserAccessDAO(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole) throws SQLException {
+        UserResources userResources = userResourceDAO.getPathUserResource(userResourcePath, userResourceRole);
             if (userResources == null) {
-                logger.error("Пути к ресурсу {} не существует!", userInputData.getUserInputPathResource());
+                logger.error("Пути к ресурсу {} не существует!", userResourcePath);
                 return false;
             }
         return true;

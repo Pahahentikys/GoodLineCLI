@@ -1,7 +1,6 @@
 package general.serv;
 
 import general.dao.DataContextDAO;
-import general.dom.UserInfo;
 import general.dom.UserInputData;
 import general.dom.UserRoles;
 import org.apache.commons.cli.*;
@@ -74,17 +73,17 @@ public class DataValidator {
     /**
      * Проверка корректности значения роли
      *
-     * @param userInpData - данные, которые идут на вход в консоль
+     * @param userRole - роль пользователя, которая идёт входным параметром
      * @return - true в том случае, если роль существует
      */
-    public boolean isUserRoleValid(UserInputData userInpData) {
+    public boolean isUserRoleValid(String userRole) {
         for (UserRoles role : UserRoles.values()) {
-            if (role.name().equals((userInpData.getUserInputRole()))) {
+            if (role.name().equals((userRole))) {
                 logger.info("Роль верна");
                 return true;
             }
         }
-        logger.error("Роль пользователя {} не подходит ни к одному значению из коллекции ролей", userInpData.getUserInputRole());
+        logger.error("Роль пользователя {} не подходит ни к одному значению из коллекции ролей", userRole);
         return false;
     }
 

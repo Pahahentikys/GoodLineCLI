@@ -2,7 +2,6 @@ package general.serv;
 
 import general.dao.UserInfoDAO;
 import general.dom.UserInfo;
-import general.dom.UserInputData;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,7 +38,8 @@ public class AuthenticationService {
      * Проверка на то, аутентифицирован ли пользователь
      *
      * @param userInfoDAO   - слой данных, который берёт по запросу из БД нужного пользователя
-     * @param userInputData - объект, хранящий в себе входные параметры
+     * @param userLogin - пользовательский логин, который считывается с входных аргументов
+     * @param userPassword - пользовательская пароль, которая считывается с входных аргументов
      * @return
      * @throws SQLException
      */

@@ -44,7 +44,8 @@ public class Main {
             dataValidator.getUserInputData(userInputData, args);
             String userLogin = userInputData.getUserInputLogin();
             String userPassword = userInputData.getUserInputPassword();
-           // String userResource = userInputData.getUserInputPathResource();
+            String userResourcePath = userInputData.getUserInputPathResource();
+            String userResourceRole = userInputData.getUserInputRole();
             logger.debug("Запускается аутентификация");
 
             boolean isAuthentification = authenticationService.isUserAuthentification(userInfoDAO, userLogin, userPassword);
@@ -54,7 +55,7 @@ public class Main {
 
             logger.debug("Запускается авторизация");
 
-            boolean isAuthorization = authorizationService.isUserAuthorization(userResourceDAO, userInputData, isAuthentification);
+            boolean isAuthorization = authorizationService.isUserAuthorization(userResourceDAO, userResourcePath, userResourceRole, isAuthentification);
             if (isAuthorization) {
                 logger.info("Authorization success!");
             }

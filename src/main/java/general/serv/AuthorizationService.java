@@ -17,20 +17,21 @@ public class AuthorizationService {
      * Проверка на то, авторизован ли пользователь
      *
      * @param userResourceDAO        - перечень ресурсов, который получен выборкой из БД
-     * @param userInputData          - входные параметры
+     * @param userResourcePath - пользовательский путь, который считывается с входных аргументов
+     * @param userResourceRole - пользовательская роль, которая считывается с входных аргументов
      * @param isUserAuthentification - проверка на то, аутентифицирован ли пользователь
      * @return - код: 3, если неправильная роль, код: 4, если нет доступа
      * @throws SQLException
      */
-    public boolean isUserAuthorization(UserResourceDAO userResourceDAO, UserInputData userInputData, boolean isUserAuthentification) throws SQLException {
+    public boolean isUserAuthorization(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole, boolean isUserAuthentification) throws SQLException {
         logger.debug("Проверка на то, авторизован ли пользователь");
         DataValidator dataValidator = new DataValidator();
         DataBaseContext dataBaseContext = new DataBaseContext();
-        if ((isUserAuthentification) && (userInputData.getUserInputRole() != null) && (userInputData.getUserInputPathResource() != null)) {
-            if (!dataValidator.isUserRoleValid(userInputData)) {
+        if ((isUserAuthentification) && (userResourceRole != null) && (userResourcePath != null)) {
+            if (!dataValidator.isUserRoleValid(userResourceRole)) {
                 System.exit(3);
             }
-            if (!dataBaseContext.hasResUserAccessDAO(userResourceDAO, userInputData)) {
+            if (!dataBaseContext.hasResUserAccessDAO(userResourceDAO, userResourcePath, userResourceRole)) {
                 System.exit(4);
             }
             return true;
