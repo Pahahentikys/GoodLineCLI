@@ -12,8 +12,9 @@ import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 
 public class DataBaseContext {
+
     AuthenticationService authenticationService = new AuthenticationService();
-    DataValidator dataValidator = new DataValidator();
+
     private static final Logger logger = LogManager.getLogger(DataContextDAO.class.getName());
 
     /**
@@ -24,10 +25,19 @@ public class DataBaseContext {
      * @return - true, если пользователь с таким же логином найден
      * @throws SQLException
      */
-    public boolean hasGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
-        UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
+//    public boolean hasGetUserLoginDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
+//        UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
+//        if (userInfo == null) {
+//            logger.error("Пользователь не найден по логину {}", userInputData.getUserInputLogin());
+//            return false;
+//        }
+//        return true;
+//    }
+
+    public boolean hasGetUserLoginDAO(UserInfoDAO userInfoDAO, String userLogin) throws SQLException {
+        UserInfo userInfo = userInfoDAO.searchUserLogin(userLogin);
         if (userInfo == null) {
-            logger.error("Пользователь не найден по логину {}", userInputData.getUserInputLogin());
+            logger.error("Пользователь не найден по логину {}", userLogin);
             return false;
         }
         return true;
@@ -41,10 +51,10 @@ public class DataBaseContext {
      * @return - true, если хэши паролей совпадают
      * @throws SQLException
      */
-    public boolean hasGetUserPasswordDAO(UserInfoDAO userInfoDAO, UserInputData userInputData) throws SQLException {
-        UserInfo userInfo = userInfoDAO.searchUserLogin(userInputData.getUserInputLogin());
+    public boolean hasGetUserPasswordDAO(UserInfoDAO userInfoDAO, String userLogin, String userPassword) throws SQLException {
+        UserInfo userInfo = userInfoDAO.searchUserLogin(userLogin);
         System.out.println(userInfo.getUserLogin());
-        String hashUserPass = authenticationService.generHashUserPassword(userInputData.getUserInputPassword(), userInfo.getUserSalt());
+        String hashUserPass = authenticationService.generHashUserPassword(userPassword, userInfo.getUserSalt());
         if (authenticationService.isUserHashesEqual(userInfo, hashUserPass)) {
             return true;
         }

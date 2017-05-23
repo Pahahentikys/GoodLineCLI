@@ -42,9 +42,12 @@ public class Main {
             UserResourceDAO userResourceDAO = new UserResourceDAO(connection);
             AccountingDAO accountingDAO = new AccountingDAO(connection);
             dataValidator.getUserInputData(userInputData, args);
+            String userLogin = userInputData.getUserInputLogin();
+            String userPassword = userInputData.getUserInputPassword();
+           // String userResource = userInputData.getUserInputPathResource();
             logger.debug("Запускается аутентификация");
 
-            boolean isAuthentification = authenticationService.isUserAuthentification(userInfoDAO, userInputData);
+            boolean isAuthentification = authenticationService.isUserAuthentification(userInfoDAO, userLogin, userPassword);
             if (isAuthentification) {
                 logger.info("Authentification success!");
             }
