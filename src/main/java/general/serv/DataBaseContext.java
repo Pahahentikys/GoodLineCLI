@@ -44,7 +44,7 @@ public class DataBaseContext {
      */
     public boolean hasGetUserPasswordDAO(UserInfoDAO userInfoDAO, String userLogin, String userPassword) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userLogin);
-        System.out.println(userInfo.getUserLogin());
+        logger.info("Запращивается пользователь с плогином {} и паролем {}", userLogin, userPassword);
         String hashUserPass = authenticationService.generHashUserPassword(userPassword, userInfo.getUserSalt());
         if (authenticationService.isUserHashesEqual(userInfo, hashUserPass)) {
             return true;
