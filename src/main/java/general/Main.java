@@ -19,7 +19,6 @@ import java.sql.SQLException;
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
     public static void main(String[] args) {
-
         DataContextDAO dataContextDAO = new DataContextDAO();
 
         dataContextDAO.withDataBaseDriver("org.h2.Driver")
@@ -48,27 +47,27 @@ public class Main {
             String userResourceRole = userInputData.getUserInputRole();
             logger.debug("Запускается аутентификация");
 
-            boolean isAuthentification = authenticationService.isUserAuthentification(userInfoDAO, userLogin, userPassword);
-            if (isAuthentification) {
+            int isAuthentification = authenticationService.isUserAuthentification(userInfoDAO, userLogin, userPassword);
+            if (isAuthentification == ExitCodeType.SUCCESS.getExitCode()) {
                 logger.info("Authentification success!");
             }
 
             logger.debug("Запускается авторизация");
 
-            boolean isAuthorization = authorizationService.isUserAuthorization(userResourceDAO, userResourcePath, userResourceRole, isAuthentification);
-            if (isAuthorization) {
-                logger.info("Authorization success!");
-            }
-
-            logger.debug("Запускается аккаунтинг");
-
-            Accounting accounting = new Accounting();
-
-            if (authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData, dataValidator, isAuthorization)) {
-
-                accountingDAO.addUserSeans(accounting);
-                logger.info("Accounting success!");
-            }
+//            boolean isAuthorization = authorizationService.isUserAuthorization(userResourceDAO, userResourcePath, userResourceRole, isAuthentification);
+//            if (isAuthorization) {
+//                logger.info("Authorization success!");
+//            }
+//
+//            logger.debug("Запускается аккаунтинг");
+//
+//            Accounting accounting = new Accounting();
+//
+//            if (authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData, dataValidator, isAuthorization)) {
+//
+//                accountingDAO.addUserSeans(accounting);
+//                logger.info("Accounting success!");
+//            }
 
         } catch (SQLException | ClassNotFoundException e) {
 
