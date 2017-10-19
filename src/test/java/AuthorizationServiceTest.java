@@ -134,4 +134,22 @@ public class AuthorizationServiceTest {
 
         assertEquals(exitCode, ExitCodeType.INVALID_ACCESS.getExitCode());
     }
+
+    @Test
+    public void testAuthorizationConnectToResourceWithOtherRole() throws SQLException {
+
+        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ",
+                "EXECUTE", "a.b");
+        String userLogin = userInputData.getUserInputLogin();
+        String userPass = userInputData.getUserInputPassword();
+        String userRole = userInputData.getUserInputRole();
+        String userPath = userInputData.getUserInputPathResource();
+
+        userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
+                userPass);
+
+        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+
+        assertEquals(exitCode, ExitCodeType.INVALID_ACCESS.getExitCode());
+    }
 }
