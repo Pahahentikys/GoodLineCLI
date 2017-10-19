@@ -78,7 +78,11 @@ public class AuthorizationServiceTest {
 
         when(userResourceDAO.getPathUserResource("a", "xxx")).thenReturn(userResourceA);
 
+        //Mock на ситуацию, когда юзер с корректной ролью пытается получить доступ к некорректному ресурсу.
         when(userResourceDAO.getPathUserResource("xxx", "READ")).thenReturn(null);
+
+        // Mock на ситуацию, когда к корректному ресурсу юзер пытается получить доступ с отсутствующей у него ролью.
+        when(userResourceDAO.getPathUserResource("a.b", "EXECUTE")).thenReturn(null);
     }
 
     @Test
