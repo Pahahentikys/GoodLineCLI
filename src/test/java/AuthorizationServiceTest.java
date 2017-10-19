@@ -73,14 +73,17 @@ public class AuthorizationServiceTest {
         // Mock на ситуацию, когда пользователь с правами доступа на ресурс найден в БД.
         when(userResourceDAO.getPathUserResource("a.b", "READ")).thenReturn(userResourceAAndB);
 
-        // Mock на ситуацию, когда задан некорректный ресурс для доступа пользователя.
+        // Mock на ситуацию, когда задана некорректная роль у пользователя.
         when(userResourceDAO.getPathUserResource("a.b", "xxx")).thenReturn(userResourceAAndB);
+
+        when(userResourceDAO.getPathUserResource("a", "xxx")).thenReturn(userResourceAAndB);
     }
 
     @Test
     public void testValidAuthorizationToResA() throws SQLException {
 
-        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ", "READ", "a");
+        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ",
+                "READ", "a");
         String userLogin = userInputData.getUserInputLogin();
         String userPass = userInputData.getUserInputPassword();
         String userRole = userInputData.getUserInputRole();
@@ -91,7 +94,24 @@ public class AuthorizationServiceTest {
 
         exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
 
-
         assertEquals(exitCode, ExitCodeType.SUCCESS.getExitCode());
+    }
+
+    @Test
+    public void testAuthorizationInvalidRole() throws SQLException {
+
+        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ",
+                "xxx", "a");
+        String userLogin = userInputData.getUserInputLogin();
+        String userPass = userInputData.getUserInputPassword();
+        String userRole = userInputData.getUserInputRole();
+        String userPath = userInputData.getUserInputPathResource();
+
+        userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
+                userPass);
+
+        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+
+        assertEquals(exitCode, ExitCodeType.INVALID_ROLE.getExitCode());
     }
 }
