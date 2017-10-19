@@ -76,7 +76,9 @@ public class AuthorizationServiceTest {
         // Mock на ситуацию, когда задана некорректная роль у пользователя.
         when(userResourceDAO.getPathUserResource("a.b", "xxx")).thenReturn(userResourceAAndB);
 
-        when(userResourceDAO.getPathUserResource("a", "xxx")).thenReturn(userResourceAAndB);
+        when(userResourceDAO.getPathUserResource("a", "xxx")).thenReturn(userResourceA);
+
+        when(userResourceDAO.getPathUserResource("xxx", "READ")).thenReturn(null);
     }
 
     @Test
@@ -113,5 +115,23 @@ public class AuthorizationServiceTest {
         exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
 
         assertEquals(exitCode, ExitCodeType.INVALID_ROLE.getExitCode());
+    }
+
+    @Test
+    public void testAuthorizationInvalidResPath() throws SQLException {
+
+        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ",
+                "READ", "xxx");
+        String userLogin = userInputData.getUserInputLogin();
+        String userPass = userInputData.getUserInputPassword();
+        String userRole = userInputData.getUserInputRole();
+        String userPath = userInputData.getUserInputPathResource();
+
+        userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
+                userPass);
+
+        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+
+        assertEquals(exitCode, ExitCodeType.INVALID_ACCESS.getExitCode());
     }
 }
