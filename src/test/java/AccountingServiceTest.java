@@ -106,4 +106,46 @@ public class AccountingServiceTest {
 
         assertEquals(exitCode, ExitCodeType.SUCCESS.getExitCode());
     }
+
+    @Test
+    public void accountinTestInvalidDate() throws SQLException {
+
+        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ",
+                "a.b", "READ", "xxxx-10-19", "2017-10-19", "100");
+        String userLogin = userInputData.getUserInputLogin();
+        String userPass = userInputData.getUserInputPassword();
+        String userRole = userInputData.getUserInputRole();
+        String userPath = userInputData.getUserInputPathResource();
+
+        userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
+                userPass);
+
+        userAuthorizationCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+
+        exitCode = authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData,
+                dataValidator, userAuthorizationCode);
+
+        assertEquals(exitCode, ExitCodeType.INVALID_ACTION.getExitCode());
+    }
+
+    @Test
+    public void accountinTestInvalidVolume() throws SQLException {
+
+        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ",
+                "a.b", "READ", "2017-10-19", "2017-10-19", "xxx");
+        String userLogin = userInputData.getUserInputLogin();
+        String userPass = userInputData.getUserInputPassword();
+        String userRole = userInputData.getUserInputRole();
+        String userPath = userInputData.getUserInputPathResource();
+
+        userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
+                userPass);
+
+        userAuthorizationCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+
+        exitCode = authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData,
+                dataValidator, userAuthorizationCode);
+
+        assertEquals(exitCode, ExitCodeType.INVALID_ACTION.getExitCode());
+    }
 }
