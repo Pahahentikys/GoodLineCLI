@@ -100,4 +100,14 @@ public class UserInputData {
         this.userInputPathResource = userInputPathResource;
     }
 
+    public UserInputData(String userInputLogin, String userInputPassword, String userInputPathResource, String userInputRole, String userInputDs, String userInputDe, String userInputVol) {
+        this.userInputLogin = userInputLogin;
+        this.userInputPassword = userInputPassword;
+        this.userInputPathResource = userInputPathResource;
+        this.userInputRole = userInputRole;
+        this.userInputDs = userInputDs;
+        this.userInputDe = userInputDe;
+        this.userInputVol = userInputVol;
+    }
+
 }
