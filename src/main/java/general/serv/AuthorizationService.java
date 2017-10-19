@@ -68,15 +68,15 @@ public class AuthorizationService {
      * @return код: 5, если некорректная дата
      * @throws SQLException
      */
-    public boolean isUserAccounting(Accounting accounting, UserResourceDAO userResourceDAO, UserInputData userInputData, DataValidator dataValidator, boolean isUserAuthorization) throws SQLException {
+    public int isUserAccounting(Accounting accounting, UserResourceDAO userResourceDAO, UserInputData userInputData, DataValidator dataValidator, int isUserAuthorization) throws SQLException {
         logger.debug("Проверка на то, выполнен ли процесс аккаунтинга");
-        if (isUserAuthorization && userInputData.getUserInputDs() != null) {
+        if (isUserAuthorization == ExitCodeType.SUCCESS.getExitCode() && userInputData.getUserInputDs() != null) {
             if (!dataValidator.isDateDsAndDeValid(userInputData) || !dataValidator.isVolumeValid(userInputData)) {
-                System.exit(5);
+              return ExitCodeType.INVALID_ACTION.getExitCode();
             }
             addAccounting(accounting, userInputData, userResourceDAO);
-            return true;
+            return ExitCodeType.SUCCESS.getExitCode();
         }
-        return false;
+        return ExitCodeType.INVALID_ACCESS.getExitCode();
     }
 }
