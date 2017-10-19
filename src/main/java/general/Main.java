@@ -54,10 +54,10 @@ public class Main {
 
             logger.debug("Запускается авторизация");
 
-//            boolean isAuthorization = authorizationService.isUserAuthorization(userResourceDAO, userResourcePath, userResourceRole, isAuthentification);
-//            if (isAuthorization) {
-//                logger.info("Authorization success!");
-//            }
+            int isAuthorization = authorizationService.isUserAuthorization(userResourceDAO, userResourcePath, userResourceRole, isAuthentification);
+            if (isAuthorization == ExitCodeType.SUCCESS.getExitCode()) {
+                logger.info("Authorization success!");
+            }
 //
 //            logger.debug("Запускается аккаунтинг");
 //
