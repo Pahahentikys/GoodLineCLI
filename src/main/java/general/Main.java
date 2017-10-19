@@ -18,6 +18,7 @@ import java.sql.SQLException;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
         DataContextDAO dataContextDAO = new DataContextDAO();
 
@@ -58,16 +59,16 @@ public class Main {
             if (isAuthorization == ExitCodeType.SUCCESS.getExitCode()) {
                 logger.info("Authorization success!");
             }
-//
-//            logger.debug("Запускается аккаунтинг");
-//
-//            Accounting accounting = new Accounting();
-//
-//            if (authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData, dataValidator, isAuthorization)) {
-//
-//                accountingDAO.addUserSeans(accounting);
-//                logger.info("Accounting success!");
-//            }
+
+            logger.debug("Запускается аккаунтинг");
+
+            Accounting accounting = new Accounting();
+
+            int isAccounting = authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData, dataValidator, isAuthorization);
+            if (isAccounting == ExitCodeType.SUCCESS.getExitCode()) {
+                accountingDAO.addUserSeans(accounting);
+                logger.info("Accounting success!");
+            }
 
         } catch (SQLException | ClassNotFoundException e) {
 
