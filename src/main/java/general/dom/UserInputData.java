@@ -11,7 +11,6 @@ public class UserInputData {
     private String userInputDe;
     private String userInputVol;
 
-
     public int getUserInputId() {
         return userInputId;
     }
@@ -92,6 +91,13 @@ public class UserInputData {
     public UserInputData(String userInputLogin, String userInputPassword) {
         this.userInputLogin = userInputLogin;
         this.userInputPassword = userInputPassword;
+    }
+
+    public UserInputData(String userInputLogin, String userInputPassword, String userInputRole, String userInputPathResource) {
+        this.userInputLogin = userInputLogin;
+        this.userInputPassword = userInputPassword;
+        this.userInputRole = userInputRole;
+        this.userInputPathResource = userInputPathResource;
     }
 
 }
