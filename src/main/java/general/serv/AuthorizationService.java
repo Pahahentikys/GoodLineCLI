@@ -1,5 +1,6 @@
 package general.serv;
 
+import general.ExitCodeType;
 import general.dao.UserResourceDAO;
 import general.dom.Accounting;
 import general.dom.UserInputData;
@@ -17,28 +18,26 @@ public class AuthorizationService {
      * Проверка на то, авторизован ли пользователь
      *
      * @param userResourceDAO        - перечень ресурсов, который получен выборкой из БД
-     * @param userResourcePath - пользовательский путь, который считывается с входных аргументов
-     * @param userResourceRole - пользовательская роль, которая считывается с входных аргументов
+     * @param userResourcePath       - пользовательский путь, который считывается с входных аргументов
+     * @param userResourceRole       - пользовательская роль, которая считывается с входных аргументов
      * @param isUserAuthentification - проверка на то, аутентифицирован ли пользователь
      * @return - код: 3, если неправильная роль, код: 4, если нет доступа
      * @throws SQLException
      */
-    public boolean isUserAuthorization(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole, boolean isUserAuthentification) throws SQLException {
+    public int isUserAuthorization(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole, int isUserAuthentification) throws SQLException {
         logger.debug("Проверка на то, авторизован ли пользователь");
         DataValidator dataValidator = new DataValidator();
         DataBaseContext dataBaseContext = new DataBaseContext();
-        if ((isUserAuthentification) && (userResourceRole != null) && (userResourcePath != null)) {
+        if ((isUserAuthentification == ExitCodeType.SUCCESS.getExitCode()) && (userResourceRole != null) && (userResourcePath != null)) {
             if (!dataValidator.isUserRoleValid(userResourceRole)) {
-                System.exit(3);
+                return ExitCodeType.INVALID_ROLE.getExitCode();
             }
             if (!dataBaseContext.hasResUserAccessDAO(userResourceDAO, userResourcePath, userResourceRole)) {
-                System.exit(4);
+                return ExitCodeType.INVALID_ACCESS.getExitCode();
             }
-            return true;
         }
-        return false;
+        return ExitCodeType.SUCCESS.getExitCode();
     }
-
 
 
     /**
