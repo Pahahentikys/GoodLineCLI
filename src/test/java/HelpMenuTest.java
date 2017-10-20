@@ -1,5 +1,3 @@
-import general.dom.UserInputData;
-import general.serv.AuthenticationService;
 import general.serv.DataValidator;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,33 +7,24 @@ import org.junit.Test;
  */
 public class HelpMenuTest {
 
-    private UserInputData userInputData;
-
     private DataValidator dataValidator;
-
-    private AuthenticationService authenticationService;
-
 
     @Before
     public void setDefaultParamsForTests() {
 
-        userInputData = new UserInputData();
-
         dataValidator = new DataValidator();
-
-        authenticationService = new AuthenticationService();
     }
 
     @Test
     public void testHelpMenu() {
 
-        dataValidator.getUserInputData(userInputData, new String[]{"-h"});
+        dataValidator.getUserInputData(new String[]{"-h"});
 
     }
 
     @Test
     public void testHelpMenuWithNoParams() {
 
-        dataValidator.getUserInputData(userInputData, new String[0]);
+        dataValidator.getUserInputData(new String[0]);
     }
 }
