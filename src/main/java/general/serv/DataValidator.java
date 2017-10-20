@@ -44,6 +44,30 @@ public class DataValidator {
         return options;
     }
 
+    public UserInputData getUserInputData(String[] args) {
+
+        try {
+            UserInputData userInputData = new UserInputData();
+            CommandLine commandLine = new DefaultParser().parse(generateOptions(), args);
+            userInputData.withUserInputLogin(commandLine.getOptionValue(String.valueOf(ComLineOptions.LOGIN)));
+            userInputData.withUserInputPassword(commandLine.getOptionValue(String.valueOf(ComLineOptions.PASS)));
+
+            if (userInputData.getUserInputLogin() == null || userInputData.getUserInputPassword() == null) {
+                HelpFormatter helpFormatter = new HelpFormatter();
+                helpFormatter.printHelp("Help menu: ", generateOptions());
+                return null;
+            }
+
+            return userInputData;
+
+        } catch (ParseException ex) {
+            HelpFormatter helpFormatter = new HelpFormatter();
+            helpFormatter.printHelp("Help menu: ", generateOptions());
+            return null;
+        }
+
+    }
+
     public UserInputData getUserInputData(UserInputData userInputData, String[] args) {
         try {
             CommandLine commandLine = new DefaultParser().parse(generateOptions(), args);
@@ -116,7 +140,7 @@ public class DataValidator {
             String testVol = userInputData.getUserInputVol();
             Integer.valueOf(testVol);
         } catch (NumberFormatException ex) {
-            logger.error("Значение объёма: "+userInputData.getUserInputVol()+" введено некорректно. Ошибка: {}", ex);
+            logger.error("Значение объёма {} введеном некорректно", userInputData.getUserInputVol(), ex);
             return false;
         }
         logger.info("Значение объёма введенно корректно!");

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class DataBaseContext {
 
-    AuthenticationService authenticationService = new AuthenticationService();
+    private AuthenticationService authenticationService = new AuthenticationService();
 
     private static final Logger logger = LogManager.getLogger(DataContextDAO.class.getName());
 
@@ -24,7 +24,7 @@ public class DataBaseContext {
      * @return - true, если пользователь с таким же логином найден
      * @throws SQLException
      */
-    public boolean hasGetUserLoginDAO(UserInfoDAO userInfoDAO, String userLogin) throws SQLException {
+    boolean hasGetUserLoginDAO(UserInfoDAO userInfoDAO, String userLogin) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userLogin);
         if (userInfo == null) {
             logger.error("Пользователь не найден по логину {}", userLogin);
@@ -42,9 +42,8 @@ public class DataBaseContext {
      * @return - true, если хэши паролей совпадают
      * @throws SQLException
      */
-    public boolean hasGetUserPasswordDAO(UserInfoDAO userInfoDAO, String userLogin, String userPassword) throws SQLException {
+    boolean hasGetUserPasswordDAO(UserInfoDAO userInfoDAO, String userLogin, String userPassword) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userLogin);
-        logger.info("Запращивается пользователь с плогином {} и паролем {}", userLogin, userPassword);
         String hashUserPass = authenticationService.generHashUserPassword(userPassword, userInfo.getUserSalt());
         if (authenticationService.isUserHashesEqual(userInfo, hashUserPass)) {
             return true;
@@ -63,7 +62,7 @@ public class DataBaseContext {
      * @return - true, если доступ к ресурсу есть, false - если доступ к ресурсу отсутствует
      * @throws SQLException
      */
-    public boolean hasResUserAccessDAO(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole) throws SQLException {
+    boolean hasResUserAccessDAO(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole) throws SQLException {
         UserResources userResources = userResourceDAO.getPathUserResource(userResourcePath, userResourceRole);
             if (userResources == null) {
                 logger.error("Пути к ресурсу {} не существует!", userResourcePath);

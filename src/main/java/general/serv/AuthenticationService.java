@@ -1,5 +1,6 @@
 package general.serv;
 
+import general.ExitCodeType;
 import general.dao.UserInfoDAO;
 import general.dom.UserInfo;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -19,7 +20,7 @@ public class AuthenticationService {
      * @param salt               - соль
      * @return - "посоленный" хэш пароля
      */
-    public String generHashUserPassword(String userNoHashPassword, String salt) {
+    String generHashUserPassword(String userNoHashPassword, String salt) {
         return DigestUtils.md5Hex(DigestUtils.md5Hex(userNoHashPassword) + salt);
     }
 
@@ -30,29 +31,32 @@ public class AuthenticationService {
      * @param hashUserPass - хэш пароля, который ввёл пользователь
      * @return true, если хэши равны
      */
-    public boolean isUserHashesEqual(UserInfo user, String hashUserPass) {
+    boolean isUserHashesEqual(UserInfo user, String hashUserPass) {
         return user.getUserHashPassword().equals(hashUserPass);
     }
+
 
     /**
      * Проверка на то, аутентифицирован ли пользователь
      *
-     * @param userInfoDAO   - слой данных, который берёт по запросу из БД нужного пользователя
-     * @param userLogin - пользовательский логин, который считывается с входных аргументов
+     * @param userInfoDAO  - слой данных, который берёт по запросу из БД нужного пользователя
+     * @param userLogin    - пользовательский логин, который считывается с входных аргументов
      * @param userPassword - пользовательская пароль, которая считывается с входных аргументов
-     * @return
+     * @return exit-1, если неверный лоигн, а exit-2, если неверный пароль
      * @throws SQLException
      */
-    public boolean isUserAuthentification(UserInfoDAO userInfoDAO,String userLogin, String userPassword) throws SQLException {
+    public int isUserAuthentification(UserInfoDAO userInfoDAO, String userLogin, String userPassword) throws SQLException {
         logger.debug("Проверка на то, аутентифицирован ли пользователь");
         DataBaseContext dataBaseContext = new DataBaseContext();
         if (!dataBaseContext.hasGetUserLoginDAO(userInfoDAO, userLogin)) {
-            System.exit(1);
+            return ExitCodeType.INVALID_LOGIN.getExitCode();
+
         }
 
         if (!dataBaseContext.hasGetUserPasswordDAO(userInfoDAO, userLogin, userPassword)) {
-            System.exit(2);
+            return ExitCodeType.INVALID_PASSWORD.getExitCode();
         }
-        return true;
+        return ExitCodeType.SUCCESS.getExitCode();
     }
+
 }
