@@ -4,4 +4,12 @@
 
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
+    <servlet>
+        <servlet-name>GetServlet</servlet-name>
+        <servlet-class>servlets.GetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetServlet</servlet-name>
+        <url-pattern>/echo/get</url-pattern>
+    </servlet-mapping>
 </web-app>
