@@ -96,6 +96,11 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>9.4.7.v20170914</version>
+        </dependency>
     </dependencies>
     <reporting>
         <plugins>
