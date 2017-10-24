@@ -12,4 +12,12 @@
         <servlet-name>GetServlet</servlet-name>
         <url-pattern>/echo/get</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>servlets.PostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/echo/post</url-pattern>
+    </servlet-mapping>
 </web-app>
