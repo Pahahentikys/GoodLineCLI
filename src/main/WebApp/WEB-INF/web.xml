@@ -6,7 +6,7 @@
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>GetServlet</servlet-name>
-        <servlet-class>servlets.GetServlet</servlet-class>
+        <servlet-class>general.servlets.GetServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GetServlet</servlet-name>
@@ -14,7 +14,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>PostServlet</servlet-name>
-        <servlet-class>servlets.PostServlet</servlet-class>
+        <servlet-class>general.servlets.PostServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PostServlet</servlet-name>
