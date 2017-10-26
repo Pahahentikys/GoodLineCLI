@@ -14,6 +14,6 @@ public class PostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // Передача id в get-сервлет.
-        resp.sendRedirect("?id="+req.getParameter("id"));
+        resp.sendRedirect("get?id="+req.getParameter("id"));
     }
 }
