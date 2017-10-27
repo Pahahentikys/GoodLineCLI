@@ -15,9 +15,6 @@ import java.sql.SQLException;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Pavel on 17.10.2017.
- */
 public class AuthorizationServiceTest {
 
     // Сервис, ответственный за аутентификацию пользователя.
