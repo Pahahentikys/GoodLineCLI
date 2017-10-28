@@ -62,6 +62,9 @@ public class AuthorizationServiceTest {
         // Mock на ситуацию, когда пользователь с правами доступа на ресурс найден в БД.
         when(userResourceDAO.getPathUserResource("a", "READ")).thenReturn(userResourceA);
 
+        // Mock на ситуацию, когда пользователь пытается зайти на ресурс с отсутствием необходимых прав доступа.
+        when(userResourceDAO.getPathUserResource("a", "WRITE")).thenReturn(null);
+
         // Mock на ситуацию, когда пользователь с правами доступа на ресурс найден в БД.
         when(userResourceDAO.getPathUserResource("a.b", "READ")).thenReturn(userResourceAAndB);
 
@@ -91,6 +94,22 @@ public class AuthorizationServiceTest {
         exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
 
         assertEquals(exitCode, ExitCodeType.SUCCESS.getExitCode());
+    }
+
+    @Test
+    public void testWithInvalidAccessAuthorizationToResA() throws SQLException {
+
+        UserInputData userInputData = new UserInputData()
+                .withUserInputRole("WRITE")
+                .withUserInputPathResource("a");
+        String userRole = userInputData.getUserInputRole();
+        String userPath = userInputData.getUserInputPathResource();
+
+        authentificateUser();
+
+        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+
+        assertEquals(exitCode, ExitCodeType.INVALID_ACCESS.getExitCode());
     }
 
     @Test
