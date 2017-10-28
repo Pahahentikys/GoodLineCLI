@@ -93,10 +93,9 @@ public class AccountingServiceTest {
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
-        userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
-                userPass);
+        authentificateUser();
 
-        userAuthorizationCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+        authorizeUser();
 
         exitCode = authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData,
                 dataValidator, userAuthorizationCode);
@@ -114,10 +113,9 @@ public class AccountingServiceTest {
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
-        userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
-                userPass);
+        authentificateUser();
 
-        userAuthorizationCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+        authorizeUser();
 
         exitCode = authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData,
                 dataValidator, userAuthorizationCode);
@@ -135,14 +133,41 @@ public class AccountingServiceTest {
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
-        userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
-                userPass);
+        authentificateUser();
 
-        userAuthorizationCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+        authorizeUser();
 
         exitCode = authorizationService.isUserAccounting(accounting, userResourceDAO, userInputData,
                 dataValidator, userAuthorizationCode);
 
         assertEquals(exitCode, ExitCodeType.INVALID_ACTION.getExitCode());
+    }
+
+    private int authentificateUser() throws SQLException {
+
+        AuthenticationService authenticationService = new AuthenticationService();
+
+        UserInputData userInputData = new UserInputData()
+                .withUserInputLogin("jdoe")
+                .withUserInputPassword("sup3rpaZZ");
+        String userLogin = userInputData.getUserInputLogin();
+        String userPass = userInputData.getUserInputPassword();
+
+        return userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
+                userPass);
+    }
+
+    private int authorizeUser() throws SQLException {
+
+        authorizationService = new AuthorizationService();
+
+        UserInputData userInputData = new UserInputData()
+                .withUserInputRole("READ")
+                .withUserInputPathResource("a.b");
+        String userRole = userInputData.getUserInputRole();
+        String userPath = userInputData.getUserInputPathResource();
+
+        return userAuthorizationCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole,
+                userAuthCode);
     }
 }
