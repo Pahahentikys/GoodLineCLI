@@ -94,6 +94,22 @@ public class AuthorizationServiceTest {
     }
 
     @Test
+    public void testValidAuthorizationToResAB() throws SQLException {
+
+        UserInputData userInputData = new UserInputData()
+                .withUserInputRole("READ")
+                .withUserInputPathResource("a.b");
+        String userRole = userInputData.getUserInputRole();
+        String userPath = userInputData.getUserInputPathResource();
+
+        authentificateUser();
+
+        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
+
+        assertEquals(exitCode, ExitCodeType.SUCCESS.getExitCode());
+    }
+
+    @Test
     public void testAuthorizationInvalidRole() throws SQLException {
 
         UserInputData userInputData = new UserInputData()
