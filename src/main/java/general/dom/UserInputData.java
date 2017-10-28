@@ -110,4 +110,9 @@ public class UserInputData {
         this.userInputVol = userInputVol;
     }
 
+    public UserInputData(String userInputDs, String userInputDe, String userInputVol) {
+        this.userInputDs = userInputDs;
+        this.userInputDe = userInputDe;
+        this.userInputVol = userInputVol;
+    }
 }

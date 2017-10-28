@@ -86,12 +86,15 @@ public class AccountingServiceTest {
     @Test
     public void accountinTestValid() throws SQLException {
 
-        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ",
-                "a.b", "READ", "2017-10-19", "2017-10-19", "100");
-        String userLogin = userInputData.getUserInputLogin();
-        String userPass = userInputData.getUserInputPassword();
-        String userRole = userInputData.getUserInputRole();
-        String userPath = userInputData.getUserInputPathResource();
+        UserInputData userInputData = new UserInputData(
+                "jdoe",
+                "sup3rpaZZ",
+                "a.b",
+                "READ",
+                "2017-10-19",
+                "2017-10-19",
+                "100"
+        );
 
         authentificateUser();
 
@@ -106,12 +109,11 @@ public class AccountingServiceTest {
     @Test
     public void accountinTestInvalidDate() throws SQLException {
 
-        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ",
-                "a.b", "READ", "xxxx-10-19", "2017-10-19", "100");
-        String userLogin = userInputData.getUserInputLogin();
-        String userPass = userInputData.getUserInputPassword();
-        String userRole = userInputData.getUserInputRole();
-        String userPath = userInputData.getUserInputPathResource();
+        UserInputData userInputData = new UserInputData(
+                "xxx-10-19",
+                "2017-10-19",
+                "100"
+        );
 
         authentificateUser();
 
@@ -126,12 +128,11 @@ public class AccountingServiceTest {
     @Test
     public void accountinTestInvalidVolume() throws SQLException {
 
-        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ",
-                "a.b", "READ", "2017-10-19", "2017-10-19", "xxx");
-        String userLogin = userInputData.getUserInputLogin();
-        String userPass = userInputData.getUserInputPassword();
-        String userRole = userInputData.getUserInputRole();
-        String userPath = userInputData.getUserInputPathResource();
+        UserInputData userInputData = new UserInputData(
+                "2017-10-19",
+                "2017-10-19",
+                "xxx"
+        );
 
         authentificateUser();
 
