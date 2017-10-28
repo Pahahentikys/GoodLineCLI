@@ -143,8 +143,14 @@ public class AccountingServiceTest {
         String userLogin = userInputData.getUserInputLogin();
         String userPass = userInputData.getUserInputPassword();
 
-        return userAuthCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
-                userPass);
+
+        if(authenticationService.isUserAuthentification(userInfoDAO, userLogin,
+                userPass) == ExitCodeType.SUCCESS.getExitCode()){
+
+            return userAuthCode = ExitCodeType.SUCCESS.getExitCode();
+        }
+
+        return userAuthCode = ExitCodeType.INVALID_ACCESS.getExitCode();
     }
 
     private int authorizeUser() throws SQLException {
@@ -157,7 +163,12 @@ public class AccountingServiceTest {
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
-        return userAuthorizationCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole,
-                userAuthCode);
+        if(authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole,
+                userAuthCode) == ExitCodeType.SUCCESS.getExitCode()){
+
+            return userAuthorizationCode = ExitCodeType.SUCCESS.getExitCode();
+        }
+
+        return userAuthorizationCode = ExitCodeType.INVALID_ACCESS.getExitCode();
     }
 }
