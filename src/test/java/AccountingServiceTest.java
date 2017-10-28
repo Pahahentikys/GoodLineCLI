@@ -18,13 +18,10 @@ import static org.mockito.Mockito.when;
 public class AccountingServiceTest {
 
     // Класс, отвечающий за валидацию дат и объёма.
-    DataValidator dataValidator = new DataValidator();
+    private DataValidator dataValidator = new DataValidator();
 
     // Класс, фиксирующий состояние сеанса юзера.
-    Accounting accounting = new Accounting();
-
-    // Сервис, ответственный за аутентификацию пользователя.
-    private AuthenticationService authenticationService;
+    private Accounting accounting = new Accounting();
 
     // Сервис, ответственный за авторизацию пользователя.
     private AuthorizationService authorizationService;
@@ -35,9 +32,6 @@ public class AccountingServiceTest {
     // Слой данных, содержащий ресурсы пользователя.
     private UserResourceDAO userResourceDAO;
 
-    // Слой данных, фиксирующий пользовательский сеанс.
-    private AccountingDAO accountingDAO;
-
     // Стоп-код при выолнении программы.
     private int exitCode;
 
@@ -47,15 +41,8 @@ public class AccountingServiceTest {
     // Стоп-код успешности/неуспешности выполнения авторизации.
     private int userAuthorizationCode;
 
-
     @Before
     public void setDefaultParamsForTests() throws SQLException {
-
-        accounting = new Accounting();
-
-        authorizationService = new AuthorizationService();
-
-        authenticationService = new AuthenticationService();
 
         // Дефолтный юзер, чтобы его мокнуть
         UserInfo userInfo = new UserInfo()
@@ -72,7 +59,7 @@ public class AccountingServiceTest {
         // Мокаем группу слоёв доступа к данным.
         userInfoDAO = Mockito.mock(UserInfoDAO.class);
         userResourceDAO = Mockito.mock(UserResourceDAO.class);
-        accountingDAO = Mockito.mock(AccountingDAO.class);
+        AccountingDAO accountingDAO = Mockito.mock(AccountingDAO.class);
 
 
         // Mock на ситуацию, когда пользователь с таким логином найден в БД
@@ -85,6 +72,8 @@ public class AccountingServiceTest {
 
     @Test
     public void accountinTestValid() throws SQLException {
+
+        accounting = new Accounting();
 
         UserInputData userInputData = new UserInputData(
                 "jdoe",
