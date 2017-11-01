@@ -9,3 +9,4 @@ GoodLineCLI.jar
 
 *.db
 dependency-reduced-pom.xml
+appClient/log
