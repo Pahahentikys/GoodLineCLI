@@ -71,7 +71,7 @@ public class AuthorizationService {
     public int isUserAccounting(Accounting accounting, UserResourceDAO userResourceDAO, UserInputData userInputData, DataValidator dataValidator, int isUserAuthorization) throws SQLException {
         logger.debug("Проверка на то, выполнен ли процесс аккаунтинга");
         if (isUserAuthorization == ExitCodeType.SUCCESS.getExitCode() && userInputData.getUserInputDs() != null) {
-            if (!dataValidator.isDateDsAndDeValid(userInputData) || !dataValidator.isVolumeValid(userInputData)) {
+            if (dataValidator.isDateDsAndDeValid(userInputData) == ExitCodeType.INVALID_ACTION.getExitCode() || dataValidator.isVolumeValid(userInputData) == ExitCodeType.INVALID_ACTION.getExitCode()) {
               return ExitCodeType.INVALID_ACTION.getExitCode();
             }
             addAccounting(accounting, userInputData, userResourceDAO);
