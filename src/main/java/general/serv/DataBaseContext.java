@@ -68,12 +68,15 @@ public class DataBaseContext {
      * @return - true, если доступ к ресурсу есть, false - если доступ к ресурсу отсутствует
      * @throws SQLException
      */
-    boolean hasResUserAccessDAO(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole) throws SQLException {
+   public int hasResUserAccessDAO(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole) throws SQLException {
         UserResources userResources = userResourceDAO.getPathUserResource(userResourcePath, userResourceRole);
             if (userResources == null) {
-                logger.error("Пути к ресурсу {} не существует!", userResourcePath);
-                return false;
+
+                logger.error("Пути к ресурсу {} не существует! Либо не существует данного пути: {} с ролью: {}", userResourcePath, userResourcePath, userResourceRole);
+                return ExitCodeType.INVALID_ACCESS.getExitCode();
             }
-        return true;
+
+        logger.info("Роль: {} соответствует ресурсу: {}", userResourceRole, userResourcePath);
+        return ExitCodeType.SUCCESS.getExitCode();
     }
 }
