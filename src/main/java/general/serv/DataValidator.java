@@ -1,5 +1,6 @@
 package general.serv;
 
+import general.ExitCodeType;
 import general.dao.DataContextDAO;
 import general.dom.UserInputData;
 import general.dom.UserRoles;
@@ -100,15 +101,15 @@ public class DataValidator {
      * @param userRole - роль пользователя, которая идёт входным параметром
      * @return - true в том случае, если роль существует
      */
-    public boolean isUserRoleValid(String userRole) {
+    public int isUserRoleValid(String userRole) {
         for (UserRoles role : UserRoles.values()) {
             if (role.name().equals((userRole))) {
                 logger.info("Роль верна");
-                return true;
+                return ExitCodeType.SUCCESS.getExitCode();
             }
         }
         logger.error("Роль пользователя {} не подходит ни к одному значению из коллекции ролей", userRole);
-        return false;
+        return ExitCodeType.INVALID_ROLE.getExitCode();
     }
 
     /**
