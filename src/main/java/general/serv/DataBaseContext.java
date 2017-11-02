@@ -29,11 +29,11 @@ public class DataBaseContext {
     public int hasGetUserLoginDAO(UserInfoDAO userInfoDAO, String userLogin) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userLogin);
         if (userInfo == null) {
+
             logger.error("Пользователь не найден по логину {}", userLogin);
-//            return false;
             return ExitCodeType.INVALID_LOGIN.getExitCode();
         }
-//        return true;
+
         return ExitCodeType.SUCCESS.getExitCode();
     }
 
