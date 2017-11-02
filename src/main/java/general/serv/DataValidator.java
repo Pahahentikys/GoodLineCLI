@@ -118,16 +118,16 @@ public class DataValidator {
      * @param userInputData - входные данные
      * @return - true, если конвертация прошла успешно
      */
-    public boolean isDateDsAndDeValid(UserInputData userInputData) {
+    public int isDateDsAndDeValid(UserInputData userInputData) {
         try {
             LocalDate.parse(userInputData.getUserInputDs());
             LocalDate.parse(userInputData.getUserInputDe());
         } catch (Exception ex) {
             logger.error("Дата(ы) не соответствует формату", ex);
-            return false;
+            return ExitCodeType.INVALID_ACTION.getExitCode();
         }
         logger.info("Дата(ы) соответствуют формату");
-        return true;
+        return ExitCodeType.SUCCESS.getExitCode();
     }
 
     /**
@@ -136,16 +136,16 @@ public class DataValidator {
      * @param userInputData - входные данные
      * @return - true, если число в целое
      */
-    public boolean isVolumeValid(UserInputData userInputData) {
+    public int isVolumeValid(UserInputData userInputData) {
         try {
             String testVol = userInputData.getUserInputVol();
             Integer.valueOf(testVol);
         } catch (NumberFormatException ex) {
-            logger.error("Значение объёма {} введеном некорректно", userInputData.getUserInputVol(), ex);
-            return false;
+            logger.error("Значение объёма {} введено некорректно", userInputData.getUserInputVol(), ex);
+            return ExitCodeType.INVALID_ACTION.getExitCode();
         }
         logger.info("Значение объёма введенно корректно!");
-        return true;
+        return ExitCodeType.SUCCESS.getExitCode();
     }
 
 }
