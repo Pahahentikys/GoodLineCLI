@@ -29,10 +29,10 @@ public class AuthorizationService {
         DataValidator dataValidator = new DataValidator();
         DataBaseContext dataBaseContext = new DataBaseContext();
         if ((isUserAuthentification == ExitCodeType.SUCCESS.getExitCode()) && (userResourceRole != null) && (userResourcePath != null)) {
-            if (!dataValidator.isUserRoleValid(userResourceRole)) {
+            if (dataValidator.isUserRoleValid(userResourceRole) == ExitCodeType.INVALID_ROLE.getExitCode()) {
                 return ExitCodeType.INVALID_ROLE.getExitCode();
             }
-            if (!dataBaseContext.hasResUserAccessDAO(userResourceDAO, userResourcePath, userResourceRole)) {
+            if (dataBaseContext.hasResUserAccessDAO(userResourceDAO, userResourcePath, userResourceRole) == ExitCodeType.INVALID_ACCESS.getExitCode()) {
                 return ExitCodeType.INVALID_ACCESS.getExitCode();
             }
         }
