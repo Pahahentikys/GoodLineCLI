@@ -48,12 +48,12 @@ public class AuthenticationService {
     public int isUserAuthentification(UserInfoDAO userInfoDAO, String userLogin, String userPassword) throws SQLException {
         logger.debug("Проверка на то, аутентифицирован ли пользователь");
         DataBaseContext dataBaseContext = new DataBaseContext();
-        if (!dataBaseContext.hasGetUserLoginDAO(userInfoDAO, userLogin)) {
+        if (dataBaseContext.hasGetUserLoginDAO(userInfoDAO, userLogin) == ExitCodeType.INVALID_LOGIN.getExitCode()) {
             return ExitCodeType.INVALID_LOGIN.getExitCode();
 
         }
 
-        if (!dataBaseContext.hasGetUserPasswordDAO(userInfoDAO, userLogin, userPassword)) {
+        if (dataBaseContext.hasGetUserPasswordDAO(userInfoDAO, userLogin, userPassword) == ExitCodeType.INVALID_PASSWORD.getExitCode()) {
             return ExitCodeType.INVALID_PASSWORD.getExitCode();
         }
         return ExitCodeType.SUCCESS.getExitCode();

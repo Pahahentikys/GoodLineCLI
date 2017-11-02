@@ -1,5 +1,6 @@
 package general.serv;
 
+import general.ExitCodeType;
 import general.dao.DataContextDAO;
 import general.dao.UserInfoDAO;
 import general.dao.UserResourceDAO;
@@ -16,6 +17,7 @@ public class DataBaseContext {
 
     private static final Logger logger = LogManager.getLogger(DataContextDAO.class.getName());
 
+
     /**
      * Поиск пользователя по логину
      *
@@ -24,13 +26,15 @@ public class DataBaseContext {
      * @return - true, если пользователь с таким же логином найден
      * @throws SQLException
      */
-    boolean hasGetUserLoginDAO(UserInfoDAO userInfoDAO, String userLogin) throws SQLException {
+    public int hasGetUserLoginDAO(UserInfoDAO userInfoDAO, String userLogin) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userLogin);
         if (userInfo == null) {
+
             logger.error("Пользователь не найден по логину {}", userLogin);
-            return false;
+            return ExitCodeType.INVALID_LOGIN.getExitCode();
         }
-        return true;
+
+        return ExitCodeType.SUCCESS.getExitCode();
     }
 
     /**
@@ -42,15 +46,17 @@ public class DataBaseContext {
      * @return - true, если хэши паролей совпадают
      * @throws SQLException
      */
-    boolean hasGetUserPasswordDAO(UserInfoDAO userInfoDAO, String userLogin, String userPassword) throws SQLException {
+    public int hasGetUserPasswordDAO(UserInfoDAO userInfoDAO, String userLogin, String userPassword) throws SQLException {
         UserInfo userInfo = userInfoDAO.searchUserLogin(userLogin);
         String hashUserPass = authenticationService.generHashUserPassword(userPassword, userInfo.getUserSalt());
         if (authenticationService.isUserHashesEqual(userInfo, hashUserPass)) {
-            return true;
+
+            logger.info("Пользователь по логину: {} и паролю: {} найден", userLogin, userPassword);
+            return ExitCodeType.SUCCESS.getExitCode();
         }
 
         logger.error("Хэши паролей не совпадают!");
-        return false;
+        return ExitCodeType.INVALID_PASSWORD.getExitCode();
     }
 
     /**
@@ -62,12 +68,15 @@ public class DataBaseContext {
      * @return - true, если доступ к ресурсу есть, false - если доступ к ресурсу отсутствует
      * @throws SQLException
      */
-    boolean hasResUserAccessDAO(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole) throws SQLException {
+   public int hasResUserAccessDAO(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole) throws SQLException {
         UserResources userResources = userResourceDAO.getPathUserResource(userResourcePath, userResourceRole);
             if (userResources == null) {
-                logger.error("Пути к ресурсу {} не существует!", userResourcePath);
-                return false;
+
+                logger.error("Пути к ресурсу {} не существует! Либо не существует данного пути: {} с ролью: {}", userResourcePath, userResourcePath, userResourceRole);
+                return ExitCodeType.INVALID_ACCESS.getExitCode();
             }
-        return true;
+
+        logger.info("Роль: {} соответствует ресурсу: {}", userResourceRole, userResourcePath);
+        return ExitCodeType.SUCCESS.getExitCode();
     }
 }

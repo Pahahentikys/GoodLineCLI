@@ -29,10 +29,10 @@ public class AuthorizationService {
         DataValidator dataValidator = new DataValidator();
         DataBaseContext dataBaseContext = new DataBaseContext();
         if ((isUserAuthentification == ExitCodeType.SUCCESS.getExitCode()) && (userResourceRole != null) && (userResourcePath != null)) {
-            if (!dataValidator.isUserRoleValid(userResourceRole)) {
+            if (dataValidator.isUserRoleValid(userResourceRole) == ExitCodeType.INVALID_ROLE.getExitCode()) {
                 return ExitCodeType.INVALID_ROLE.getExitCode();
             }
-            if (!dataBaseContext.hasResUserAccessDAO(userResourceDAO, userResourcePath, userResourceRole)) {
+            if (dataBaseContext.hasResUserAccessDAO(userResourceDAO, userResourcePath, userResourceRole) == ExitCodeType.INVALID_ACCESS.getExitCode()) {
                 return ExitCodeType.INVALID_ACCESS.getExitCode();
             }
         }
@@ -71,7 +71,7 @@ public class AuthorizationService {
     public int isUserAccounting(Accounting accounting, UserResourceDAO userResourceDAO, UserInputData userInputData, DataValidator dataValidator, int isUserAuthorization) throws SQLException {
         logger.debug("Проверка на то, выполнен ли процесс аккаунтинга");
         if (isUserAuthorization == ExitCodeType.SUCCESS.getExitCode() && userInputData.getUserInputDs() != null) {
-            if (!dataValidator.isDateDsAndDeValid(userInputData) || !dataValidator.isVolumeValid(userInputData)) {
+            if (dataValidator.isDateDsAndDeValid(userInputData) == ExitCodeType.INVALID_ACTION.getExitCode() || dataValidator.isVolumeValid(userInputData) == ExitCodeType.INVALID_ACTION.getExitCode()) {
               return ExitCodeType.INVALID_ACTION.getExitCode();
             }
             addAccounting(accounting, userInputData, userResourceDAO);
