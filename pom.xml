@@ -8,8 +8,7 @@
     <artifactId>GoodLineCLI</artifactId>
     <packaging>pom</packaging>
     <version>4.0-SNAPSHOT</version>
-
-
+    
     <modules>
         <module>appClient</module>
         <module>appServer</module>
