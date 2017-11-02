@@ -23,7 +23,6 @@ public class AuthorizationServiceTest {
     // Слой данных, содержащий ресурсы пользователя.
     private UserResourceDAO userResourceDAO;
 
-
     @Before
     public void setDefaultParamsForTests() throws SQLException {
 
