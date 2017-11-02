@@ -2,7 +2,7 @@ import general.ExitCodeType;
 import general.dao.UserInfoDAO;
 import general.dom.UserInfo;
 import general.dom.UserInputData;
-import general.serv.AuthenticationService;
+import general.serv.DataBaseContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -15,17 +15,16 @@ import static org.mockito.Mockito.when;
 
 public class AuthentificationServiceTest {
 
-    // Сервис, ответственный за аутентификацию юзера.
-    private AuthenticationService authenticationService;
+    // Класс, обеспечивающий доступ к слоям с данными.
+    private DataBaseContext dataBaseContext;
 
+    // Слой данных, содержащийи информацию о пользователе.
     private UserInfoDAO userInfoDAO;
-
-    // Стоп-код при выолнении программы
-    private int exitCode;
 
     @Before
     public void setDefaultParamsForTests() throws SQLException {
-        authenticationService = new AuthenticationService();
+
+        dataBaseContext = new DataBaseContext();
 
         // Дефолтный юзер, чтобы его мокнуть
         UserInfo userInfo = new UserInfo()
@@ -45,38 +44,40 @@ public class AuthentificationServiceTest {
     @Test
     public void testInvalidLogin() throws SQLException {
 
-        UserInputData userInputData = new UserInputData("xxx", "sup3rpaZZ");
+        UserInputData userInputData = new UserInputData()
+                .withUserInputLogin("xxx");
+
         String userLogin = userInputData.getUserInputLogin();
-        String userPass = userInputData.getUserInputPassword();
 
-        exitCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
-                userPass);
-
-        assertEquals(exitCode, ExitCodeType.INVALID_LOGIN.getExitCode());
+        assertEquals(ExitCodeType.INVALID_LOGIN.getExitCode(), dataBaseContext.hasGetUserLoginDAO(userInfoDAO, userLogin));
     }
 
     @Test
     public void testInvalidPassword() throws SQLException {
 
-        UserInputData userInputData = new UserInputData("jdoe", "xxx");
+        UserInputData userInputData = new UserInputData()
+                .withUserInputLogin("jdoe")
+                .withUserInputPassword("xxx");
+
         String userLogin = userInputData.getUserInputLogin();
         String userPass = userInputData.getUserInputPassword();
 
-        exitCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
-                userPass);
+        assertEquals(ExitCodeType.INVALID_PASSWORD.getExitCode(), dataBaseContext.hasGetUserPasswordDAO(userInfoDAO, userLogin, userPass));
 
-        assertEquals(exitCode, ExitCodeType.INVALID_PASSWORD.getExitCode());
     }
 
     @Test
     public void testValidLoginAndPassword() throws SQLException {
-        UserInputData userInputData = new UserInputData("jdoe", "sup3rpaZZ");
+
+        UserInputData userInputData = new UserInputData()
+                .withUserInputLogin("jdoe")
+                .withUserInputPassword("sup3rpaZZ");
+
         String userLogin = userInputData.getUserInputLogin();
         String userPass = userInputData.getUserInputPassword();
 
-        exitCode = authenticationService.isUserAuthentification(userInfoDAO, userLogin,
-                userPass);
+        assertEquals(ExitCodeType.SUCCESS.getExitCode(), dataBaseContext.hasGetUserPasswordDAO(userInfoDAO, userLogin, userPass));
 
-        assertEquals(exitCode, ExitCodeType.SUCCESS.getExitCode());
     }
+
 }
