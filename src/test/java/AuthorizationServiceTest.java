@@ -4,8 +4,8 @@ import general.dao.UserResourceDAO;
 import general.dom.UserInfo;
 import general.dom.UserInputData;
 import general.dom.UserResources;
-import general.serv.AuthenticationService;
-import general.serv.AuthorizationService;
+import general.serv.DataBaseContext;
+import general.serv.DataValidator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -17,26 +17,15 @@ import static org.mockito.Mockito.when;
 
 public class AuthorizationServiceTest {
 
-    // Сервис, ответственный за авторизацию пользователя.
-    private AuthorizationService authorizationService;
-
-    // Слой данных, содержащий данные о пользователе.
-    private UserInfoDAO userInfoDAO;
+    // Слой, обеспечивающий доступ к данным.
+    private DataBaseContext dataBaseContext;
 
     // Слой данных, содержащий ресурсы пользователя.
     private UserResourceDAO userResourceDAO;
 
-    // Стоп-код при выолнении программы.
-    private int exitCode;
-
-    // Стоп-код успешности/неуспешности выполнения аутентификации.
-    private int userAuthCode;
-
 
     @Before
     public void setDefaultParamsForTests() throws SQLException {
-
-        authorizationService = new AuthorizationService();
 
         // Дефолтный юзер, чтобы его мокнуть
         UserInfo userInfo = new UserInfo()
@@ -53,7 +42,7 @@ public class AuthorizationServiceTest {
                 .setResourcePath("A.B");
 
         // Мокаем группу слоёв доступа к данным.
-        userInfoDAO = Mockito.mock(UserInfoDAO.class);
+        UserInfoDAO userInfoDAO = Mockito.mock(UserInfoDAO.class);
         userResourceDAO = Mockito.mock(UserResourceDAO.class);
 
         // Mock на ситуацию, когда пользователь с таким логином найден в БД
@@ -83,37 +72,37 @@ public class AuthorizationServiceTest {
     @Test
     public void testValidAuthorizationToResA() throws SQLException {
 
+        dataBaseContext = new DataBaseContext();
+
         UserInputData userInputData = new UserInputData()
                 .withUserInputRole("READ")
                 .withUserInputPathResource("a");
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
-        authentificateUser();
-
-        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
-
-        assertEquals(exitCode, ExitCodeType.SUCCESS.getExitCode());
+        assertEquals(ExitCodeType.SUCCESS.getExitCode(), dataBaseContext.hasResUserAccessDAO(userResourceDAO, userPath, userRole));
     }
 
     @Test
     public void testWithInvalidAccessAuthorizationToResA() throws SQLException {
 
+        dataBaseContext = new DataBaseContext();
+
         UserInputData userInputData = new UserInputData()
                 .withUserInputRole("WRITE")
                 .withUserInputPathResource("a");
+
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
-        authentificateUser();
-
-        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
-
-        assertEquals(exitCode, ExitCodeType.INVALID_ACCESS.getExitCode());
+        assertEquals(ExitCodeType.INVALID_ACCESS.getExitCode(), dataBaseContext.hasResUserAccessDAO(userResourceDAO, userPath, userRole));
     }
+
 
     @Test
     public void testValidAuthorizationToResAB() throws SQLException {
+
+        dataBaseContext = new DataBaseContext();
 
         UserInputData userInputData = new UserInputData()
                 .withUserInputRole("READ")
@@ -121,31 +110,27 @@ public class AuthorizationServiceTest {
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
-        authentificateUser();
-
-        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
-
-        assertEquals(exitCode, ExitCodeType.SUCCESS.getExitCode());
+        assertEquals(ExitCodeType.SUCCESS.getExitCode(), dataBaseContext.hasResUserAccessDAO(userResourceDAO, userPath, userRole));
     }
 
     @Test
     public void testAuthorizationInvalidRole() throws SQLException {
 
+        // Класс, отвечающий за валидацию некоторых входных данных.
+        DataValidator dataValidator = new DataValidator();
+
         UserInputData userInputData = new UserInputData()
-                .withUserInputRole("xxx")
-                .withUserInputPathResource("a");
+                .withUserInputRole("xxx");
+
         String userRole = userInputData.getUserInputRole();
-        String userPath = userInputData.getUserInputPathResource();
 
-        authentificateUser();
-
-        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
-
-        assertEquals(exitCode, ExitCodeType.INVALID_ROLE.getExitCode());
+        assertEquals(ExitCodeType.INVALID_ROLE.getExitCode(), dataValidator.isUserRoleValid(userRole));
     }
 
     @Test
     public void testAuthorizationInvalidResPath() throws SQLException {
+
+        dataBaseContext = new DataBaseContext();
 
         UserInputData userInputData = new UserInputData()
                 .withUserInputRole("READ")
@@ -153,15 +138,13 @@ public class AuthorizationServiceTest {
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
-        authentificateUser();
-
-        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
-
-        assertEquals(exitCode, ExitCodeType.INVALID_ACCESS.getExitCode());
+        assertEquals(ExitCodeType.INVALID_ACCESS.getExitCode(), dataBaseContext.hasResUserAccessDAO(userResourceDAO, userPath, userRole));
     }
 
     @Test
     public void testAuthorizationConnectToResourceWithOtherRole() throws SQLException {
+
+        dataBaseContext = new DataBaseContext();
 
         UserInputData userInputData = new UserInputData()
                 .withUserInputRole("EXECUTE")
@@ -169,30 +152,6 @@ public class AuthorizationServiceTest {
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
-        authentificateUser();
-
-        exitCode = authorizationService.isUserAuthorization(userResourceDAO, userPath, userRole, userAuthCode);
-
-        assertEquals(exitCode, ExitCodeType.INVALID_ACCESS.getExitCode());
-    }
-
-    private int authentificateUser() throws SQLException {
-
-        AuthenticationService authenticationService = new AuthenticationService();
-
-        UserInputData userInputData = new UserInputData()
-                .withUserInputLogin("jdoe")
-                .withUserInputPassword("sup3rpaZZ");
-        String userLogin = userInputData.getUserInputLogin();
-        String userPass = userInputData.getUserInputPassword();
-
-
-        if (authenticationService.isUserAuthentification(userInfoDAO, userLogin,
-                userPass) == ExitCodeType.SUCCESS.getExitCode()) {
-
-            return userAuthCode = ExitCodeType.SUCCESS.getExitCode();
-        }
-
-        return userAuthCode = ExitCodeType.INVALID_ACCESS.getExitCode();
+        assertEquals(ExitCodeType.INVALID_ACCESS.getExitCode(), dataBaseContext.hasResUserAccessDAO(userResourceDAO, userPath, userRole));
     }
 }
