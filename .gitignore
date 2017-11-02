@@ -8,3 +8,5 @@ GoodLineCLI.jar
 *.iml
 
 *.db
+dependency-reduced-pom.xml
+appClient/log
