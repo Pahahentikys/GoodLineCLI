@@ -41,6 +41,12 @@
                 <version>2.6</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/WebApp/</directory>
+                            <targetPath>src/main/WebApp/WEB-INF/</targetPath>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
             <plugin>
@@ -50,7 +56,7 @@
                 <configuration>
                     <scanIntervalSeconds>2</scanIntervalSeconds>
                     <webApp>
-                        <contextPath>/GoodLineCLI/</contextPath>
+                        <contextPath>/appServer</contextPath>
                     </webApp>
                 </configuration>
             </plugin>
