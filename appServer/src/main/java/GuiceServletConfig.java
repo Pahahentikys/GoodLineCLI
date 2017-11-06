@@ -2,6 +2,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
+import general.servlets.ActivityServlet;
 import general.servlets.UserServlet;
 
 public class GuiceServletConfig extends GuiceServletContextListener {
@@ -17,6 +18,9 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 
                 // Конфигурация пути до AuthorityServlet.
                 serve("/ajax/authority").with(UserServlet.class);
+
+                // Конфигурация пути до
+                serve("/ajax/activity").with(ActivityServlet.class);
 
             }
         });
