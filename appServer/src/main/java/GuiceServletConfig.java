@@ -15,6 +15,9 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 // Конфигурация пути до UserServlet.
                 serve("/ajax/user").with(UserServlet.class);
 
+                // Конфигурация пути до AuthorityServlet.
+                serve("/ajax/authority").with(UserServlet.class);
+
             }
         });
     }
