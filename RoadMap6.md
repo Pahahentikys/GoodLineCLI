@@ -21,7 +21,7 @@
 
     - [x] 4. 1. Добавить класс: **UserServlet**;
 
-    - [ ] 4. 2. Добавить класс: **AuthorityServlet**;
+    - [x] 4. 2. Добавить класс: **AuthorityServlet**;
 
     - [ ] 4. 3. Добавить класс: **ActivityServlet**.
 
