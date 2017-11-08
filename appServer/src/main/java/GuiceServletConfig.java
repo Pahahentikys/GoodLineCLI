@@ -5,6 +5,9 @@ import com.google.inject.servlet.ServletModule;
 import general.servlets.ActivityServlet;
 import general.servlets.UserServlet;
 
+import javax.servlet.annotation.WebListener;
+
+@WebListener
 public class GuiceServletConfig extends GuiceServletContextListener {
 
     @Override
