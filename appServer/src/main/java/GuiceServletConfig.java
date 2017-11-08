@@ -4,6 +4,8 @@ import com.google.inject.matcher.Matchers;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import general.servlets.ActivityServlet;
+import general.servlets.GetServlet;
+import general.servlets.PostServlet;
 import general.servlets.UserServlet;
 import inject.logger.Log4JTypeListener;
 
@@ -26,6 +28,12 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 
                 // Конфигурация пути до ActivityServlet.
                 serve("/ajax/activity").with(ActivityServlet.class);
+
+                // Конфигурация пути до GetServlet.
+                serve("/echo/get").with(GetServlet.class);
+
+                // Конфигурация пути до PostServlet.
+                serve("/echo/post").with(PostServlet.class);
 
                 // Привязка кастомного слушателя.
                 bindListener(Matchers.any(), new Log4JTypeListener());
