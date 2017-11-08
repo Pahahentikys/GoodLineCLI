@@ -1,9 +1,11 @@
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.matcher.Matchers;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import general.servlets.ActivityServlet;
 import general.servlets.UserServlet;
+import inject.logger.Log4JTypeListener;
 
 import javax.servlet.annotation.WebListener;
 
@@ -22,10 +24,14 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 // Конфигурация пути до AuthorityServlet.
                 serve("/ajax/authority").with(UserServlet.class);
 
-                // Конфигурация пути до
+                // Конфигурация пути до ActivityServlet.
                 serve("/ajax/activity").with(ActivityServlet.class);
 
+                // Привязка кастомного слушателя.
+                bindListener(Matchers.any(), new Log4JTypeListener());
+
             }
+
         });
     }
 }

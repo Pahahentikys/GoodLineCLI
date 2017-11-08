@@ -57,7 +57,7 @@
 
     - [x] 7. 4. Создать:  class **Log4JMembersInjector<T>** implements **MembersInjector<T>**;
 
-    - [ ] 7. 5. Добавить bind **Log4JTypeListener** через метод **configureLogger()** в классе: **GuiceServletConfig**.
+    - [x] 7. 5. Добавить bind **Log4JTypeListener** через метод **configureServlets()** в классе: **GuiceServletConfig**.
 
     - [ ] 7. 6. Реализовать инжект логгера в необходимые сервлеты через аннотацию: **@InjectLogger Logger logger**;
 
