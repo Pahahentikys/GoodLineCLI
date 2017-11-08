@@ -47,7 +47,7 @@
 
 <hr>
 
-  - [ ] 7. Добавить инжект логгеров в пакет **appServer**:
+  - [x] 7. Добавить инжект логгеров в пакет **appServer**:
 
     - [x] 7. 1. Ознакомиться с документацией по инжекту логгеров: https://github.com/google/guice/wiki/CustomInjections
 
@@ -59,7 +59,7 @@
 
     - [x] 7. 5. Добавить bind **Log4JTypeListener** через метод **configureServlets()** в классе: **GuiceServletConfig**.
 
-    - [ ] 7. 6. Реализовать инжект логгера в необходимые сервлеты через аннотацию: **@InjectLogger Logger logger**;
+    - [x] 7. 6. Реализовать инжект логгера в необходимые сервлеты через аннотацию: **@InjectLogger Logger logger**;
 
 <hr>
 
