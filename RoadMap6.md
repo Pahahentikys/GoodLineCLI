@@ -51,13 +51,15 @@
 
     - [x] 7. 1. Ознакомиться с документацией по инжекту логгеров: https://github.com/google/guice/wiki/CustomInjections
 
-    - [ ] 7. 2. Создать: class **Log4JTypeListener** implements **TypeListener**;
+    - [ ] 7. 2. Создать аннотацию под логгер: **@InjectLogger Logger logger**;
 
-    - [ ] 7. 3. Создать:  class **Log4JMembersInjector<T>** implements **MembersInjector<T>**;
+    - [ ] 7. 3. Создать: class **Log4JTypeListener** implements **TypeListener**;
 
-    - [ ] 7. 4. Добавить bind **Log4JTypeListener** через метод **configureLogger()** в классе: **GuiceServletConfig**.
+    - [ ] 7. 5. Создать:  class **Log4JMembersInjector<T>** implements **MembersInjector<T>**;
 
-    - [ ] 7. 5. Реализовать инжект логгера в необходимые сервлеты через аннотацию: **@InjectLogger Logger logger**;
+    - [ ] 7. 5. Добавить bind **Log4JTypeListener** через метод **configureLogger()** в классе: **GuiceServletConfig**.
+
+    - [ ] 7. 6. Реализовать инжект логгера в необходимые сервлеты через аннотацию: **@InjectLogger Logger logger**;
 
 <hr>
 
