@@ -16,4 +16,7 @@
         <welcome-file>index.html</welcome-file>
         <welcome-file>getServletPage.jsp</welcome-file>
     </welcome-file-list>
+    <listener>
+        <listener-class>GuiceServletConfig</listener-class>
+    </listener>
 </web-app>
