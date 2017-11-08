@@ -51,7 +51,7 @@
 
     - [x] 7. 1. Ознакомиться с документацией по инжекту логгеров: https://github.com/google/guice/wiki/CustomInjections
 
-    - [ ] 7. 2. Создать аннотацию под логгер: **@InjectLogger Logger logger**;
+    - [x] 7. 2. Создать аннотацию под логгер: **@InjectLogger Logger logger**;
 
     - [ ] 7. 3. Создать: class **Log4JTypeListener** implements **TypeListener**;
 
