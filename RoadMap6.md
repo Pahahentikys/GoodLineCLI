@@ -55,7 +55,7 @@
 
     - [x] 7. 3. Создать: class **Log4JTypeListener** implements **TypeListener**;
 
-    - [ ] 7. 5. Создать:  class **Log4JMembersInjector<T>** implements **MembersInjector<T>**;
+    - [x] 7. 4. Создать:  class **Log4JMembersInjector<T>** implements **MembersInjector<T>**;
 
     - [ ] 7. 5. Добавить bind **Log4JTypeListener** через метод **configureLogger()** в классе: **GuiceServletConfig**.
 
