@@ -31,11 +31,12 @@ public class UserInfoDAO {
 
             if (resultSet.next()) {
                 logger.debug("Запрос выполнен. Наполнение данными объекта UserInfo");
-                return new UserInfo()
-                        .withUserId(resultSet.getInt("USER_ID"))
-                        .withUserLogin(resultSet.getString("USER_LOGIN"))
-                        .withUserHashPassword(resultSet.getString("USER_PASS_HASH"))
-                        .withUserSalt(resultSet.getString("USER_SALT"));
+                return UserInfo.builder()
+                        .userId(resultSet.getInt("USER_ID"))
+                        .userLogin(resultSet.getString("USER_LOGIN"))
+                        .userHashPassword(resultSet.getString("USER_PASS_HASH"))
+                        .userSalt(resultSet.getString("USER_SALT"))
+                        .build();
             } else {
                 logger.debug("В БД нет записей по условию");
             }
