@@ -27,10 +27,11 @@ public class AuthentificationServiceTest {
         dataBaseContext = new DataBaseContext();
 
         // Дефолтный юзер, чтобы его мокнуть
-        UserInfo userInfo = new UserInfo()
-                .withUserLogin("jdoe")
-                .withUserHashPassword("d824656e5bb0902512e1e8a7f1a099cb")
-                .withUserSalt("+NSw]7");
+        UserInfo userInfo = UserInfo.builder()
+                .userLogin("jdoe")
+                .userHashPassword("d824656e5bb0902512e1e8a7f1a099cb")
+                .userSalt("+NSw]7")
+                .build();
 
         userInfoDAO = Mockito.mock(UserInfoDAO.class);
 
