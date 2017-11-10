@@ -45,8 +45,9 @@ public class AuthentificationServiceTest {
     @Test
     public void testInvalidLogin() throws SQLException {
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputLogin("xxx");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputLogin("xxx")
+                .build();
 
         String userLogin = userInputData.getUserInputLogin();
 
@@ -56,9 +57,10 @@ public class AuthentificationServiceTest {
     @Test
     public void testInvalidPassword() throws SQLException {
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputLogin("jdoe")
-                .withUserInputPassword("xxx");
+        UserInputData userInputData =  UserInputData.builder()
+                .userInputLogin("jdoe")
+                .userInputPassword("xxx")
+                .build();
 
         String userLogin = userInputData.getUserInputLogin();
         String userPass = userInputData.getUserInputPassword();
@@ -70,9 +72,10 @@ public class AuthentificationServiceTest {
     @Test
     public void testValidLoginAndPassword() throws SQLException {
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputLogin("jdoe")
-                .withUserInputPassword("sup3rpaZZ");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputLogin("jdoe")
+                .userInputPassword("sup3rpaZZ")
+                .build();
 
         String userLogin = userInputData.getUserInputLogin();
         String userPass = userInputData.getUserInputPassword();

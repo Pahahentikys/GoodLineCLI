@@ -74,9 +74,10 @@ public class AuthorizationServiceTest {
 
         dataBaseContext = new DataBaseContext();
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputRole("READ")
-                .withUserInputPathResource("a");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputRole("READ")
+                .userInputPathResource("a")
+                .build();
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
@@ -88,9 +89,10 @@ public class AuthorizationServiceTest {
 
         dataBaseContext = new DataBaseContext();
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputRole("WRITE")
-                .withUserInputPathResource("a");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputRole("WRITE")
+                .userInputPathResource("a")
+                .build();
 
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
@@ -104,9 +106,10 @@ public class AuthorizationServiceTest {
 
         dataBaseContext = new DataBaseContext();
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputRole("READ")
-                .withUserInputPathResource("a.b");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputRole("READ")
+                .userInputPathResource("a.b")
+                .build();
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
@@ -119,8 +122,9 @@ public class AuthorizationServiceTest {
         // Класс, отвечающий за валидацию некоторых входных данных.
         DataValidator dataValidator = new DataValidator();
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputRole("xxx");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputRole("xxx")
+                .build();
 
         String userRole = userInputData.getUserInputRole();
 
@@ -132,9 +136,10 @@ public class AuthorizationServiceTest {
 
         dataBaseContext = new DataBaseContext();
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputRole("READ")
-                .withUserInputPathResource("xxx");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputRole("READ")
+                .userInputPathResource("xxx")
+                .build();
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 
@@ -146,9 +151,10 @@ public class AuthorizationServiceTest {
 
         dataBaseContext = new DataBaseContext();
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputRole("EXECUTE")
-                .withUserInputPathResource("a.b");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputRole("EXECUTE")
+                .userInputPathResource("a.b")
+                .build();
         String userRole = userInputData.getUserInputRole();
         String userPath = userInputData.getUserInputPathResource();
 

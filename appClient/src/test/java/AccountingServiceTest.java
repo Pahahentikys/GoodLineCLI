@@ -29,9 +29,10 @@ public class AccountingServiceTest {
     @Test
     public void accountingTestInvalidDate() throws SQLException {
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputDs("xxx-10-19")
-                .withUserInputDe("2017-10-19");
+        UserInputData userInputData =  UserInputData.builder()
+                .userInputDs("xxx-10-19")
+                .userInputDe("2017-10-19")
+                .build();
 
         assertEquals(ExitCodeType.INVALID_ACTION.getExitCode(), dataValidator.isDateDsAndDeValid(userInputData));
     }
@@ -39,8 +40,9 @@ public class AccountingServiceTest {
     @Test
     public void accountingTestInvalidVolume() throws SQLException {
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputVol("xxx");
+        UserInputData userInputData =  UserInputData.builder()
+                .userInputVol("xxx")
+                .build();
 
         assertEquals(ExitCodeType.INVALID_ACTION.getExitCode(), dataValidator.isVolumeValid(userInputData));
     }
@@ -48,9 +50,10 @@ public class AccountingServiceTest {
     @Test
     public void accountingTestValidDates() throws SQLException {
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputDs("2017-10-19")
-                .withUserInputDe("2017-10-19");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputDs("2017-10-19")
+                .userInputDe("2017-10-19")
+                .build();
 
         assertEquals(ExitCodeType.SUCCESS.getExitCode(), dataValidator.isDateDsAndDeValid(userInputData));
     }
@@ -58,8 +61,9 @@ public class AccountingServiceTest {
     @Test
     public void accountingTestValidVolume() throws SQLException {
 
-        UserInputData userInputData = new UserInputData()
-                .withUserInputVol("100");
+        UserInputData userInputData = UserInputData.builder()
+                .userInputVol("100")
+                .build();
 
         assertEquals(ExitCodeType.SUCCESS.getExitCode(), dataValidator.isVolumeValid(userInputData));
     }
