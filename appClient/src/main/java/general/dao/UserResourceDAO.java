@@ -42,9 +42,10 @@ public class UserResourceDAO {
 
                 if (resultSet.next()) {
                     logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
-                    return new UserResources()
-                            .withUserResResId(resultSet.getInt("USER_RESOURCE_ID"))
-                            .setResourcePath(resultSet.getString("USER_RESOURCE_PATH"));
+                    return UserResources.builder()
+                            .userResResId(resultSet.getInt("USER_RESOURCE_ID"))
+                            .resourcePath(resultSet.getString("USER_RESOURCE_PATH"))
+                            .build();
                 }
 
                 findPath += ".";
@@ -72,8 +73,9 @@ public class UserResourceDAO {
 
             if (resultSet.next()) {
                 logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
-                return new UserResources()
-                        .withUserResResId(resultSet.getInt("USER_RESOURCE_ID"));
+                return UserResources.builder()
+                        .userResResId(resultSet.getInt("USER_RESOURCE_ID"))
+                        .build();
             } else {
                 logger.debug("В БД нет записей по условию");
             }
