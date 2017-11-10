@@ -34,12 +34,14 @@ public class AuthorizationServiceTest {
                 .build();
 
         // Дефолтный ресурсы для дальнейшего мока.
-        UserResources userResourceA = new UserResources()
-                .setResourcePath("A");
+        UserResources userResourceA = UserResources.builder()
+                .resourcePath("A")
+                .build();
 
         // Дефолтный ресурсы для дальнейшего мока.
-        UserResources userResourceAAndB = new UserResources()
-                .setResourcePath("A.B");
+        UserResources userResourceAAndB = UserResources.builder()
+                .resourcePath("A.B")
+                .build();
 
         // Мокаем группу слоёв доступа к данным.
         UserInfoDAO userInfoDAO = Mockito.mock(UserInfoDAO.class);
