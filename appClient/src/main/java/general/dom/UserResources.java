@@ -1,49 +1,23 @@
 package general.dom;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Builder
 public class UserResources {
+
+    @Getter
     private UserRoles userRole;
+
+    @Getter
     private String resourcePath;
+
+    @Getter
     private int userResId;
+
+    @Getter
     private int userResUserId;
+
+    @Getter
     private int userResResId;
-
-    public String getResourcePath() {
-        return resourcePath;
-    }
-
-    public UserResources setResourcePath(String resourcePath) {
-        this.resourcePath = resourcePath;
-        return this;
-    }
-
-    public UserRoles getUserRole() {
-        return userRole;
-    }
-    public int getUserResUserId() {
-        return userResUserId;
-    }
-    public int getUserResResId() {
-        return userResResId;
-    }
-    public int getUserResId() {
-        return userResId;
-    }
-
-    public UserResources withUserResId(int userResId) {
-        this.userResId = userResId;
-        return this;
-    }
-    public UserResources withUserRole(UserRoles userRole) {
-        this.userRole = userRole;
-        return this;
-    }
-    public UserResources withUserResUserId(int userResUserId) {
-        this.userResUserId = userResUserId;
-        return this;
-    }
-    public UserResources withUserResResId(int userResResId) {
-        this.userResResId = userResResId;
-        return this;
-    }
-
 }
