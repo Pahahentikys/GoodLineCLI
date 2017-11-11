@@ -20,12 +20,12 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        DataContextDAO dataContextDAO = new DataContextDAO();
-
-        dataContextDAO.withDataBaseDriver("org.h2.Driver")
-                .withDataBaseUrl("jdbc:h2:file:./src/main/resources/db/GoodLineCLI")
-                .withDataBaseUserName("Pavel")
-                .withDataBasePassword("1234");
+        DataContextDAO dataContextDAO = DataContextDAO.builder()
+                .dataBaseDriver("org.h2.Driver")
+                .dataBaseUrl("jdbc:h2:file:./src/main/resources/db/GoodLineCLI")
+                .dataBaseUserName("Pavel")
+                .dataBasePassword("1234")
+                .build();
 
         logger.debug("Процесс миграции");
         Flyway flyway = new Flyway();
