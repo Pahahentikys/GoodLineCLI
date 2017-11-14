@@ -21,7 +21,7 @@
 
 <hr>
 
-  - [ ] 6. Создать класс-провайдер для cоединения с базой данных: **class DataBaseConnectionProvider implements Provider<Connection>**.
+  - [x] 6. Создать класс-провайдер для cоединения с базой данных: **class DataBaseConnectionProvider implements Provider<Connection>**.
 
 <hr>
 
