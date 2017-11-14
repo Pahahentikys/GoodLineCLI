@@ -12,6 +12,7 @@ import general.servlets.UserServlet;
 import inject.logger.Log4JTypeListener;
 
 import javax.servlet.annotation.WebListener;
+import java.sql.Connection;
 
 @WebListener
 public class GuiceServletConfig extends GuiceServletContextListener {
@@ -42,6 +43,9 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 
                 // Привязка провайдера для сериализации
                 bind(Gson.class).toProvider(GsonProvider.class).in(Singleton.class);
+
+                // Привязка провайдера для соединения с базой данных.
+                bind(Connection.class).toProvider(DataBaseConnectionProvider.class).in(Singleton.class);
 
             }
 
