@@ -17,7 +17,7 @@
 
 <hr>
 
-  - [ ] 5. Создать класс-провайдер для получения сериализатора GSON: **class GsonProvider implements Provider<Gson>**.
+  - [x] 5. Создать класс-провайдер для получения сериализатора GSON: **class GsonProvider implements Provider<Gson>**.
 
 <hr>
 
