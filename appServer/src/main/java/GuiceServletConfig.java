@@ -1,5 +1,7 @@
+import com.google.gson.Gson;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
@@ -37,6 +39,9 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 
                 // Привязка кастомного слушателя.
                 bindListener(Matchers.any(), new Log4JTypeListener());
+
+                // Привязка провайдера для сериализации
+                bind(Gson.class).toProvider(GsonProvider.class).in(Singleton.class);
 
             }
 
