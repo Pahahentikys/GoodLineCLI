@@ -10,6 +10,8 @@ import general.servlets.GetServlet;
 import general.servlets.PostServlet;
 import general.servlets.UserServlet;
 import inject.logger.Log4JTypeListener;
+import providers.DataBaseConnectionProvider;
+import providers.GsonProvider;
 
 import javax.servlet.annotation.WebListener;
 import java.sql.Connection;
