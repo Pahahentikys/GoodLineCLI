@@ -33,13 +33,13 @@
 
 <hr>
 
-  - [ ] 8. Добавить инжект GSON-провайдера в классы следующих сервлетов:
+  - [x] 8. Добавить инжект GSON-сериализатора в классы следующих сервлетов:
 
-    - [ ] 8. 1. **UserServlet**;
+    - [x] 8. 1. **UserServlet**;
 
-    - [ ] 8. 2. **AuthorityServlet**;
+    - [x] 8. 2. **AuthorityServlet**;
 
-    - [ ] 8. 3. **ActivityServlet**.
+    - [x] 8. 3. **ActivityServlet**.
 
 <hr>
 

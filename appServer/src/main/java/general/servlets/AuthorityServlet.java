@@ -1,8 +1,10 @@
 package general.servlets;
 
+import com.google.gson.Gson;
 import inject.logger.InjectLogger;
 import org.apache.logging.log4j.Logger;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,9 @@ public class AuthorityServlet extends HttpServlet {
 
     @InjectLogger
     Logger logger;
+
+    @Inject
+    Gson gson;
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
