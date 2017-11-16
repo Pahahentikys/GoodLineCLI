@@ -1,6 +1,8 @@
 package general.servlets;
 
 import com.google.gson.Gson;
+import general.dao.UserInfoDAO;
+import general.dom.UserInfo;
 import inject.logger.InjectLogger;
 import org.apache.logging.log4j.Logger;
 
@@ -11,6 +13,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
+import java.util.List;
 
 @Singleton
 public class UserServlet extends HttpServlet {
@@ -21,10 +24,23 @@ public class UserServlet extends HttpServlet {
     @Inject
     Gson gson;
 
+    private String jsonResp;
+
+    @Inject
+    private UserInfoDAO userInfoDAO;
+
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
-        super.service(req, res);
 
         logger.debug("It's UserServlet!");
+
+        if(req.getParameter("id") == null){
+            logger.debug("ID пользователя не получен, выводится весь список юзеров!");
+            List<UserInfo> userInfos = userInfoDAO.getAllUsersInfo();
+            jsonResp = gson.toJson(userInfos);
+        }
+
+        res.setContentType("application/json");
+        res.getWriter().write(jsonResp);
     }
 }
