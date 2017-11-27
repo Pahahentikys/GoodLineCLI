@@ -5,10 +5,8 @@ import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
-import general.servlets.ActivityServlet;
-import general.servlets.GetServlet;
-import general.servlets.PostServlet;
-import general.servlets.UserServlet;
+import general.dao.UserInfoDAO;
+import general.servlets.*;
 import inject.logger.Log4JTypeListener;
 import providers.DataBaseConnectionProvider;
 import providers.GsonProvider;
@@ -29,7 +27,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 serve("/ajax/user").with(UserServlet.class);
 
                 // Конфигурация пути до AuthorityServlet.
-                serve("/ajax/authority").with(UserServlet.class);
+                serve("/ajax/authority").with(AuthorityServlet.class);
 
                 // Конфигурация пути до ActivityServlet.
                 serve("/ajax/activity").with(ActivityServlet.class);
@@ -48,6 +46,8 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 
                 // Привязка провайдера для соединения с базой данных.
                 bind(Connection.class).toProvider(DataBaseConnectionProvider.class).in(Singleton.class);
+
+                bind(UserInfoDAO.class);
 
             }
 
