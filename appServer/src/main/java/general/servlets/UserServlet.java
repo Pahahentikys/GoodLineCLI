@@ -37,7 +37,9 @@ public class UserServlet extends HttpServlet {
         if(req.getParameter("id") == null){
             logger.debug("ID пользователя не получен, выводится весь список юзеров!");
             List<UserInfo> userInfos = userInfoDAO.getAllUsersInfo();
+            logger.debug("Запрос пошёл!");
             jsonResp = gson.toJson(userInfos);
+            logger.debug("Юзеры: {}", jsonResp);
         }
 
         res.setContentType("application/json");
