@@ -45,7 +45,7 @@
 
   - [ ] 9. В классах-сервлетах реализовать поведение сервлета при http get, когда отправляется, в виде json, список его **всех** параметров.
 
-    - [ ] 9. 1. Сервлет: **UserServlet**, его путь: **/ajax/user**, выводится список пользователей;
+    - [x] 9. 1. Сервлет: **UserServlet**, его путь: **/ajax/user**, выводится список пользователей;
 
     - [ ] 9. 2. Сервлет: **AuthorityServlet**, его путь: **/ajax/authority**, выводится список всех прав доступа*;
 
@@ -67,7 +67,7 @@
 
 <hr>
 
-  - [ ] 11. Ознакомиться с сериализацией полей через аннотацию: **@Expose** по ссылке: **https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/annotations/Expose.html**.
+  - [x] 11. Ознакомиться с сериализацией полей через аннотацию: **@Expose** по ссылке: **https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/annotations/Expose.html**.
 
 <hr>
 
