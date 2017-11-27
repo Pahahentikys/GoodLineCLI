@@ -4,6 +4,7 @@ import general.dom.UserInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +22,7 @@ public class UserInfoDAO {
 
     private Connection connection;
 
+    @Inject
     public UserInfoDAO(Connection connection) {
         this.connection = connection;
     }
