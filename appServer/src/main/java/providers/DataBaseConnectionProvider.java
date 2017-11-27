@@ -2,6 +2,8 @@ package providers;
 
 import com.google.inject.Provider;
 import general.dao.DataContextDAO;
+import inject.logger.InjectLogger;
+import org.apache.logging.log4j.Logger;
 import org.flywaydb.core.Flyway;
 
 import java.sql.Connection;
@@ -9,6 +11,9 @@ import java.sql.SQLException;
 
 
 public class DataBaseConnectionProvider implements Provider<Connection> {
+
+    @InjectLogger
+    Logger logger;
 
     private final DataContextDAO dataContextDAO;
 
@@ -30,10 +35,10 @@ public class DataBaseConnectionProvider implements Provider<Connection> {
 
     @Override
     public Connection get() {
-        try (Connection connection = dataContextDAO.getConnection()) {
-
+        try {
+            return dataContextDAO.getConnection();
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.debug("При подключении к БД произошла ошибка", e);
         }
 
         return null;
