@@ -31,7 +31,6 @@ public class AuthorityServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.service(req, resp);
 
         logger.debug("It's AuthorityServlet!");
 
