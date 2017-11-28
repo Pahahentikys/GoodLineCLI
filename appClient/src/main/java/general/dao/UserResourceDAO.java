@@ -1,6 +1,7 @@
 package general.dao;
 
 import general.dom.UserResources;
+import general.dom.UserRoles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserResourceDAO {
 
@@ -25,6 +28,31 @@ public class UserResourceDAO {
             "(USER_RESOURCES.USER_RESOURCE_ROLE LIKE ?)";
 
     final String SELECT_USER_RESOURCE_ID = "SELECT USER_RESOURCE_ID FROM USER_RESOURCES WHERE USER_RESOURCES.USER_RESOURCE_PATH = ?";
+
+    final String SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCES = "SELECT * FROM USER_RESOURCES";
+
+    public List<UserResources> getAllAccessRightsForResources() {
+        List<UserResources> userResources = new ArrayList<>();
+        logger.debug("Готовим запрос: " + SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCES);
+        try {
+            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCES);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                userResources.add(
+                        UserResources.builder()
+                        .userResUserId(resultSet.getInt("USER_ID"))
+                        .resourcePath(resultSet.getString("USER_RESOURCE_PATH"))
+                        .userRole(UserRoles.valueOf("USER_RESOURCE_ROLE"))
+                        .build());
+            }
+            return userResources;
+
+        } catch (SQLException e){
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
+        }
+
+        return null;
+    }
 
     public UserResources getPathUserResource(String userResourcePath, String userRole) throws SQLException {
         logger.debug("Подготовить запрос: " + SELECT_WHERE_USER_RESOURCE_PATH);
