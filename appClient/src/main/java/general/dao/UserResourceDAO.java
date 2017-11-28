@@ -5,6 +5,7 @@ import general.dom.UserRoles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,8 +17,9 @@ public class UserResourceDAO {
 
     private static final Logger logger = LogManager.getLogger(UserResourceDAO.class.getName());
 
-    Connection connection;
+    private Connection connection;
 
+    @Inject
     public UserResourceDAO(Connection connection) {
         this.connection = connection;
     }
