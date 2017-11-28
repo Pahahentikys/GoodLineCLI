@@ -6,6 +6,7 @@ import com.google.inject.matcher.Matchers;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import general.dao.UserInfoDAO;
+import general.dao.UserResourceDAO;
 import general.servlets.*;
 import inject.logger.Log4JTypeListener;
 import providers.DataBaseConnectionProvider;
@@ -48,6 +49,8 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 bind(Connection.class).toProvider(DataBaseConnectionProvider.class).in(Singleton.class);
 
                 bind(UserInfoDAO.class);
+
+                bind(UserResourceDAO.class);
 
             }
 
