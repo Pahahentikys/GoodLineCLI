@@ -44,7 +44,7 @@ public class UserResourceDAO {
                         UserResources.builder()
                         .userResUserId(resultSet.getInt("USER_ID"))
                         .resourcePath(resultSet.getString("USER_RESOURCE_PATH"))
-                        .userRole(UserRoles.valueOf("USER_RESOURCE_ROLE"))
+                        .userRole(UserRoles.valueOf(resultSet.getString("USER_RESOURCE_ROLE")))
                         .build());
             }
             return userResources;
