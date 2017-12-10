@@ -33,10 +33,11 @@ public class AccountingDAO {
             while (resultSet.next()) {
                 accountings.add(
                         Accounting.builder()
+                                .accountingId(resultSet.getInt("USER_SEANS_ID"))
                                 .resourceId(resultSet.getInt("USER_RESOURCE_ID"))
-                                .startAccountingDate(resultSet.getString("USER_SEANSE_DATE_START"))
-                                .endAccountingDate(resultSet.getString("USER_SEANSE_DATE_END"))
-                                .volumeOfUseRes(resultSet.getString("USER_SEANSE_VOLUME"))
+                                .startAccountingDate(resultSet.getString("USER_SEANS_DATE_START"))
+                                .endAccountingDate(resultSet.getString("USER_SEANS_DATE_END"))
+                                .volumeOfUseRes(resultSet.getString("USER_SEANS_VOLUME"))
                                 .build()
                 );
 
