@@ -4,22 +4,49 @@ import general.dom.Accounting;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountingDAO {
 
     private static final Logger logger = LogManager.getLogger(AccountingDAO.class.getName());
 
-    public static final String INSERT_ACCOUNTING = "INSERT INTO USER_SEANS(USER_RESOURCE_ID, USER_SEANS_DATE_START, USER_SEANS_DATE_END, USER_SEANS_VOLUME) VALUES (?, ?, ?, ?)";
+    private static final String INSERT_ACCOUNTING = "INSERT INTO USER_SEANS(USER_RESOURCE_ID, USER_SEANS_DATE_START, USER_SEANS_DATE_END, USER_SEANS_VOLUME) VALUES (?, ?, ?, ?)";
+
+    private static final String SELECT_ALL_USER_SEANSES = "SELECT * FROM USER_SEANS";
 
     private Connection connection;
 
     public AccountingDAO(Connection connection) {
         this.connection = connection;
     }
+
+    public List<Accounting> getAllUserSeanses() {
+        List<Accounting> accountings = new ArrayList<>();
+        logger.debug("Готовим запрос: " + SELECT_ALL_USER_SEANSES);
+        try {
+            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USER_SEANSES);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                accountings.add(
+                        Accounting.builder()
+                                .resourceId(resultSet.getInt("USER_RESOURCE_ID"))
+                                .startAccountingDate(resultSet.getString("USER_SEANSE_DATE_START"))
+                                .endAccountingDate(resultSet.getString("USER_SEANSE_DATE_END"))
+                                .volumeOfUseRes(resultSet.getString("USER_SEANSE_VOLUME"))
+                                .build()
+                );
+
+            }
+            return accountings;
+
+        } catch (SQLException e) {
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
+        }
+        return null;
+    }
+
 
     public void addUserSeans(Accounting accounting) {
 
