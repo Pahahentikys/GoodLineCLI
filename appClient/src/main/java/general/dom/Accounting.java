@@ -1,8 +1,10 @@
 package general.dom;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+@Builder
 public class Accounting {
     /**
      * Идентификатор ресурса, к которому обращается пользователь.
