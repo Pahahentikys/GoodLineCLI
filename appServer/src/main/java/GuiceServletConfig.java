@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
+import general.dao.AccountingDAO;
 import general.dao.UserInfoDAO;
 import general.dao.UserResourceDAO;
 import general.servlets.*;
@@ -51,6 +52,8 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 bind(UserInfoDAO.class);
 
                 bind(UserResourceDAO.class);
+
+                bind(AccountingDAO.class);
 
             }
 
