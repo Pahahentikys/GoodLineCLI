@@ -4,6 +4,7 @@ import general.dom.Accounting;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.inject.Inject;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class AccountingDAO {
 
     private Connection connection;
 
+    @Inject
     public AccountingDAO(Connection connection) {
         this.connection = connection;
     }
