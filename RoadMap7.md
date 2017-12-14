@@ -59,7 +59,7 @@
 
     - [x] 10. 2. Сервлет: **AuthorityServlet**, его путь: **/ajax/authority?id=xxx**, выводится право юзера с указанным **id**:
 
-        - [ ] 10. 2. 1. Сервлет: **AuthorityServlet**, его путь: **/ajax/authority?userId=xxx**, выводятся право указанного юзера.
+        - [x] 10. 2. 1. Сервлет: **AuthorityServlet**, его путь: **/ajax/authority?userId=xxx**, выводятся право указанного юзера.
 
     - [ ] 10. 3. Сервлет: **ActivityServlet**, его путь: **/ajax/activity?id=xxx**, выводится действие юзера с указанным **id**.
 

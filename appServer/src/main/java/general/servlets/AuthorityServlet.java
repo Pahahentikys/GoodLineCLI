@@ -26,7 +26,9 @@ public class AuthorityServlet extends HttpServlet {
 
     private String jsonResp;
 
-    private String JSON_RESP_ACCESS_RIGHT_NOT_FOUND = "Право доступа для ресурса с текущим id в БД не найдено";
+    private final String JSON_RESP_ACCESS_RIGHT_NOT_FOUND = "Право доступа для ресурса с текущим id в БД не найдено";
+
+    private final int EMTPY_USERS = 0;
 
     @Inject
     private UserResourceDAO userResourceDAO;
@@ -46,6 +48,10 @@ public class AuthorityServlet extends HttpServlet {
             searchAuthorityWhereResId(Integer.parseInt(req.getParameter("id")));
         }
 
+        if (req.getParameter("user_id") != null) {
+            searchAuthorityWhereUserId(Integer.parseInt(req.getParameter("user_id")));
+        }
+
         resp.setContentType("application/json");
         resp.getWriter().write(jsonResp);
     }
@@ -58,6 +64,14 @@ public class AuthorityServlet extends HttpServlet {
         } else {
             jsonResp = gson.toJson(JSON_RESP_ACCESS_RIGHT_NOT_FOUND);
         }
+    }
 
+    private void searchAuthorityWhereUserId(int userId) {
+        List<UserResources> userResourcesList = userResourceDAO.searchAccessRightWhereUserId(userId);
+        if (userResourcesList.size() == EMTPY_USERS) {
+            jsonResp = gson.toJson(JSON_RESP_ACCESS_RIGHT_NOT_FOUND);
+        } else {
+            jsonResp = gson.toJson(userResourcesList);
+        }
     }
 }
