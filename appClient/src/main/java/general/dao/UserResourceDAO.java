@@ -35,6 +35,8 @@ public class UserResourceDAO {
 
     final String SELECT_ALL_ACCESS_RIGHT_FOR_RESOURCE_WHERE_RESOURCE_ID = "SELECT * FROM USER_RESOURCES WHERE USER_RESOURCE_ID = ?";
 
+    final String SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCE_WHERE_USER_ID = "SELECT * FROM USER_RESOURCES WHERE USER_ID = ?";
+
     public List<UserResources> getAllAccessRightsForResources() {
         List<UserResources> userResources = new ArrayList<>();
         logger.debug("Готовим запрос: " + SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCES);
@@ -135,6 +137,31 @@ public class UserResourceDAO {
             } else {
                 logger.debug("В БД нет записей по условию");
             }
+        } catch (SQLException e) {
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
+        }
+        return null;
+    }
+
+    public List<UserResources> searchAccessRightWhereUserId(int userId) {
+        List<UserResources> userResourcesList = new ArrayList<>();
+        logger.debug("Подготовить запрос: " + SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCE_WHERE_USER_ID);
+        try {
+            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCE_WHERE_USER_ID);
+            statement.setInt(1, userId);
+            logger.debug("Выполнить запрос: " + statement.toString());
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
+                userResourcesList.add(
+                        UserResources.builder()
+                                .userResUserId(resultSet.getInt("USER_ID"))
+                                .resourcePath(resultSet.getString("USER_RESOURCE_PATH"))
+                                .userRole(UserRoles.valueOf(resultSet.getString("USER_RESOURCE_ROLE")))
+                                .build());
+            }
+            return userResourcesList;
         } catch (SQLException e) {
             logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
