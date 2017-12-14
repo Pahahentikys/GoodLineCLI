@@ -20,6 +20,8 @@ public class UserInfoDAO {
 
     private static final String SELECT_ALL_USERS = "SELECT * FROM USERS";
 
+    private static final String SELECT_ALL_USERS_WITH_ID = "SELECT * FROM USERS WHERE USER_ID = ?";
+
     private Connection connection;
 
     @Inject
@@ -79,6 +81,31 @@ public class UserInfoDAO {
         } catch (SQLException e) {
             logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
+        return null;
+    }
+
+    public UserInfo searchUserInfoWhereId(int userInfoId) {
+        logger.debug("Готовим запрос: " + SELECT_ALL_USERS_WITH_ID);
+        try {
+            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS_WITH_ID);
+            statement.setInt(1, userInfoId);
+            logger.debug("Выполнить запрос: " + statement.toString());
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return UserInfo.builder()
+                        .userId(resultSet.getInt("USER_ID"))
+                        .userLogin(resultSet.getString("USER_LOGIN"))
+                        .userHashPassword(resultSet.getString("USER_PASS_HASH"))
+                        .userSalt(resultSet.getString("USER_SALT"))
+                        .build();
+            } else {
+                logger.debug("В БД нет записей по условию");
+            }
+        } catch (SQLException e) {
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
+        }
+
         return null;
     }
 }
