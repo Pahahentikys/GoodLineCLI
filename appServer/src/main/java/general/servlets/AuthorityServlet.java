@@ -26,6 +26,8 @@ public class AuthorityServlet extends HttpServlet {
 
     private String jsonResp;
 
+    private String JSON_RESP_ACCESS_RIGHT_NOT_FOUND = "Право доступа для ресурса с текущим id в БД не найдено";
+
     @Inject
     private UserResourceDAO userResourceDAO;
 
@@ -40,9 +42,22 @@ public class AuthorityServlet extends HttpServlet {
             logger.debug("Запрос на вывод всех прав пошёл!");
             jsonResp = gson.toJson(userResources);
             logger.debug("Права: {}", jsonResp);
+        } else {
+            searchAuthorityWhereResId(Integer.parseInt(req.getParameter("id")));
         }
 
         resp.setContentType("application/json");
         resp.getWriter().write(jsonResp);
+    }
+
+    private void searchAuthorityWhereResId(int resId) {
+
+        UserResources userResources = userResourceDAO.searchAccessRightWhereUserResId(resId);
+        if (userResources != null) {
+            jsonResp = gson.toJson(userResources);
+        } else {
+            jsonResp = gson.toJson(JSON_RESP_ACCESS_RIGHT_NOT_FOUND);
+        }
+
     }
 }
