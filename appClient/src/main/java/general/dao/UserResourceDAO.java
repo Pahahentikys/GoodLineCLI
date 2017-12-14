@@ -33,23 +33,25 @@ public class UserResourceDAO {
 
     final String SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCES = "SELECT * FROM USER_RESOURCES";
 
+    final String SELECT_ALL_ACCESS_RIGHT_FOR_RESOURCE_WHERE_RESOURCE_ID = "SELECT * FROM USER_RESOURCES WHERE USER_RESOURCE_ID = ?";
+
     public List<UserResources> getAllAccessRightsForResources() {
         List<UserResources> userResources = new ArrayList<>();
         logger.debug("Готовим запрос: " + SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCES);
         try {
             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ACCESS_RIGHTS_FOR_RESOURCES);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 userResources.add(
                         UserResources.builder()
-                        .userResUserId(resultSet.getInt("USER_ID"))
-                        .resourcePath(resultSet.getString("USER_RESOURCE_PATH"))
-                        .userRole(UserRoles.valueOf(resultSet.getString("USER_RESOURCE_ROLE")))
-                        .build());
+                                .userResUserId(resultSet.getInt("USER_ID"))
+                                .resourcePath(resultSet.getString("USER_RESOURCE_PATH"))
+                                .userRole(UserRoles.valueOf(resultSet.getString("USER_RESOURCE_ROLE")))
+                                .build());
             }
             return userResources;
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
 
@@ -110,6 +112,29 @@ public class UserResourceDAO {
                 logger.debug("В БД нет записей по условию");
             }
 
+        } catch (SQLException e) {
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
+        }
+        return null;
+    }
+
+    public UserResources searchAccessRightWhereUserResId(int userResId) {
+        logger.debug("Подготовить запрос: " + SELECT_ALL_ACCESS_RIGHT_FOR_RESOURCE_WHERE_RESOURCE_ID);
+        try {
+            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ACCESS_RIGHT_FOR_RESOURCE_WHERE_RESOURCE_ID);
+            statement.setInt(1, userResId);
+            logger.debug("Выполнить запрос: " + statement.toString());
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                logger.debug("Запрос выполнен. Наполнение данными объекта UserResource");
+                return UserResources.builder()
+                        .userResUserId(resultSet.getInt("USER_ID"))
+                        .userRole(UserRoles.valueOf(resultSet.getString("USER_RESOURCE_ROLE")))
+                        .build();
+            } else {
+                logger.debug("В БД нет записей по условию");
+            }
         } catch (SQLException e) {
             logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
