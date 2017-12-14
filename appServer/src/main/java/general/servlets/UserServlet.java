@@ -26,6 +26,8 @@ public class UserServlet extends HttpServlet {
 
     private String jsonResp;
 
+    private String JSON_RESP_USER_MESSAGE_NOT_FOUND = "Пользователя с текущим id в БД не найдено";
+
     @Inject
     private UserInfoDAO userInfoDAO;
 
@@ -42,7 +44,21 @@ public class UserServlet extends HttpServlet {
             logger.debug("Юзеры: {}", jsonResp);
         }
 
+        else {
+            searchUserInfoWithId(Integer.parseInt(req.getParameter("id")));
+        }
+
         res.setContentType("application/json");
         res.getWriter().write(jsonResp);
+    }
+
+    private void searchUserInfoWithId(int userInfoId){
+        UserInfo userInfo = userInfoDAO.searchUserInfoWhereId(userInfoId);
+        if(userInfo != null){
+            jsonResp = gson.toJson(userInfo);
+        }
+        else {
+            jsonResp = JSON_RESP_USER_MESSAGE_NOT_FOUND;
+        }
     }
 }
