@@ -17,6 +17,8 @@ public class AccountingDAO {
 
     private static final String SELECT_ALL_USER_SEANSES = "SELECT * FROM USER_SEANS";
 
+    private static final String SELECT_USER_SEANSE_WHERE_ID = "SELECT * FROM USER_SEANS WHERE USER_SEANS_ID = ?";
+
     private Connection connection;
 
     @Inject
@@ -47,6 +49,30 @@ public class AccountingDAO {
         } catch (SQLException e) {
             logger.error("Ошибка доступа к БД, приложение не работает!", e);
         }
+        return null;
+    }
+
+    public Accounting searchAccountingWithId(int userSeansId) {
+        logger.debug("Готовим запрос: " + SELECT_USER_SEANSE_WHERE_ID);
+        try {
+            PreparedStatement statement = connection.prepareStatement(SELECT_USER_SEANSE_WHERE_ID);
+            statement.setInt(1, userSeansId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return Accounting.builder()
+                        .accountingId(resultSet.getInt("USER_SEANS_ID"))
+                        .resourceId(resultSet.getInt("USER_RESOURCE_ID"))
+                        .startAccountingDate(resultSet.getString("USER_SEANS_DATE_START"))
+                        .endAccountingDate(resultSet.getString("USER_SEANS_DATE_END"))
+                        .volumeOfUseRes(resultSet.getString("USER_SEANS_VOLUME"))
+                        .build();
+            } else {
+                logger.debug("В БД нет записей по условию");
+            }
+        } catch (SQLException e) {
+            logger.error("Ошибка доступа к БД, приложение не работает!", e);
+        }
+
         return null;
     }
 
