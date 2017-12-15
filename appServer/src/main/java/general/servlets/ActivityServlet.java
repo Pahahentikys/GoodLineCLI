@@ -26,6 +26,8 @@ public class ActivityServlet extends HttpServlet {
 
     private String jsonResp;
 
+    private final String ACTIVITY_NOT_FOUND = "Активности с таким id не существует";
+
     @Inject
     private AccountingDAO accountingDAO;
 
@@ -34,15 +36,26 @@ public class ActivityServlet extends HttpServlet {
 
         logger.debug("It's ActivityServlet!");
 
-        if(req.getParameter("id")==null){
+        if (req.getParameter("id") == null) {
             logger.debug("ID сеанса не получен, выводится весь список сеансов!");
             List<Accounting> accountings = accountingDAO.getAllUserSeanses();
             logger.debug("Запрос на вывод всех сеансов пошёл!");
             jsonResp = gson.toJson(accountings);
-            logger.debug("Сеансы: {}", jsonResp );
+            logger.debug("Сеансы: {}", jsonResp);
+        } else {
+            searchAccountingWhereId(Integer.parseInt(req.getParameter("id")));
         }
 
         resp.setContentType("application/json");
         resp.getWriter().write(jsonResp);
+    }
+
+    private void searchAccountingWhereId(int accountingId) {
+        Accounting accounting = accountingDAO.searchAccountingWithId(accountingId);
+        if (accounting == null) {
+            jsonResp = gson.toJson(ACTIVITY_NOT_FOUND);
+        } else {
+            jsonResp = gson.toJson(accounting);
+        }
     }
 }
