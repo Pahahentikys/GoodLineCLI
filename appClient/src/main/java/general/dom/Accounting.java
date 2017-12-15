@@ -1,6 +1,7 @@
 package general.dom;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
 @Builder
@@ -10,6 +11,7 @@ public class Accounting {
     /**
      * Идентификатор сеанса пользователя.
      */
+    @SerializedName("accounting_id")
     @Expose
     @Getter
     @Setter
@@ -18,6 +20,7 @@ public class Accounting {
     /**
      * Идентификатор ресурса, к которому обращается пользователь.
      */
+    @SerializedName("resource_id")
     @Expose
     @Getter
     @Setter
@@ -26,6 +29,7 @@ public class Accounting {
     /**
      * Объём ресурсов, потреблённых юзером.
      */
+    @SerializedName("volume_of_res")
     @Expose
     @Getter
     @Setter
@@ -34,6 +38,7 @@ public class Accounting {
     /**
      * Дата, по которой началось пользование ресурсом.
      */
+    @SerializedName("start_accounting_date")
     @Expose
     @Getter
     @Setter
@@ -42,6 +47,7 @@ public class Accounting {
     /**
      * Дата, по которой закончилось пользование ресурсом.
      */
+    @SerializedName("end_accounting_date")
     @Expose
     @Getter
     @Setter
