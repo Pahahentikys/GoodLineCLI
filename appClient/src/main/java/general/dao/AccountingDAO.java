@@ -78,7 +78,7 @@ public class AccountingDAO {
         return null;
     }
 
-    public Accounting searchAccountingWhereUserResId(int userResId){
+    public Accounting searchAccountingWithUserResId(int userResId){
         logger.debug("Готовим запрос: " + SELECT_USER_SEANSE_WHERE_USER_RES_ID);
         try (PreparedStatement statement = connection.prepareStatement(SELECT_USER_SEANSE_WHERE_USER_RES_ID)){
             statement.setInt(1, userResId);

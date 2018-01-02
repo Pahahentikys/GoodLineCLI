@@ -62,7 +62,7 @@ public class ActivityServlet extends HttpServlet {
     }
 
     private void searchAccountingWhereUserResId(int userResId) {
-        Accounting accounting = accountingDAO.searchAccountingWhereUserResId(userResId);
+        Accounting accounting = accountingDAO.searchAccountingWithUserResId(userResId);
         if (accounting == null) {
             jsonResp = gson.toJson(ACTIVITY_NOT_FOUND);
         } else {
