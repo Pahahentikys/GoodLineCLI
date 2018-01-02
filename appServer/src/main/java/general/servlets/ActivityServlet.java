@@ -45,13 +45,24 @@ public class ActivityServlet extends HttpServlet {
         } else {
             searchAccountingWhereId(Integer.parseInt(req.getParameter("id")));
         }
-
+        if (req.getParameter("authorityId") != null) {
+            searchAccountingWhereUserResId(Integer.parseInt(req.getParameter("authorityId")));
+        }
         resp.setContentType("application/json");
         resp.getWriter().write(jsonResp);
     }
 
     private void searchAccountingWhereId(int accountingId) {
         Accounting accounting = accountingDAO.searchAccountingWithId(accountingId);
+        if (accounting == null) {
+            jsonResp = gson.toJson(ACTIVITY_NOT_FOUND);
+        } else {
+            jsonResp = gson.toJson(accounting);
+        }
+    }
+
+    private void searchAccountingWhereUserResId(int userResId) {
+        Accounting accounting = accountingDAO.searchAccountingWhereUserResId(userResId);
         if (accounting == null) {
             jsonResp = gson.toJson(ACTIVITY_NOT_FOUND);
         } else {
