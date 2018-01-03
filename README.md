@@ -23,7 +23,7 @@
 
   7. [Набор требований для седьмого задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap7.md)
 
-  7. [Набор требований для восьмого задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap8.md)
+  8. [Набор требований для восьмого задания](https://github.com/Pahahentikys/GoodLineCLI/blob/master/RoadMap8.md)
 
 <h2>Набор инструкций по сборке проекта. 1 набор требований. </h2>
 
