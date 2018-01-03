@@ -1,0 +1,109 @@
+<h1>Декомпозиция требований. Веб-приложение. Работа с ORM. (Красильников П. В.). :pencil2: :clipboard:</h1>
+<h2>Перечень задач: :point_down:</h2>
+
+  - [x] 1. Создать в папке с репозиторием файл: RoadMap8.md для описания плана для восьмого набора требований.
+
+<hr>
+
+  - [ ] 2. Ознакомиться со следующей документацией:
+
+    - [ ] 2. 1. По работе с HIBERNATE по ссылке: **https://docs.jboss.org/hibernate/annotations/3.5/reference/en/html/entity.html#entity-overview**.
+
+    - [ ] 2. 2. По работе с GuicePersist по ссылке: **https://github.com/google/guice/wiki/GuicePersist**.
+
+<hr>
+
+  - [ ] 3. Интегрировать в проект набор библиотек:
+
+    - [ ] 3. 1. **hibernate-core**
+
+    - [ ] 3. 2. **guice-persist**
+
+<hr>
+
+  - [ ] 4. Сконфигурировать поведение HIBERNATE через файл: **persistence.xml** в пакете appServer, внутри папки META-INF.
+
+<hr>
+
+  - [ ] 5. Настроить работу сущностей из пакета dom на работу с ORM:
+
+    - [ ] 5. 1. Конфигурирование класса: **Accounting**:
+
+        - [ ] 5. 1. 1. К классу **Accounting** добавить аннотации *@Entity* и *@Table*(name="accounting")
+
+        - [ ] 5. 1. 2. Поля класса отметить аннотацией *@Column*
+
+        - [ ] 5. 1. 3. Поле первичного ключа отметить аннотацией *@Id*
+
+        - [ ] 5. 1. 4. Добавить поле **userInfo** с типом данных **UserInfo**, поле пометить аннотацией *@ManyToOne*
+
+    - [ ] 5. 2. Конфигурирование класса: **UserInfo**:
+
+        - [ ] 5. 2. 1. К классу **UserInfo** добавить аннотации *@Entity* и *@Table*(name="userInfo")
+
+        - [ ] 5. 2. 2. Поля класса отметить аннотацией *@Column*
+
+        - [ ] 5. 2. 3. Поле первичного ключа отметить аннотацией *@Id*
+
+    - [ ] 5. 3 Конфигурирование класса: **UserResources**.
+
+        - [ ] 5. 3. 1. К классу **UserResources** добавить аннотации *@Entity* и *@Table*(name="userResources").
+
+        - [ ] 5. 3. 2. Поля класса отметить аннотацией *@Column*
+
+        - [ ] 5. 3. 3. Поле первичного ключа отметить аннотацией *@Id*
+
+        - [ ] 5. 3. 4. Добавить поле **accounting** с типом данных **Accounting**, поле пометить аннотацией *@ManyToOne*
+
+<hr>
+
+  - [ ] 6. Сконфигурировать работу **EntityManager** внутри проекта:
+
+    - [ ] 6. 1. Создать источник данных, который будет использовать свойства, описанные в конфиге *persistence.xml*.
+
+    - [ ] 6. 2. Создать класс: **EntityManagerProvider**, перенести в него код из класса **DataBaseConnectionProvider**.
+
+    - [ ] 6. 3. Настроить создание **EntityManager** через фабрику сущностей.
+
+    - [ ] 6. 4. В класс: **GuiceServletConfig** добавить привязку для **EntityManager**.
+
+<hr>
+
+  - [ ] 7. Настроить работу классов пакета **DAO** на работу с БД через **EntityManager**.
+
+     - [ ] 7. 1. Добавить инъекцию **EntityManger** в DAO-классы поочерёдно в классы:
+
+        - [ ] 7. 1. 1. AccountingDAO.
+
+        - [ ] 7. 1. 2. UserInfoDAO.
+
+        - [ ] 7. 1. 3. UserResourceDAO.
+
+     - [ ] 7. 2. Настроить работу с БД с помощью **EntityManger** в методах DAO-классов:
+
+        - [ ] 7. 2. 1. AccountingDAO(getAllUserSeanses(), searchAccountingWithId(), searchAccountingWithUserResId(), addUserSeans()).
+
+        - [ ] 7. 2. 2. UserInfoDAO(getAllUsersInfo(), searchUserLogin(), searchUserInfoWhereId()).
+
+        - [ ] 7. 2. 3. UserResourceDAO(getAllAccessRightsForResources(), findIdRes(), searchAccessRightWhereUserResId(), searchAccessRightWhereUserId())..
+
+<hr>
+
+  - [ ] 8. Адаптация миграций к PostgreSQL, перевести H2 в режим совместимости с PostgreSQL:
+
+    - [ ] 8. 1. Ознакомиться с докой по переведению в режим совместимости: **http://www.h2database.com/html/features.html#compatibility**
+
+    - [ ] 8. 2. ...
+
+    - [ ] 8. 3. ...
+
+<hr>
+
+  - [ ] 9. Заюзать PostgreSQL предоставляемую сервисом Heroku: **https://www.heroku.com/postgres**.
+
+<hr>
+
+  - [ ] 10. Заюзать пулл коннектов **c3p0**: **http://javacore.ru/topic/3-jdbc-spring-c3p0.htm**.
+
+<hr>
+
