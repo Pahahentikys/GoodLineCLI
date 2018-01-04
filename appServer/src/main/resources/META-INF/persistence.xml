@@ -6,5 +6,16 @@
         <class>appClient.src.main.java.general.dom.UserInfo</class>
         <class>appClient.src.main.java.general.dom.Accounting</class>
         <class>appClient.src.main.java.general.dom.UserResources</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="Pavel"/>
+            <property name="javax.persistence.jdbc.password" value="1234"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:./src/main/resources/db/GoodLineCLI"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.max_fetch_depth" value="3"/>
+<!--Опции для кэша-->
+            <property name="hibernate.ejb.classcache.org.hibernate.ejb.test.Item" value="read-write"/>
+            <property name="hibernate.ejb.collectioncache.org.hibernate.ejb.test.Item.distributors" value="read-write, RegionName"/>
+        </properties>
     </persistence-unit>
 </persistence>
