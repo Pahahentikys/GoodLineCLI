@@ -5,17 +5,17 @@
 
 <hr>
 
-  - [ ] 2. Ознакомиться со следующей документацией:
+  - [x] 2. Ознакомиться со следующей документацией:
 
-    - [ ] 2. 1. По работе с HIBERNATE по ссылке: **https://docs.jboss.org/hibernate/annotations/3.5/reference/en/html/entity.html#entity-overview**.
+    - [x] 2. 1. По работе с HIBERNATE по ссылке: **https://docs.jboss.org/hibernate/annotations/3.5/reference/en/html/entity.html#entity-overview**.
 
-    - [ ] 2. 2. По работе с GuicePersist по ссылке: **https://github.com/google/guice/wiki/GuicePersist**.
+    - [x] 2. 2. По работе с GuicePersist по ссылке: **https://github.com/google/guice/wiki/GuicePersist**.
 
 <hr>
 
   - [ ] 3. Интегрировать в проект набор библиотек:
 
-    - [ ] 3. 1. **hibernate-core**
+    - [x] 3. 1. **hibernate-core**
 
     - [ ] 3. 2. **guice-persist**
 
