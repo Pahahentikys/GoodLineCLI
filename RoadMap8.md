@@ -21,7 +21,7 @@
 
 <hr>
 
-  - [ ] 4. Сконфигурировать поведение HIBERNATE через файл: **persistence.xml** в пакете appServer, внутри папки META-INF.
+  - [ ] 4. Сконфигурировать поведение HIBERNATE через файл: **persistence.xml** в пакете appServer, внутри папки META-INF: **https://docs.jboss.org/hibernate/orm/5.2/quickstart/html_single/**.
 
 <hr>
 
