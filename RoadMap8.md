@@ -65,11 +65,11 @@
 
     - [ ] 6. 1. Создать источник данных, который будет использовать свойства, описанные в конфиге *persistence.xml*.
 
-    - [ ] 6. 2. Создать класс: **EntityManagerProvider**, перенести в него код из класса **DataBaseConnectionProvider**.
+    - [x] 6. 2. Создать класс: **EntityManagerProvider**, перенести в него код из класса **DataBaseConnectionProvider**.
 
     - [ ] 6. 3. Настроить создание **EntityManager** через фабрику сущностей.
 
-    - [ ] 6. 4. В класс: **GuiceServletConfig** добавить привязку для **EntityManager**.
+    - [x] 6. 4. В класс: **GuiceServletConfig** добавить привязку для **EntityManager**.
 
 <hr>
 
