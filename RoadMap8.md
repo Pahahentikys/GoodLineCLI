@@ -29,7 +29,7 @@
 
     - [x] 5. 1. Конфигурирование класса: **Accounting**:
 
-        - [x] 5. 1. 1. К классу **Accounting** добавить аннотации *@Entity* и *@Table*(name="accounting")
+        - [x] 5. 1. 1. К классу **Accounting** добавить аннотации *@Entity* и *@Table*(name="User_Seans")
 
         - [x] 5. 1. 2. Поля класса отметить аннотацией *@Column*
 
@@ -41,7 +41,7 @@
 
     - [x] 5. 2. Конфигурирование класса: **UserInfo**:
 
-        - [x] 5. 2. 1. К классу **UserInfo** добавить аннотации *@Entity* и *@Table*(name="user_info")
+        - [x] 5. 2. 1. К классу **UserInfo** добавить аннотации *@Entity* и *@Table*(name="Users")
 
         - [x] 5. 2. 2. Поля класса отметить аннотацией *@Column*
 
@@ -49,7 +49,7 @@
 
     - [x] 5. 3 Конфигурирование класса: **UserResources**.
 
-        - [x] 5. 3. 1. К классу **UserResources** добавить аннотации *@Entity* и *@Table*(name="user_resources").
+        - [x] 5. 3. 1. К классу **UserResources** добавить аннотации *@Entity* и *@Table*(name="User_Resources").
 
         - [x] 5. 3. 2. Поля класса отметить аннотацией *@Column*
 
@@ -77,9 +77,9 @@
 
      - [ ] 7. 1. Добавить инъекцию **EntityManger** в DAO-классы поочерёдно в классы:
 
-        - [ ] 7. 1. 1. AccountingDAO.
+        - [ ] 7. 1. 1. UserInfoDAO.
 
-        - [ ] 7. 1. 2. UserInfoDAO.
+        - [ ] 7. 1. 2. AccountingDAO.
 
         - [ ] 7. 1. 3. UserResourceDAO.
 
