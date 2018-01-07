@@ -77,7 +77,7 @@
 
      - [ ] 7. 1. Добавить инъекцию **EntityManger** в DAO-классы поочерёдно в классы:
 
-        - [ ] 7. 1. 1. UserInfoDAO.
+        - [x] 7. 1. 1. UserInfoDAO.
 
         - [ ] 7. 1. 2. AccountingDAO.
 

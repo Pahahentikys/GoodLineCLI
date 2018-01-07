@@ -1,20 +1,19 @@
 package general.dao;
 
 import general.dom.UserInfo;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 public class UserInfoDAO {
 
-    private static final Logger logger = LogManager.getLogger(UserInfoDAO.class.getName());
 
     private static final String SELECT_WHERE_USER_LOGIN = "SELECT * FROM USERS WHERE USER_LOGIN = ?";
 
@@ -25,49 +24,29 @@ public class UserInfoDAO {
     private Connection connection;
 
     @Inject
+    private EntityManager entityManager;
+
+
+    @Inject
     public UserInfoDAO(Connection connection) {
         this.connection = connection;
     }
 
     public List<UserInfo> getAllUsersInfo() {
-        logger.debug("Готовим запрос: " + SELECT_ALL_USERS);
-
-        List<UserInfo> userInfos = new ArrayList<>();
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                logger.debug("Запрос выполнен. Наполнение данными объекта UserInfo");
-                userInfos.add(
-                        UserInfo.builder()
-                                .userId(resultSet.getInt("USER_ID"))
-                                .userLogin(resultSet.getString("USER_LOGIN"))
-                                .userHashPassword(resultSet.getString("USER_PASS_HASH"))
-                                .userSalt(resultSet.getString("USER_SALT"))
-                                .build());
-            }
-
-            return userInfos;
-
-        } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!", e);
-        }
-
-        return null;
+        List<UserInfo> result = entityManager.createQuery("FROM general.dom.UserInfo", UserInfo.class).getResultList();
+        return result;
     }
 
     public UserInfo searchUserLogin(String userLogin) throws SQLException {
-        logger.debug("Готовим запрос: " + SELECT_WHERE_USER_LOGIN);
+        log.debug("Готовим запрос: " + SELECT_WHERE_USER_LOGIN);
         try {
             PreparedStatement statement = connection.prepareStatement(SELECT_WHERE_USER_LOGIN);
             statement.setString(1, userLogin);
-            logger.debug("Выполнить запрос: " + statement.toString());
+            log.debug("Выполнить запрос: " + statement.toString());
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                logger.debug("Запрос выполнен. Наполнение данными объекта UserInfo");
+                log.debug("Запрос выполнен. Наполнение данными объекта UserInfo");
                 return UserInfo.builder()
                         .userId(resultSet.getInt("USER_ID"))
                         .userLogin(resultSet.getString("USER_LOGIN"))
@@ -75,21 +54,21 @@ public class UserInfoDAO {
                         .userSalt(resultSet.getString("USER_SALT"))
                         .build();
             } else {
-                logger.debug("В БД нет записей по условию");
+                log.debug("В БД нет записей по условию");
             }
 
         } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!", e);
+            log.error("Ошибка доступа к БД, приложение не работает!", e);
         }
         return null;
     }
 
     public UserInfo searchUserInfoWhereId(int userInfoId) {
-        logger.debug("Готовим запрос: " + SELECT_ALL_USERS_WITH_ID);
+        log.debug("Готовим запрос: " + SELECT_ALL_USERS_WITH_ID);
         try {
             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS_WITH_ID);
             statement.setInt(1, userInfoId);
-            logger.debug("Выполнить запрос: " + statement.toString());
+            log.debug("Выполнить запрос: " + statement.toString());
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -100,10 +79,10 @@ public class UserInfoDAO {
                         .userSalt(resultSet.getString("USER_SALT"))
                         .build();
             } else {
-                logger.debug("В БД нет записей по условию");
+                log.debug("В БД нет записей по условию");
             }
         } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!", e);
+            log.error("Ошибка доступа к БД, приложение не работает!", e);
         }
 
         return null;
