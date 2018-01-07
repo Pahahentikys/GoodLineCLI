@@ -87,7 +87,7 @@
 
         - [ ] 7. 2. 1. AccountingDAO(getAllUserSeanses(), searchAccountingWithId(), searchAccountingWithUserResId(), addUserSeans()).
 
-        - [ ] 7. 2. 2. UserInfoDAO(getAllUsersInfo(), searchUserLogin(), searchUserInfoWhereId()).
+        - [x] 7. 2. 2. UserInfoDAO(getAllUsersInfo(), searchUserLogin(), searchUserInfoWhereId()).
 
         - [ ] 7. 2. 3. UserResourceDAO(getAllAccessRightsForResources(), findIdRes(), searchAccessRightWhereUserResId(), searchAccessRightWhereUserId())..
 

@@ -38,7 +38,7 @@ public class Main {
             AuthorizationService authorizationService = new AuthorizationService();
             UserInputData userInputData = new UserInputData();
             DataValidator dataValidator = new DataValidator();
-            UserInfoDAO userInfoDAO = new UserInfoDAO(connection);
+            UserInfoDAO userInfoDAO = new UserInfoDAO();
             UserResourceDAO userResourceDAO = new UserResourceDAO(connection);
             AccountingDAO accountingDAO = new AccountingDAO(connection);
             dataValidator.getUserInputData(userInputData, args);
