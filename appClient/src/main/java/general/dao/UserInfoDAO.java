@@ -64,27 +64,8 @@ public class UserInfoDAO {
     }
 
     public UserInfo searchUserInfoWhereId(int userInfoId) {
-        log.debug("Готовим запрос: " + SELECT_ALL_USERS_WITH_ID);
-        try {
-            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS_WITH_ID);
-            statement.setInt(1, userInfoId);
-            log.debug("Выполнить запрос: " + statement.toString());
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                return UserInfo.builder()
-                        .userId(resultSet.getInt("USER_ID"))
-                        .userLogin(resultSet.getString("USER_LOGIN"))
-                        .userHashPassword(resultSet.getString("USER_PASS_HASH"))
-                        .userSalt(resultSet.getString("USER_SALT"))
-                        .build();
-            } else {
-                log.debug("В БД нет записей по условию");
-            }
-        } catch (SQLException e) {
-            log.error("Ошибка доступа к БД, приложение не работает!", e);
-        }
-
-        return null;
+        return entityManager.createQuery("FROM general.dom.UserInfo u WHERE u.userId = :userInfoId", UserInfo.class)
+                .setParameter("userInfoId", userInfoId)
+                .getSingleResult();
     }
 }
