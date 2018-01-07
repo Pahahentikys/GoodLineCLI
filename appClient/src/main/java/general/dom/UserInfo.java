@@ -3,14 +3,15 @@ package general.dom;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_info")
+@Table(name = "Users")
 @Builder
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class UserInfo {
 
     @Id
@@ -21,13 +22,19 @@ public class UserInfo {
     @Getter
     private int userId;
 
-    @Column(name="user_login")
+    @Column(name = "user_login")
     @SerializedName("user_login")
     @Expose
     @Getter
     private String userLogin;
 
-    @Column(name = "user_hash_password")
+    @Column(name = "user_name")
+    @SerializedName("user_name")
+    @Expose
+    @Getter
+    private String userName;
+
+    @Column(name = "user_pass_hash")
     @Getter
     private String userHashPassword;
 
