@@ -6,8 +6,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
+
 @Entity
-@Table(name="accounting")
+@Table(name="User_Seans")
 @Builder
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -16,7 +17,7 @@ public class Accounting {
      * Идентификатор сеанса пользователя.
      */
     @Id
-    @Column(name="accounting_id")
+    @Column(name="user_seans_id")
     @GeneratedValue
     @SerializedName("accounting_id")
     @Expose
@@ -25,7 +26,7 @@ public class Accounting {
     private int accountingId;
 
     @ManyToOne
-    @JoinColumn(name="user_resources_id")
+    @JoinColumn(name="user_resource_id")
     @Getter
     @Setter
     private UserResources userResources;
@@ -33,6 +34,7 @@ public class Accounting {
     /**
      * Идентификатор ресурса, к которому обращается пользователь.
      */
+    @Transient
     @SerializedName("resource_id")
     @Expose
     @Getter
@@ -42,7 +44,7 @@ public class Accounting {
     /**
      * Объём ресурсов, потреблённых юзером.
      */
-    @Column(name = "volume_of_res")
+    @Column(name = "user_seans_volume")
     @SerializedName("volume_of_res")
     @Expose
     @Getter
@@ -52,7 +54,7 @@ public class Accounting {
     /**
      * Дата, по которой началось пользование ресурсом.
      */
-    @Column(name="start_accounting_date")
+    @Column(name="user_seans_date_start")
     @SerializedName("start_accounting_date")
     @Expose
     @Getter
@@ -62,7 +64,7 @@ public class Accounting {
     /**
      * Дата, по которой закончилось пользование ресурсом.
      */
-    @Column(name="end_accounting_date")
+    @Column(name="user_seans_date_end")
     @SerializedName("end_accounting_date")
     @Expose
     @Getter
