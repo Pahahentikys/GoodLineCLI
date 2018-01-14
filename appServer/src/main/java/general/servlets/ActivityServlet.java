@@ -49,6 +49,7 @@ public class ActivityServlet extends HttpServlet {
             searchAccountingWhereUserResId(Integer.parseInt(req.getParameter("authorityId")));
         }
         resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(jsonResp);
     }
 
@@ -62,11 +63,13 @@ public class ActivityServlet extends HttpServlet {
     }
 
     private void searchAccountingWhereUserResId(int userResId) {
-        Accounting accounting = accountingDAO.searchAccountingWithUserResId(userResId);
+        List<Accounting> accounting = accountingDAO.searchAccountingWithUserResId(userResId);
         if (accounting == null) {
             jsonResp = gson.toJson(ACTIVITY_NOT_FOUND);
         } else {
             jsonResp = gson.toJson(accounting);
         }
     }
+
+
 }

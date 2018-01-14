@@ -4,9 +4,12 @@ import com.google.inject.Provider;
 import general.dao.DataContextDAO;
 import org.flywaydb.core.Flyway;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,9 +18,7 @@ public class EntityManagerProvider implements Provider<EntityManager> {
     private EntityManager entityManager;
 
     public EntityManagerProvider() {
-
-        final DataContextDAO dataContextDAO;
-
+        DataContextDAO dataContextDAO;
         dataContextDAO = DataContextDAO.builder()
                 .dataBaseDriver("org.h2.Driver")
                 .dataBaseUrl("jdbc:h2:file:./src/main/resources/db/GoodLineCLI")
@@ -38,11 +39,13 @@ public class EntityManagerProvider implements Provider<EntityManager> {
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GoodLineCLI", properties);
         entityManager = entityManagerFactory.createEntityManager();
-
     }
 
     @Override
     public EntityManager get() {
         return entityManager;
     }
+
 }
+
+

@@ -10,13 +10,11 @@ import general.dao.UserInfoDAO;
 import general.dao.UserResourceDAO;
 import general.servlets.*;
 import inject.logger.Log4JTypeListener;
-import providers.DataBaseConnectionProvider;
 import providers.EntityManagerProvider;
 import providers.GsonProvider;
 
 import javax.persistence.EntityManager;
 import javax.servlet.annotation.WebListener;
-import java.sql.Connection;
 
 @WebListener
 public class GuiceServletConfig extends GuiceServletContextListener {
@@ -47,9 +45,6 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 
                 // Привязка провайдера для сериализации
                 bind(Gson.class).toProvider(GsonProvider.class).in(Singleton.class);
-
-                // Привязка провайдера для соединения с базой данных.
-                bind(Connection.class).toProvider(DataBaseConnectionProvider.class).in(Singleton.class);
 
                 // Привязка для менеджера сущностей БД
                 bind(EntityManager.class).toProvider(EntityManagerProvider.class);

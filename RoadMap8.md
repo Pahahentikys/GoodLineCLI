@@ -73,23 +73,23 @@
 
 <hr>
 
-  - [ ] 7. Настроить работу классов пакета **DAO** на работу с БД через **EntityManager**.
+  - [x] 7. Настроить работу классов пакета **DAO** на работу с БД через **EntityManager**.
 
-     - [ ] 7. 1. Добавить инъекцию **EntityManger** в DAO-классы поочерёдно в классы:
+     - [x] 7. 1. Добавить инъекцию **EntityManger** в DAO-классы поочерёдно в классы:
 
         - [x] 7. 1. 1. UserInfoDAO.
 
         - [x] 7. 1. 2. AccountingDAO.
 
-        - [ ] 7. 1. 3. UserResourceDAO.
+        - [x] 7. 1. 3. UserResourceDAO.
 
-     - [ ] 7. 2. Настроить работу с БД с помощью **EntityManger** в методах DAO-классов:
+     - [x] 7. 2. Настроить работу с БД с помощью **EntityManger** в методах DAO-классов:
 
-        - [ ] 7. 2. 1. AccountingDAO(getAllUserSeanses(), searchAccountingWithId(), searchAccountingWithUserResId(), addUserSeans()).
+        - [x] 7. 2. 1. AccountingDAO(getAllUserSeanses(), searchAccountingWithId(), searchAccountingWithUserResId(), addUserSeans()).
 
         - [x] 7. 2. 2. UserInfoDAO(getAllUsersInfo(), searchUserLogin(), searchUserInfoWhereId()).
 
-        - [ ] 7. 2. 3. UserResourceDAO(getAllAccessRightsForResources(), findIdRes(), searchAccessRightWhereUserResId(), searchAccessRightWhereUserId())..
+        - [x] 7. 2. 3. UserResourceDAO(getAllAccessRightsForResources(), findIdRes(), searchAccessRightWhereUserResId(), searchAccessRightWhereUserId())..
 
 <hr>
 

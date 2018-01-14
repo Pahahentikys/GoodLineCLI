@@ -49,6 +49,7 @@ public class UserServlet extends HttpServlet {
         }
 
         res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
         res.getWriter().write(jsonResp);
     }
 
