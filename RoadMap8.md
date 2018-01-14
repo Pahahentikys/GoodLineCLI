@@ -107,7 +107,7 @@
 
 <hr>
 
-  - [ ] 10. Заюзать пулл коннектов **c3p0**: **http://javacore.ru/topic/3-jdbc-spring-c3p0.htm**.
+  - [x] 10. Заюзать пулл коннектов **c3p0**: **http://javacore.ru/topic/3-jdbc-spring-c3p0.htm**.
 
 <hr>
 

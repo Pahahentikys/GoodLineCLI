@@ -14,6 +14,25 @@
             <property name="hibernate.connection.url" value="jdbc:h2:file:./src/main/resources/db/GoodLineCLI"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="show_sql" value="true"/>
+
+            <!--Коифигурация для пулла коннектов к бд-->
+
+            <!--как только переполнится пул коннектов, укажем, сколько соединений ещё добавить в пул-->
+            <property name="hibernate.c3p0.acquire_increment" value="2"/>
+
+            <!--как долго ждать, чтобы подтвердить соединение, т.е. не закрывать его, а, например, сделать запрос "select 1"-->
+            <property name="hibernate.c3p0.idle_test_period" value="300"/>
+
+            <!--максимальное количество соединений в пуле-->
+            <property name="hibernate.c3p0.max_size" value="20"/>
+
+            <!--минимальный размер пула-->
+            <property name="hibernate.c3p0.min_size" value="4"/>
+
+            <!--таймаут для с3p0-->
+            <property name="hibernate.c3p0.timeout" value="320"/>
+
+            <property name="hibernate.c3p0.max_statements" value="3"/>
         </properties>
     </persistence-unit>
 </persistence>
