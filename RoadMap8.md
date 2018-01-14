@@ -37,7 +37,7 @@
 
         - [x] 5. 1. 4. Добавить поле **userResources** с типом данных **UserResources**, поле пометить аннотацией *@ManyToOne*
 
-        - [x] 5. 1. 5. Добавить на поле **userResources** аннотацию @JoinColumn(name= "user_resources_id")
+        - [x] 5. 1. 5. Добавить на поле **userResources** аннотацию @JoinColumn(name= "user_resource_id")
 
     - [x] 5. 2. Конфигурирование класса: **UserInfo**:
 
@@ -79,7 +79,7 @@
 
         - [x] 7. 1. 1. UserInfoDAO.
 
-        - [ ] 7. 1. 2. AccountingDAO.
+        - [x] 7. 1. 2. AccountingDAO.
 
         - [ ] 7. 1. 3. UserResourceDAO.
 

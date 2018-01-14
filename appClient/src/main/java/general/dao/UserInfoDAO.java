@@ -1,13 +1,19 @@
 package general.dao;
 
 import general.dom.UserInfo;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.sql.Connection;
 import java.util.List;
 
 @Log4j2
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class UserInfoDAO {
 
     @Inject
@@ -19,8 +25,8 @@ public class UserInfoDAO {
     }
 
     public UserInfo searchUserLogin(String userLogin) {
-        return entityManager.createQuery("FROM general.dom.UserInfo u WHERE u.userLogin = :userLogin", UserInfo.class)
-                .setParameter("userLogin", userLogin)
+        return entityManager.createQuery("FROM general.dom.UserInfo u WHERE u.userLogin = :login", UserInfo.class)
+                .setParameter("login", userLogin)
                 .getSingleResult();
     }
 
