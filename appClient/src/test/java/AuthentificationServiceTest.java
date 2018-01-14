@@ -35,6 +35,8 @@ public class AuthentificationServiceTest {
 
         userInfoDAO = Mockito.mock(UserInfoDAO.class);
 
+        dataBaseContext.setUserInfoDAO(userInfoDAO);
+
         // Mock на ситуацию, когда пользователь с таким логином найден в БД
         when(userInfoDAO.searchUserLogin("jdoe")).thenReturn(userInfo);
 
@@ -51,7 +53,7 @@ public class AuthentificationServiceTest {
 
         String userLogin = userInputData.getUserInputLogin();
 
-        assertEquals(ExitCodeType.INVALID_LOGIN.getExitCode(), dataBaseContext.hasGetUserLoginDAO(userInfoDAO, userLogin));
+        assertEquals(ExitCodeType.INVALID_LOGIN.getExitCode(), dataBaseContext.hasGetUserLoginDAO(userLogin));
     }
 
     @Test
@@ -65,7 +67,7 @@ public class AuthentificationServiceTest {
         String userLogin = userInputData.getUserInputLogin();
         String userPass = userInputData.getUserInputPassword();
 
-        assertEquals(ExitCodeType.INVALID_PASSWORD.getExitCode(), dataBaseContext.hasGetUserPasswordDAO(userInfoDAO, userLogin, userPass));
+        assertEquals(ExitCodeType.INVALID_PASSWORD.getExitCode(), dataBaseContext.hasGetUserPasswordDAO(userLogin, userPass));
 
     }
 
@@ -80,7 +82,7 @@ public class AuthentificationServiceTest {
         String userLogin = userInputData.getUserInputLogin();
         String userPass = userInputData.getUserInputPassword();
 
-        assertEquals(ExitCodeType.SUCCESS.getExitCode(), dataBaseContext.hasGetUserPasswordDAO(userInfoDAO, userLogin, userPass));
+        assertEquals(ExitCodeType.SUCCESS.getExitCode(), dataBaseContext.hasGetUserPasswordDAO(userLogin, userPass));
 
     }
 

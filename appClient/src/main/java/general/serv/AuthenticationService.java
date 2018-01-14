@@ -66,20 +66,4 @@ public class AuthenticationService {
         return user.getUserHashPassword().equals(hashUserPass);
     }
 
-
-
-//    public int isUserAuthentification(userInfoDAO, String userLogin, String userPassword) throws SQLException {
-//        log.debug("Проверка на то, аутентифицирован ли пользователь");
-//        DataBaseContext dataBaseContext = new DataBaseContext();
-//        if (dataBaseContext.hasGetUserLoginDAO(userInfoDAO, userLogin) == ExitCodeType.INVALID_LOGIN.getExitCode()) {
-//            return ExitCodeType.INVALID_LOGIN.getExitCode();
-//
-//        }
-//
-//        if (dataBaseContext.hasGetUserPasswordDAO(userInfoDAO, userLogin, userPassword) == ExitCodeType.INVALID_PASSWORD.getExitCode()) {
-//            return ExitCodeType.INVALID_PASSWORD.getExitCode();
-//        }
-//        return ExitCodeType.SUCCESS.getExitCode();
-//    }
-
 }

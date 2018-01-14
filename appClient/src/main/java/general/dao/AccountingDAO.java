@@ -5,117 +5,36 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountingDAO {
 
-    private static final Logger logger = LogManager.getLogger(AccountingDAO.class.getName());
-
-    private static final String INSERT_ACCOUNTING = "INSERT INTO USER_SEANS(USER_RESOURCE_ID, USER_SEANS_DATE_START, USER_SEANS_DATE_END, USER_SEANS_VOLUME) VALUES (?, ?, ?, ?)";
-
-    private static final String SELECT_ALL_USER_SEANSES = "SELECT * FROM USER_SEANS";
-
-    private static final String SELECT_USER_SEANSE_WHERE_ID = "SELECT * FROM USER_SEANS WHERE USER_SEANS_ID = ?";
-
-    private static final String SELECT_USER_SEANSE_WHERE_USER_RES_ID = "SELECT * FROM USER_SEANS WHERE USER_SEANS.USER_RESOURCE_ID = ?";
-
-    private Connection connection;
-
     @Inject
-    public AccountingDAO(Connection connection) {
-        this.connection = connection;
-    }
+    private EntityManager entityManager;
 
     public List<Accounting> getAllUserSeanses() {
-        List<Accounting> accountings = new ArrayList<>();
-        logger.debug("Готовим запрос: " + SELECT_ALL_USER_SEANSES);
-        try {
-            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USER_SEANSES);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                accountings.add(
-                        Accounting.builder()
-                                .accountingId(resultSet.getInt("USER_SEANS_ID"))
-                                .resourceId(resultSet.getInt("USER_RESOURCE_ID"))
-                                .startAccountingDate(resultSet.getString("USER_SEANS_DATE_START"))
-                                .endAccountingDate(resultSet.getString("USER_SEANS_DATE_END"))
-                                .volumeOfUseRes(resultSet.getString("USER_SEANS_VOLUME"))
-                                .build()
-                );
-
-            }
-            return accountings;
-
-        } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!", e);
-        }
-        return null;
+        return entityManager.createQuery("FROM general.dom.Accounting", Accounting.class).getResultList();
     }
 
     public Accounting searchAccountingWithId(int userSeansId) {
-        logger.debug("Готовим запрос: " + SELECT_USER_SEANSE_WHERE_ID);
-        try {
-            PreparedStatement statement = connection.prepareStatement(SELECT_USER_SEANSE_WHERE_ID);
-            statement.setInt(1, userSeansId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return Accounting.builder()
-                        .accountingId(resultSet.getInt("USER_SEANS_ID"))
-                        .resourceId(resultSet.getInt("USER_RESOURCE_ID"))
-                        .startAccountingDate(resultSet.getString("USER_SEANS_DATE_START"))
-                        .endAccountingDate(resultSet.getString("USER_SEANS_DATE_END"))
-                        .volumeOfUseRes(resultSet.getString("USER_SEANS_VOLUME"))
-                        .build();
-            } else {
-                logger.debug("В БД нет записей по условию");
-            }
-        } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!", e);
-        }
-
-        return null;
+        return entityManager.createQuery("FROM general.dom.Accounting a WHERE a.accountingId = :userSeansId", Accounting.class)
+                .setParameter("userSeansId", userSeansId)
+                .getSingleResult();
     }
 
-    public Accounting searchAccountingWithUserResId(int userResId){
-        logger.debug("Готовим запрос: " + SELECT_USER_SEANSE_WHERE_USER_RES_ID);
-        try (PreparedStatement statement = connection.prepareStatement(SELECT_USER_SEANSE_WHERE_USER_RES_ID)){
-            statement.setInt(1, userResId);
-            ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()){
-                return Accounting.builder()
-                        .accountingId(resultSet.getInt("USER_SEANS_ID"))
-                        .resourceId(resultSet.getInt("USER_RESOURCE_ID"))
-                        .startAccountingDate(resultSet.getString("USER_SEANS_DATE_START"))
-                        .endAccountingDate(resultSet.getString("USER_SEANS_DATE_END"))
-                        .volumeOfUseRes(resultSet.getString("USER_SEANS_VOLUME"))
-                        .build();
-            } else {
-                logger.debug("В БД нет записей по условию");
-            }
-        } catch (SQLException e){
-            logger.error("Ошибка доступа к БД, приложение не работает!", e);
-        }
-
-        return null;
+    public List<Accounting> searchAccountingWithUserResId(int userResId) {
+        return entityManager.createQuery("FROM Accounting a WHERE a.userResources.userResourcesId = :userResId", Accounting.class)
+                .setParameter("userResId", userResId)
+                .getResultList();
     }
-
 
     public void addUserSeans(Accounting accounting) {
-
-        logger.debug("Подготовить запрос: " + INSERT_ACCOUNTING);
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ACCOUNTING);
-            preparedStatement.setInt(1, accounting.getResourceId());
-            preparedStatement.setDate(2, Date.valueOf(accounting.getStartAccountingDate()));
-            preparedStatement.setDate(3, Date.valueOf(accounting.getEndAccountingDate()));
-            preparedStatement.setInt(4, Integer.parseInt(String.valueOf(accounting.getVolumeOfUseRes())));
-            preparedStatement.executeUpdate();
-            logger.debug("Запрос в БД выполнен успешно, пользовательский сеанс сохранён");
-
-        } catch (SQLException e) {
-            logger.error("Ошибка доступа к БД, приложение не работает!", e);
-        }
+        entityManager.getTransaction().begin();
+        entityManager.persist(accounting);
+        entityManager.flush();
+        entityManager.getTransaction().commit();
     }
+
 }

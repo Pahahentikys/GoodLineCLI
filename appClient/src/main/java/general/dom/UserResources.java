@@ -2,49 +2,46 @@ package general.dom;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+//import org.hibernate.annotations.Entity;
 
 @Entity
-@Table(name = "user_resources")
+@Table(name = "User_Resources")
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Builder
 public class UserResources {
 
-    @Column(name="user_resources_id")
+    @Column(name="user_resource_id")
     @Id
     @GeneratedValue
     @Getter
     @Setter
+    @SerializedName("user_resource_id")
+    @Expose
     private int userResourcesId;
 
     @ManyToOne
+    @Expose
     @JoinColumn(name="user_id")
     private UserInfo userInfo;
 
-    @Column(name="user_role")
+    @Column(name="user_resource_role")
     @SerializedName("user_role")
+    @Enumerated(EnumType.STRING)
     @Expose
     @Getter
     private UserRoles userRole;
 
-    @Column(name="resource_path")
+    @Column(name="user_resource_path")
     @SerializedName("resource_path")
     @Expose
     @Getter
     private String resourcePath;
 
-    @Getter
-    private int userResId;
-
-    @Column(name="user_res_user_id")
-    @SerializedName("user_id")
-    @Expose
-    @Getter
-    private int userResUserId;
-
+    @Transient
     @Getter
     private int userResResId;
 }

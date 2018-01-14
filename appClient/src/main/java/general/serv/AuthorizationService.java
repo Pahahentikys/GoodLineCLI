@@ -8,11 +8,18 @@ import general.dom.UserResources;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 
 public class AuthorizationService {
 
     private static final Logger logger = LogManager.getLogger(AuthorizationService.class.getName());
+
+    @Inject
+    private UserResourceDAO userResourceDAO;
+
+    @Inject
+    private DataBaseContext dataBaseContext;
 
     /**
      * Проверка на то, авторизован ли пользователь
@@ -24,10 +31,9 @@ public class AuthorizationService {
      * @return - код: 3, если неправильная роль, код: 4, если нет доступа
      * @throws SQLException
      */
-    public int isUserAuthorization(UserResourceDAO userResourceDAO, String userResourcePath, String userResourceRole, int isUserAuthentification) throws SQLException {
+    public int isUserAuthorization(String userResourcePath, String userResourceRole, int isUserAuthentification) throws SQLException {
         logger.debug("Проверка на то, авторизован ли пользователь");
         DataValidator dataValidator = new DataValidator();
-        DataBaseContext dataBaseContext = new DataBaseContext();
         if ((isUserAuthentification == ExitCodeType.SUCCESS.getExitCode()) && (userResourceRole != null) && (userResourcePath != null)) {
             if (dataValidator.isUserRoleValid(userResourceRole) == ExitCodeType.INVALID_ROLE.getExitCode()) {
                 return ExitCodeType.INVALID_ROLE.getExitCode();
@@ -52,6 +58,7 @@ public class AuthorizationService {
         logger.debug("Добавление пользовательского сеанса в БД");
         UserResources userResources = userResourceDAO.findIdRes(userInputData.getUserInputPathResource());
         accounting.setResourceId(userResources.getUserResResId());
+//        accounting.setResourceId(userResources.getUserResourcesId());
         accounting.setStartAccountingDate(userInputData.getUserInputDs());
         accounting.setEndAccountingDate(userInputData.getUserInputDe());
         accounting.setVolumeOfUseRes(userInputData.getUserInputVol());
@@ -68,7 +75,7 @@ public class AuthorizationService {
      * @return код: 5, если некорректная дата
      * @throws SQLException
      */
-    public int isUserAccounting(Accounting accounting, UserResourceDAO userResourceDAO, UserInputData userInputData, DataValidator dataValidator, int isUserAuthorization) throws SQLException {
+    public int isUserAccounting(Accounting accounting, UserInputData userInputData, DataValidator dataValidator, int isUserAuthorization) throws SQLException {
         logger.debug("Проверка на то, выполнен ли процесс аккаунтинга");
         if (isUserAuthorization == ExitCodeType.SUCCESS.getExitCode() && userInputData.getUserInputDs() != null) {
             if (dataValidator.isDateDsAndDeValid(userInputData) == ExitCodeType.INVALID_ACTION.getExitCode() || dataValidator.isVolumeValid(userInputData) == ExitCodeType.INVALID_ACTION.getExitCode()) {

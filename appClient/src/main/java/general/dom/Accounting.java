@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -29,6 +30,7 @@ public class Accounting {
     @JoinColumn(name="user_resource_id")
     @Getter
     @Setter
+    @Expose
     private UserResources userResources;
 
     /**

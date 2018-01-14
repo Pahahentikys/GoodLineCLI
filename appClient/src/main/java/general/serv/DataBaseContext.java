@@ -19,6 +19,8 @@ public class DataBaseContext {
     private AuthenticationService authenticationService = new AuthenticationService();
 
     @Inject
+    @Getter
+    @Setter
     private UserInfoDAO userInfoDAO;
 
     /**
