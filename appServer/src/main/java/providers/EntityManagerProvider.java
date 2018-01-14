@@ -18,10 +18,11 @@ public class EntityManagerProvider implements Provider<EntityManager> {
     private EntityManager entityManager;
 
     public EntityManagerProvider() {
+
         DataContextDAO dataContextDAO;
         dataContextDAO = DataContextDAO.builder()
-                .dataBaseDriver("org.h2.Driver")
-                .dataBaseUrl("jdbc:h2:file:./src/main/resources/db/GoodLineCLI")
+                .dataBaseDriver("org.postgresql.Driver")
+                .dataBaseUrl("jdbc:h2:file:./src/main/resources/db/GoodLineCLI;MODE=PostgreSQL")
                 .dataBaseUserName("Pavel")
                 .dataBasePassword("1234")
                 .build();

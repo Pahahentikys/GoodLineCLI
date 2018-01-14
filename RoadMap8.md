@@ -93,17 +93,13 @@
 
 <hr>
 
-  - [ ] 8. Адаптация миграций к PostgreSQL, перевести H2 в режим совместимости с PostgreSQL:
+  - [x] 8. Адаптация миграций к PostgreSQL, перевести H2 в режим совместимости с PostgreSQL:
 
-    - [ ] 8. 1. Ознакомиться с докой по переведению в режим совместимости: **http://www.h2database.com/html/features.html#compatibility**
-
-    - [ ] 8. 2. ...
-
-    - [ ] 8. 3. ...
+    - [x] 8. 1. Ознакомиться с докой по переведению в режим совместимости: **http://www.h2database.com/html/features.html#compatibility**
 
 <hr>
 
-  - [ ] 9. Заюзать PostgreSQL предоставляемую сервисом Heroku: **https://www.heroku.com/postgres**.
+  - [x] 9. Заюзать PostgreSQL предоставляемую сервисом Heroku: **https://www.heroku.com/postgres**.
 
 <hr>
 
