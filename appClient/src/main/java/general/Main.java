@@ -28,7 +28,7 @@ public class Main {
 
         DataContextDAO dataContextDAO = DataContextDAO.builder()
                 .dataBaseDriver("org.h2.Driver")
-                .dataBaseUrl("jdbc:h2:file:./src/main/resources/db/GoodLineCLI")
+                .dataBaseUrl("jdbc:h2:./src/main/resources/db/GoodLineCLIPostgre;MODE=PostgreSQL")
                 .dataBaseUserName("Pavel")
                 .dataBasePassword("1234")
                 .build();
