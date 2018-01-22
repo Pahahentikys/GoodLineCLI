@@ -8,11 +8,13 @@
         <class>general.dom.Accounting</class>
         <class>general.dom.UserResources</class>
         <properties>
-            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
-            <property name="hibernate.connection.user" value="Pavel"/>
-            <property name="hibernate.connection.password" value="1234"/>
-            <property name="hibernate.connection.url" value="jdbc:h2:./src/main/resources/db/GoodLineCLIPostgre;MODE=PostgreSQL"/>
+            <!--<property name="hibernate.connection.driver_class" value="org.h2.Driver"/>-->
+            <!--<property name="hibernate.connection.user" value="Pavel"/>-->
+            <!--<property name="hibernate.connection.password" value="1234"/>-->
+            <!--<property name="hibernate.connection.url" value="jdbc:h2:./src/main/resources/db/GoodLineCLIPostgre3;MODE=PostgreSQL"/>-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
             <property name="show_sql" value="true"/>
 
             <!--Коифигурация для пулла коннектов к бд-->
