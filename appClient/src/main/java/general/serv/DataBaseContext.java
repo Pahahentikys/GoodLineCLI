@@ -7,16 +7,23 @@ import general.dom.UserInfo;
 import general.dom.UserResources;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.sql.SQLException;
 
-@Log4j2
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class DataBaseContext {
 
+    private static final Logger logger = LogManager.getLogger(DataBaseContext.class.getName());
+
     private AuthenticationService authenticationService = new AuthenticationService();
+//    private AuthenticationService authenticationService;
+//
+//    public DataBaseContext setAuthentificationService(AuthenticationService authentificationService){
+//        this.authenticationService = authentificationService;
+//        return this;
+//    }
 
     @Inject
     @Getter
@@ -36,7 +43,7 @@ public class DataBaseContext {
 
         if (userInfo == null) {
 
-            log.error("Пользователь не найден по логину {}", userLogin);
+            logger.error("Пользователь не найден по логину {}", userLogin);
             return ExitCodeType.INVALID_LOGIN.getExitCode();
         }
 
@@ -57,11 +64,11 @@ public class DataBaseContext {
         String hashUserPass = authenticationService.generHashUserPassword(userPassword, userInfo.getUserSalt());
         if (authenticationService.isUserHashesEqual(userInfo, hashUserPass)) {
 
-            log.info("Пользователь по логину: {} и паролю: {} найден", userLogin, userPassword);
+            logger.info("Пользователь по логину: {} и паролю: {} найден", userLogin, userPassword);
             return ExitCodeType.SUCCESS.getExitCode();
         }
 
-        log.error("Хэши паролей не совпадают!");
+        logger.error("Хэши паролей не совпадают!");
         return ExitCodeType.INVALID_PASSWORD.getExitCode();
     }
 
@@ -78,11 +85,11 @@ public class DataBaseContext {
         UserResources userResources = userResourceDAO.getPathUserResource(userResourcePath, userResourceRole);
         if (userResources == null) {
 
-            log.error("Пути к ресурсу {} не существует! Либо не существует данного пути: {} с ролью: {}", userResourcePath, userResourcePath, userResourceRole);
+            logger.error("Пути к ресурсу {} не существует! Либо не существует данного пути: {} с ролью: {}", userResourcePath, userResourcePath, userResourceRole);
             return ExitCodeType.INVALID_ACCESS.getExitCode();
         }
 
-        log.info("Роль: {} соответствует ресурсу: {}", userResourceRole, userResourcePath);
+        logger.info("Роль: {} соответствует ресурсу: {}", userResourceRole, userResourcePath);
         return ExitCodeType.SUCCESS.getExitCode();
     }
 }

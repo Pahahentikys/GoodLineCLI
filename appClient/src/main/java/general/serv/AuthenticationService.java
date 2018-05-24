@@ -1,25 +1,27 @@
 package general.serv;
 
 import general.ExitCodeType;
-import general.dao.UserInfoDAO;
 import general.dom.UserInfo;
-import lombok.*;
-import lombok.extern.log4j.Log4j2;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.sql.SQLException;
 
-@Log4j2
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class AuthenticationService {
 
-   @Inject
-   private DataBaseContext dataBaseContext;
+    private static final Logger logger = LogManager.getLogger(AuthenticationService.class.getName());
+
+//    @Inject
+//    private DataBaseContext dataBaseContext;
+
+//    private DataBaseContext dataBaseContext;
+//
+//    public AuthenticationService setDataBaseContext(DataBaseContext dataBaseContext){
+//        this.dataBaseContext = dataBaseContext;
+//        return this;
+//    }
 
     /**
      * Проверка на то, аутентифицирован ли пользователь
@@ -31,7 +33,10 @@ public class AuthenticationService {
      * @throws SQLException
      */
     public int isUserAuthentification(String userLogin, String userPassword) throws SQLException {
-        log.debug("Проверка на то, аутентифицирован ли пользователь");
+
+        DataBaseContext dataBaseContext = new DataBaseContext();
+
+        logger.debug("Проверка на то, аутентифицирован ли пользователь");
 
         if (dataBaseContext.hasGetUserLoginDAO(userLogin) == ExitCodeType.INVALID_LOGIN.getExitCode()) {
             return ExitCodeType.INVALID_LOGIN.getExitCode();

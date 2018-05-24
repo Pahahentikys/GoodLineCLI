@@ -24,11 +24,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Injector injector = Guice.createInjector(new GuiceClientConfig());
+//        Injector injector = Guice.createInjector(new GuiceClientConfig());
 
         DataContextDAO dataContextDAO = DataContextDAO.builder()
                 .dataBaseDriver("org.h2.Driver")
-                .dataBaseUrl("jdbc:h2:./src/main/resources/db/GoodLineCLIPostgre;MODE=PostgreSQL")
+                .dataBaseUrl("jdbc:h2:./src/main/resources/db/GoodLineCLIPostgre5;MODE=PostgreSQL")
                 .dataBaseUserName("Pavel")
                 .dataBasePassword("1234")
                 .build();
@@ -41,16 +41,23 @@ public class Main {
         try (Connection connection = dataContextDAO.getConnection()) {
             logger.debug("Подключение к базе данных установлено");
 
-            AuthorizationService authorizationService = injector.getInstance(AuthorizationService.class);
-            AuthenticationService authenticationService = injector.getInstance(AuthenticationService.class);
+//            AuthorizationService authorizationService = injector.getInstance(AuthorizationService.class);
+//            AuthenticationService authenticationService = injector.getInstance(AuthenticationService.class);
+//            AccountingDAO accountingDAO = injector.getInstance(AccountingDAO.class);
+
+            AuthorizationService authorizationService = new AuthorizationService();
+            AuthenticationService authenticationService = new AuthenticationService();
+            AccountingDAO accountingDAO = new AccountingDAO();
 
             UserInputData userInputData = new UserInputData();
             DataValidator dataValidator = new DataValidator();
             Accounting accounting = new Accounting();
 
-            UserInfoDAO userInfoDAO = new UserInfoDAO();
-            UserResourceDAO userResourceDAO = new UserResourceDAO();
-            AccountingDAO accountingDAO = new AccountingDAO();
+//            UserInfoDAO userInfoDAO = new UserInfoDAO(connection);
+//            UserResourceDAO userResourceDAO = new UserResourceDAO();
+//            AccountingDAO accountingDAO = new AccountingDAO();
+
+//            DataBaseContext dataBaseContext = new DataBaseContext();
 
             dataValidator.getUserInputData(userInputData, args);
             String userLogin = userInputData.getUserInputLogin();
@@ -76,7 +83,7 @@ public class Main {
 
             int isAccounting = authorizationService.isUserAccounting(accounting, userInputData, dataValidator, isAuthorization);
             if (isAccounting == ExitCodeType.SUCCESS.getExitCode()) {
-                accountingDAO.addUserSeans(accounting);
+//                accountingDAO.addUserSeans(accounting);
                 logger.info("Accounting success!");
             }
 
