@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import general.dao.UserInfoDAO;
 import general.dom.UserInfo;
 import inject.logger.InjectLogger;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
@@ -16,6 +19,8 @@ import java.io.IOException;
 import java.util.List;
 
 @Singleton
+//@AllArgsConstructor(access = AccessLevel.PUBLIC)
+//@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class UserServlet extends HttpServlet {
 
     @InjectLogger
@@ -30,6 +35,9 @@ public class UserServlet extends HttpServlet {
 
     @Inject
     private UserInfoDAO userInfoDAO;
+
+//    @Inject
+//    public UserServlet (UserInfoDAO userInfoDAO){this.userInfoDAO = userInfoDAO;}
 
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
