@@ -27,7 +27,8 @@ public class EntityManagerProvider implements Provider<EntityManager> {
 //
         DataContextDAO dataContextDAO;
         dataContextDAO = DataContextDAO.builder()
-                .dataBaseDriver("org.postgresql.Driver")
+//                .dataBaseDriver("org.postgresql.Driver")
+//                .dataBaseDriver(env.get("JDBC_DATABASE_DRIVER"))
 //                .dataBaseUrl("jdbc:h2:./src/main/resources/db/GoodLineCLIPostgre5;MODE=PostgreSQL")
 //                .dataBaseUserName("Pavel")
 //                .dataBasePassword("1234")
@@ -53,13 +54,14 @@ public class EntityManagerProvider implements Provider<EntityManager> {
 
         Map<String, String> properties = new HashMap<>();
 
-        properties.put("javax.persistence.jdbc.url", env.get("JDBC_DATABASE_URL"));
-        properties.put("javax.persistence.jdbc.user", env.get("JDBC_DATABASE_USERNAME"));
-        properties.put("javax.persistence.jdbc.password", env.get("JDBC_DATABASE_PASSWORD"));
+//        properties.put("javax.persistence.jdbc.url", env.get("JDBC_DATABASE_URL"));
+//        properties.put("javax.persistence.jdbc.user", env.get("JDBC_DATABASE_USERNAME"));
+//        properties.put("javax.persistence.jdbc.password", env.get("JDBC_DATABASE_PASSWORD"));
+//        properties.put("javax.persistence.jdbc.driver", env.get("JDBC_DATABASE_DRIVER"));
 
-//        properties.put("hibernate.connection.url", env.get("JDBC_DATABASE_URL"));
-//        properties.put("hibernate.connection.user", env.get("JDBC_DATABASE_USERNAME"));
-//        properties.put("hibernate.connection.password", env.get("JDBC_DATABASE_PASSWORD"));
+        properties.put("hibernate.connection.url", env.get("JDBC_DATABASE_URL"));
+        properties.put("hibernate.connection.user", env.get("JDBC_DATABASE_USERNAME"));
+        properties.put("hibernate.connection.password", env.get("JDBC_DATABASE_PASSWORD"));
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GoodLineCLI", properties);
 //        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GoodLineCLI");
