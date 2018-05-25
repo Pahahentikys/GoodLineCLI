@@ -28,7 +28,8 @@ public class EntityManagerProvider implements Provider<EntityManager> {
         DataContextDAO dataContextDAO;
         dataContextDAO = DataContextDAO.builder()
 //                .dataBaseDriver("org.postgresql.Driver")
-//                .dataBaseDriver(env.get("JDBC_DATABASE_DRIVER"))
+                .dataBaseDriver(env.get("JDBC_DATABASE_DRIVER"))
+                .dataBaseDialect(env.get("JDBC_DATABASE_DIALECT"))
 //                .dataBaseUrl("jdbc:h2:./src/main/resources/db/GoodLineCLIPostgre5;MODE=PostgreSQL")
 //                .dataBaseUserName("Pavel")
 //                .dataBasePassword("1234")
@@ -62,6 +63,8 @@ public class EntityManagerProvider implements Provider<EntityManager> {
         properties.put("hibernate.connection.url", env.get("JDBC_DATABASE_URL"));
         properties.put("hibernate.connection.user", env.get("JDBC_DATABASE_USERNAME"));
         properties.put("hibernate.connection.password", env.get("JDBC_DATABASE_PASSWORD"));
+        properties.put("hibernate.connection.driver", env.get("JDBC_DATABASE_DRIVER"));
+        properties.put("hibernate.dialect", env.get("JDBC_DATABASE_DIALECT"));
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GoodLineCLI", properties);
 //        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GoodLineCLI");
